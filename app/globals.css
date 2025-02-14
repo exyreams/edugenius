@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 224, 71%, 4%;
+        --foreground: 213, 31%, 91%;
+        --primary: 210, 40%, 98%;
+        --secondary: 222.2, 47.4%, 11.2%;
+    }
+
+    * {
+        scrollbar-width: thin;
+    }
+}
+
+body {
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
+}
+
+.glass {
+    @apply bg-gray-300/30 dark:bg-white/10 backdrop-blur-lg border border-white/50 dark:border-white/20 rounded-xl;
+}
+
+.glass-hover {
+    @apply transition-all duration-300 hover:bg-white/20;
+}
+
+.heading {
+    @apply text-4xl font-bold bg-clip-text text-transparent dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300
+    bg-gradient-to-r from-gray-800 to-indigo-800;
+}
+
+.sub-heading {
+    @apply text-xl font-bold bg-clip-text text-transparent dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300
+    bg-gradient-to-r from-gray-800 to-indigo-800;
+}
