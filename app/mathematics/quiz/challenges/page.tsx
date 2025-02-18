@@ -1,13 +1,45 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Check, ChevronDown, ChevronRight, XCircle } from "lucide-react";
+import {
+  BarChart,
+  Binary,
+  Calculator,
+  Check,
+  ChevronDown,
+  ChevronRight,
+  Divide,
+  FunctionSquare,
+  Grid,
+  LayoutDashboard,
+  Percent,
+  Pi,
+  Ruler,
+  Scale,
+  Shapes,
+  SquareSigma,
+  Triangle,
+  Variable,
+  Waves,
+  XCircle,
+  Zap,
+} from "lucide-react";
 import { toast } from "sonner";
 import "katex/dist/katex.min.css";
 import { InlineMath } from "react-katex";
-import Results from "@/components/quiz/Results";
-import Loader from "@/components/quiz/Loader";
+import Results from "@/components/Results";
+import Loader from "@/components/Loader";
+import { MdStraight } from "react-icons/md";
+import { TbMath, TbMathIntegrals, TbMathIntegralX } from "react-icons/tb";
 
+/**
+ * Interface for a single question in the quiz.
+ * @property {number} id - Unique identifier for the question.
+ * @property {string} questionText - The text of the question.
+ * @property {string} formula - The mathematical formula associated with the question (if any).
+ * @property {string[]} options - An array of possible answer choices.
+ * @property {string} answer - The correct answer among the options.
+ */
 interface Question {
   id: number;
   questionText: string;
@@ -16,6 +48,271 @@ interface Question {
   answer: string;
 }
 
+/**
+ * Represents a topic with its properties.
+ * @interface
+ * @property {string} id - The unique identifier for the topic.
+ * @property {string} name - The display name of the topic.
+ * @property {React.ComponentType} icon - The icon component associated with the topic.
+ * @property {string} color - The text color for the topic.
+ * @property {string} gradient - The background gradient for the topic.
+ * @property {string} text - The text color for descriptions and other elements.
+ * @property {string} description - A brief description of the topic.
+ */
+interface Topic {
+  id: string;
+  name: string;
+  icon: React.ComponentType;
+  color: string;
+  gradient: string;
+  text: string;
+  description: string;
+}
+
+/**
+ * Foundational mathematics topics.
+ * @type {Topic[]}
+ */
+const foundationalTopics: Topic[] = [
+  {
+    id: "number-systems",
+    name: "Number Systems",
+    icon: LayoutDashboard,
+    color: "text-blue-500 dark:text-blue-200",
+    gradient: "from-blue-100 to-sky-200 dark:from-blue-700 dark:to-sky-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Understanding different types of numbers.",
+  },
+  {
+    id: "integers",
+    name: "Integers",
+    icon: Calculator,
+    color: "text-blue-500 dark:text-blue-200",
+    gradient: "from-blue-100 to-sky-200 dark:from-blue-700 dark:to-sky-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Working with positive and negative numbers.",
+  },
+  {
+    id: "fractions",
+    name: "Fractions",
+    icon: Divide,
+    color: "text-green-500 dark:text-green-200",
+    gradient: "from-green-100 to-lime-200 dark:from-green-700 dark:to-lime-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Understanding parts of a whole.",
+  },
+  {
+    id: "decimals",
+    name: "Decimals",
+    icon: Pi,
+    color: "text-yellow-500 dark:text-yellow-200",
+    gradient:
+      "from-yellow-100 to-amber-200 dark:from-yellow-700 dark:to-amber-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Numbers with decimal points.",
+  },
+  {
+    id: "percentages",
+    name: "Percentages",
+    icon: Percent,
+    color: "text-pink-500 dark:text-pink-200",
+    gradient: "from-pink-100 to-rose-200 dark:from-pink-700 dark:to-rose-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Representing parts out of 100.",
+  },
+  {
+    id: "ratios-proportions",
+    name: "Ratios & Proportions",
+    icon: Scale,
+    color: "text-purple-500 dark:text-purple-200",
+    gradient:
+      "from-purple-100 to-indigo-200 dark:from-purple-700 dark:to-indigo-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Comparing quantities and solving for unknowns.",
+  },
+  {
+    id: "measurement-units",
+    name: "Measurement & Units",
+    icon: MdStraight,
+    color: "text-cyan-500 dark:text-cyan-200",
+    gradient: "from-cyan-100 to-teal-200 dark:from-cyan-700 dark:to-teal-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Understanding units and how to convert them.",
+  },
+  {
+    id: "exponents-roots",
+    name: "Exponents & Roots",
+    icon: SquareSigma,
+    color: "text-red-500 dark:text-red-200",
+    gradient: "from-red-100 to-orange-200 dark:from-red-700 dark:to-orange-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Powers and square roots.",
+  },
+  {
+    id: "variables-expressions",
+    name: "Variables & Expressions",
+    icon: Variable,
+    color: "text-teal-500 dark:text-teal-200",
+    gradient: "from-teal-100 to-cyan-200 dark:from-teal-700 dark:to-cyan-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Using letters to represent numbers.",
+  },
+  {
+    id: "equations-inequalities",
+    name: "Equations & Inequalities",
+    icon: TbMath,
+    color: "text-orange-500 dark:text-orange-200",
+    gradient:
+      "from-orange-100 to-amber-200 dark:from-orange-700 dark:to-amber-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Solving for unknown values.",
+  },
+  {
+    id: "order-of-operations",
+    name: "Order of Operations",
+    icon: FunctionSquare,
+    color: "text-indigo-500 dark:text-indigo-200",
+    gradient:
+      "from-indigo-100 to-violet-200 dark:from-indigo-700 dark:to-violet-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "PEMDAS/BODMAS - The order to calculate.",
+  },
+  {
+    id: "area-perimeter",
+    name: "Area & Perimeter",
+    icon: Ruler,
+    color: "text-cyan-500 dark:text-cyan-200",
+    gradient: "from-cyan-100 to-sky-200 dark:from-cyan-700 dark:to-sky-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Measuring shapes.",
+  },
+  {
+    id: "data-handling-statistics",
+    name: "Data & Statistics",
+    icon: BarChart,
+    color: "text-pink-500 dark:text-pink-200",
+    gradient:
+      "from-pink-100 to-fuchsia-200 dark:from-pink-700 dark:to-fuchsia-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Collecting and interpreting data.",
+  },
+];
+
+/**
+ * Intermediate and advanced mathematics topics.
+ * @type {Topic[]}
+ */
+const intermediateAdvancedTopics: Topic[] = [
+  {
+    id: "algebra",
+    name: "Algebra",
+    icon: FunctionSquare,
+    color: "text-orange-500 dark:text-orange-200",
+    gradient: "from-orange-100 to-red-200 dark:from-orange-700 dark:to-red-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Symbol manipulation study",
+  },
+  {
+    id: "calculus",
+    name: "Calculus",
+    icon: TbMathIntegrals,
+    color: "text-green-500 dark:text-green-200",
+    gradient: "from-lime-100 to-green-200 dark:from-lime-700 dark:to-green-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Study of continuous change",
+  },
+  {
+    id: "differential-equations",
+    name: "Differential Equations",
+    icon: Divide,
+    color: "text-blue-500 dark:text-blue-200",
+    gradient: "from-sky-100 to-blue-200 dark:from-sky-700 dark:to-blue-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Study of differential equations",
+  },
+  {
+    id: "discrete-math",
+    name: "Discrete Mathematics",
+    icon: Binary,
+    color: "text-pink-500 dark:text-pink-200",
+    gradient: "from-pink-100 to-red-200 dark:from-pink-700 dark:to-red-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Discrete mathematics study",
+  },
+  {
+    id: "fourier",
+    name: "Fourier Series",
+    icon: Waves,
+    color: "text-cyan-500 dark:text-cyan-200",
+    gradient: "from-sky-100 to-cyan-200 dark:from-sky-700 dark:to-cyan-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Fourier series representation",
+  },
+  {
+    id: "geometry",
+    name: "Geometry",
+    icon: Shapes,
+    color: "text-yellow-500 dark:text-yellow-200",
+    gradient:
+      "from-yellow-100 to-orange-200 dark:from-yellow-700 dark:to-orange-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Geometric elements",
+  },
+  {
+    id: "laplace",
+    name: "Laplace",
+    icon: TbMathIntegralX,
+    color: "text-red-500 dark:text-red-200",
+    gradient: "from-orange-100 to-red-200 dark:from-orange-700 dark:to-red-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Laplace transform techniques",
+  },
+  {
+    id: "linear-algebra",
+    name: "Linear Algebra",
+    icon: Grid,
+    color: "text-purple-500 dark:text-purple-200",
+    gradient:
+      "from-indigo-100 to-purple-200 dark:from-indigo-700 dark:to-purple-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Linear algebra elements",
+  },
+  {
+    id: "probability-statistics",
+    name: "Probability & Statistics",
+    icon: Percent,
+    color: "text-indigo-500 dark:text-indigo-200",
+    gradient:
+      "from-violet-100 to-fuchsia-200 dark:from-violet-700 dark:to-fuchsia-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Probability and statistics",
+  },
+  {
+    id: "trigonometry",
+    name: "Trigonometry",
+    icon: Triangle,
+    color: "text-lime-500 dark:text-lime-200",
+    gradient: "from-lime-100 to-green-200 dark:from-lime-700 dark:to-green-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Triangle side-angle relationships",
+  },
+  {
+    id: "z-transform",
+    name: "Z-Transform",
+    icon: Zap,
+    color: "text-teal-500 dark:text-teal-200",
+    gradient:
+      "from-teal-100 to-emerald-200 dark:from-teal-700 dark:to-emerald-600",
+    text: "text-gray-800 dark:text-gray-200",
+    description: "Z-transform conversion",
+  },
+];
+
+/**
+ * A component that renders a challenging math quiz.
+ * The quiz fetches questions from an API, allows the user to select a topic, difficulty, and number of questions,
+ * and displays the results at the end. It features timed questions and local storage persistence.
+ */
 const ChallengesQuiz = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [quizQuestions, setQuizQuestions] = useState<Question[]>([]);
@@ -33,6 +330,10 @@ const ChallengesQuiz = () => {
   const [quizDuration, setQuizDuration] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState<number>(0);
 
+  /**
+   * Fetches quiz questions from the API when the quiz starts or when parameters change.
+   * Stores the fetched questions in local storage.
+   */
   useEffect(() => {
     if (quizStarted && quizQuestions.length === 0) {
       (async () => {
@@ -66,7 +367,7 @@ const ChallengesQuiz = () => {
           if (data.generatedContent && data.generatedContent.questions) {
             setQuizQuestions(data.generatedContent.questions);
             localStorage.setItem(
-              "formulaQuizData",
+              "formulaQuizData", // Changed key for consistency
               JSON.stringify(data.generatedContent),
             );
             setStartTime(Date.now());
@@ -86,8 +387,17 @@ const ChallengesQuiz = () => {
         }
       })();
     }
-  }, [quizStarted, numQuestions, quizQuestions]);
+  }, [
+    quizStarted,
+    numQuestions,
+    selectedTopic,
+    selectedDifficulty,
+    quizQuestions.length,
+  ]); // Added missing dependencies
 
+  /**
+   * Tracks the time taken for the quiz.
+   */
   useEffect(() => {
     // eslint-disable-next-line no-undef
     let intervalId: NodeJS.Timeout;
@@ -100,28 +410,33 @@ const ChallengesQuiz = () => {
     return () => clearInterval(intervalId);
   }, [quizStarted, isLoading, quizQuestions]);
 
+  /**
+   * Sets a timeout for each question based on the selected difficulty.
+   * Automatically moves to the next question when the time runs out.
+   */
   useEffect(() => {
     if (!quizStarted || quizQuestions.length === 0) return;
 
     // eslint-disable-next-line no-undef
     let timeout: NodeJS.Timeout;
-    if (!isAnswered) {
-      const timeLimit =
-        selectedDifficulty === "advanced"
-          ? 120000
-          : selectedDifficulty === "intermediate"
-            ? 90000
-            : 60000;
+    const timeLimit =
+      selectedDifficulty === "advanced"
+        ? 120000
+        : selectedDifficulty === "intermediate"
+          ? 90000
+          : 60000;
 
-      setTimeLeft(timeLimit / 1000);
+    setTimeLeft(timeLimit / 1000);
 
-      timeout = setTimeout(() => {
-        if (!isAnswered) {
-          toast.error("Time's up! Moving to the next question.");
-          handleNextQuestion();
-        }
-      }, timeLimit);
-    }
+    // Set Quiz Duration.
+    setQuizDuration(timeLimit / 1000);
+
+    timeout = setTimeout(() => {
+      if (!isAnswered) {
+        toast.error("Time's up! Moving to the next question.");
+        handleNextQuestion(); // Call handleNextQuestion directly
+      }
+    }, timeLimit);
 
     return () => clearTimeout(timeout);
   }, [
@@ -132,6 +447,9 @@ const ChallengesQuiz = () => {
     selectedDifficulty,
   ]);
 
+  /**
+   * Tracks the time left for the current question.
+   */
   useEffect(() => {
     // eslint-disable-next-line no-undef
     let timeLeftInterval: NodeJS.Timeout;
@@ -144,8 +462,13 @@ const ChallengesQuiz = () => {
     return () => clearInterval(timeLeftInterval);
   }, [quizStarted, isAnswered, timeLeft]);
 
+  /**
+   * Starts the quiz.  Checks for existing quiz data in local storage.
+   * If data exists, prompts the user to either continue the existing quiz or start a new one.
+   * If no data exists, or the user chooses to start a new quiz, fetches new questions.
+   */
   const handleStartQuiz = () => {
-    const quizData = localStorage.getItem("formulaQuizData");
+    const quizData = localStorage.getItem("formulaQuizData"); // Consistent key
 
     if (quizData) {
       const parsedData = JSON.parse(quizData);
@@ -155,27 +478,34 @@ const ChallengesQuiz = () => {
             "Starting a new quiz will clear any existing quiz data. Continue?",
           )
         ) {
-          localStorage.removeItem("formulaQuizData");
+          localStorage.removeItem("formulaQuizData"); // Consistent key
           setQuizQuestions([]);
           setQuizStarted(true);
           setIsLoading(true);
           toast.info("Generating quiz...", { duration: 3000 });
         } else {
+          // If the user cancels, *don't* restart the quiz. Load existing data.
           setQuizQuestions(parsedData.questions);
           setQuizStarted(true);
-          setIsLoading(false);
+          setIsLoading(false); // We're not loading anymore
           setStartTime(Date.now());
           setTimeTaken(0);
         }
       }
     } else {
-      setQuizQuestions([]);
+      // If there's no data in localStorage, start a new quiz
+      setQuizQuestions([]); // Ensure quizQuestions is reset
       setQuizStarted(true);
       setIsLoading(true);
       toast.info("Generating quiz...", { duration: 3000 });
     }
   };
 
+  /**
+   * Handles the selection of an answer option.
+   * Marks the question as answered, updates the score, and displays a toast message.
+   * @param {string} option - The selected answer option.
+   */
   const handleOptionSelect = (option: string) => {
     if (!isAnswered) {
       setSelectedOption(option);
@@ -190,59 +520,55 @@ const ChallengesQuiz = () => {
     }
   };
 
+  /**
+   * Moves to the next question in the quiz.
+   * If the current question is the last one, shows the results.
+   */
   const handleNextQuestion = () => {
-    if (isAnswered || timeLeft === 0) {
-      if (currentQuestionIndex < quizQuestions.length - 1) {
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
-        setSelectedOption(null);
-        setIsAnswered(false);
-        setTimeLeft(
-          selectedDifficulty === "advanced"
-            ? 60
-            : selectedDifficulty === "intermediate"
-              ? 45
-              : 30,
-        );
-      } else {
-        const endTime = Date.now();
-        const duration = Math.round((endTime - startTime) / 1000);
-        setQuizDuration(duration);
-        const totalMinutes = Math.floor(timeTaken / 60);
-        const remainingSeconds = timeTaken % 60;
-
-        setShowResult(true);
-        setQuizStarted(false);
-
-        setQuizDuration(totalMinutes);
-        setTimeTaken(remainingSeconds);
-      }
+    if (currentQuestionIndex < quizQuestions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setSelectedOption(null);
+      setIsAnswered(false);
+      setTimeLeft(
+        selectedDifficulty === "advanced"
+          ? 120
+          : selectedDifficulty === "intermediate"
+            ? 90
+            : 60,
+      );
+    } else {
+      // Quiz is finished
+      setShowResult(true);
+      setQuizStarted(false);
     }
   };
 
-  const topics = [
-    "Algebra",
-    "Calculus",
-    "Discrete Mathematics",
-    "Geometry",
-    "Linear Algebra",
-    "Probability",
-    "Statistics",
-    "Trigonometry",
-    "Differential Equations",
-  ];
-
+  /**
+   * Array of available difficulty levels.
+   * @type {string[]}
+   */
   const difficulties = ["Basic", "Intermediate", "Advanced"];
 
+  /**
+   * Resets the quiz state to start a new quiz.
+   * Clears any existing quiz data from local storage.
+   */
   const handleStartAgain = () => {
+    // Reset all states.
+    setCurrentQuestionIndex(0);
     setQuizQuestions([]);
+    setSelectedOption(null);
     setScore(0);
     setTimeTaken(0);
     setQuizStarted(false);
     setShowResult(false);
     setIsLoading(false);
-    localStorage.removeItem("formulaQuizData");
+    setQuizDuration(0);
+    setTimeLeft(0);
+    localStorage.removeItem("formulaQuizData"); // Clear quiz data
   };
 
+  // Initial screen to configure the quiz
   if (!quizStarted && !showResult) {
     return (
       <div className="container mx-auto max-w-3xl p-8">
@@ -270,21 +596,39 @@ const ChallengesQuiz = () => {
           <div className="relative">
             <select
               id="topic"
-              className="w-full appearance-none rounded-lg border border-gray-300  bg-dropdown-light p-3 font-medium text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white" // Add appearance-none to hide default arrow
+              className="w-full appearance-none rounded-lg border border-gray-300 bg-white/40 p-3 font-medium text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white"
               value={selectedTopic}
               onChange={(e) => setSelectedTopic(e.target.value)}
             >
-              {topics.map((topic) => (
-                <option
-                  key={topic}
-                  value={topic.toLowerCase()}
-                  className="bg-dropdown-light font-medium text-black dark:bg-dropdown-dark dark:text-white"
-                >
-                  {topic}
-                </option>
-              ))}
+              <optgroup
+                label="Foundational"
+                className="bg-gray-200 dark:bg-gray-600"
+              >
+                {foundationalTopics.map((topic) => (
+                  <option
+                    key={topic.id}
+                    value={topic.id}
+                    className="bg-dropdown-light font-medium text-black dark:bg-dropdown-dark dark:text-white"
+                  >
+                    {topic.name}
+                  </option>
+                ))}
+              </optgroup>
+              <optgroup
+                label="Intermediate/Advanced"
+                className="bg-gray-200 dark:bg-gray-600"
+              >
+                {intermediateAdvancedTopics.map((topic) => (
+                  <option
+                    key={topic.id}
+                    value={topic.id}
+                    className="bg-dropdown-light font-medium text-black dark:bg-dropdown-dark dark:text-white"
+                  >
+                    {topic.name}
+                  </option>
+                ))}
+              </optgroup>
             </select>
-            {/* Add ChevronDown icon */}
             <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
               <ChevronDown className="h-5 w-5 text-black dark:text-white" />
             </div>
@@ -303,7 +647,7 @@ const ChallengesQuiz = () => {
           <div className="relative">
             <select
               id="difficulty"
-              className="w-full appearance-none rounded-lg border border-gray-300  bg-dropdown-light p-3 font-medium text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white"
+              className="w-full appearance-none rounded-lg border border-gray-300  bg-white/40 p-3 font-medium text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white"
               value={selectedDifficulty}
               onChange={(e) => setSelectedDifficulty(e.target.value)}
             >
@@ -341,7 +685,7 @@ const ChallengesQuiz = () => {
             value={numQuestions}
             onChange={(e) =>
               setNumQuestions(
-                Math.max(1, Math.min(20, parseInt(e.target.value))),
+                Math.max(3, Math.min(20, parseInt(e.target.value))), // Ensure min is 3
               )
             }
             className="w-full rounded-lg border border-gray-300 bg-white/40 p-3 text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-white/20 dark:text-white"
@@ -378,19 +722,22 @@ const ChallengesQuiz = () => {
     );
   }
 
+  // Display results component when quiz is finished
   if (showResult) {
     return (
       <Results
         score={score}
+        totalQuestions={quizQuestions.length} // Use quizQuestions.length
         timeTaken={timeTaken}
-        totalMinutes={quizDuration}
-        quizQuestions={quizQuestions}
-        onRetry={handleStartAgain}
-        category={"formulas"}
+        quizDuration={quizDuration}
+        topic={selectedTopic}
+        difficulty={selectedDifficulty}
+        onStartAgain={handleStartAgain}
       />
     );
   }
 
+  // Quiz in progress view
   return (
     <div className="container mx-auto max-w-3xl p-4">
       {isLoading && quizQuestions.length === 0 && (
@@ -467,7 +814,7 @@ const ChallengesQuiz = () => {
           <button
             onClick={handleNextQuestion}
             className="glass w-fit rounded-full  border p-3 text-black dark:text-white"
-            disabled={!isAnswered}
+            disabled={!isAnswered && timeLeft > 0} // Disable if not answered OR time is still left
           >
             {currentQuestionIndex < quizQuestions.length - 1
               ? "Next Question"
