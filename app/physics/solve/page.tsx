@@ -16,7 +16,7 @@ import { Download, FileText, Images, Upload as UploadIcon } from "lucide-react";
 import { toast } from "sonner";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
-import Loader from "@/components/quiz/Loader";
+import Loader from "@/components/Loader";
 import ColorToggle from "@/components/ColorToggle";
 import {
   equationsBgColors,
