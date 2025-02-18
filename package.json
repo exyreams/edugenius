@@ -11,6 +11,7 @@
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
     "@types/jszip": "^3.4.0",
+    "canvas-confetti": "^1.9.3",
     "chart.js": "^4.4.7",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-tailwindcss": "^3.17.5",
@@ -38,6 +39,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

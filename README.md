@@ -170,4 +170,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For any inquiries or contributions, please contact the project maintainers (add your contact information here).
+For any inquiries or contributions, please contact the project maintainers exyreams@gmail.com.
