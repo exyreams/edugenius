@@ -290,7 +290,7 @@ export default function Physics() {
         >
           Quizzes
         </h2>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
           {/* Challenges */}
           <Link
             href="/physics/quiz/challenges"
