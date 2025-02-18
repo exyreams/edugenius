@@ -267,7 +267,7 @@ const FormulaQuiz = () => {
           <div className="relative">
             <select
               id="topic"
-              className="bg-dropdown-light font-figtree dark:bg-dropdown-dark w-full appearance-none rounded-lg  border border-gray-300 p-3 font-medium text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:text-white" // Add appearance-none to hide default arrow
+              className="w-full appearance-none rounded-lg border border-gray-300 bg-dropdown-light  p-3 font-figtree font-medium text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white" // Add appearance-none to hide default arrow
               value={selectedTopic}
               onChange={(e) => setSelectedTopic(e.target.value)}
             >
@@ -275,7 +275,7 @@ const FormulaQuiz = () => {
                 <option
                   key={topic}
                   value={topic.toLowerCase()}
-                  className="bg-dropdown-light dark:bg-dropdown-dark font-medium text-black dark:text-white"
+                  className="bg-dropdown-light font-medium text-black dark:bg-dropdown-dark dark:text-white"
                 >
                   {topic}
                 </option>
@@ -300,7 +300,7 @@ const FormulaQuiz = () => {
           <div className="relative">
             <select
               id="difficulty"
-              className="bg-dropdown-light dark:bg-dropdown-dark w-full appearance-none rounded-lg  border border-gray-300 p-3 font-medium text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:text-white"
+              className="w-full appearance-none rounded-lg border border-gray-300  bg-dropdown-light p-3 font-medium text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white"
               value={selectedDifficulty}
               onChange={(e) => setSelectedDifficulty(e.target.value)}
             >
@@ -308,7 +308,7 @@ const FormulaQuiz = () => {
                 <option
                   key={difficulty}
                   value={difficulty.toLowerCase()}
-                  className="bg-dropdown-light dark:bg-dropdown-dark font-medium text-black dark:text-white"
+                  className="bg-dropdown-light font-medium text-black dark:bg-dropdown-dark dark:text-white"
                 >
                   {difficulty}
                 </option>
@@ -392,10 +392,10 @@ const FormulaQuiz = () => {
     <div className="container mx-auto max-w-3xl p-4">
       {isLoading && quizQuestions.length === 0 && (
         <Loader
-          description={
+          mainText={"Generating Formulas..."}
+          subText={
             "Please wait while we generate your customized formula quiz based on your preferences. This may take a moment. Thank you for your patience!"
           }
-          title={"Quiz..."}
         />
       )}
 
