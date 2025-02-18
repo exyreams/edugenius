@@ -298,7 +298,7 @@ export default function Chemistry() {
         <h2 className="mb-6 text-center text-2xl font-bold text-gray-800 dark:text-gray-200">
           Quizzes
         </h2>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
           {/* Challenges */}
           <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-sky-200 to-blue-200 p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:from-sky-600 dark:to-blue-600">
             <ComingSoonTag />
