@@ -196,10 +196,10 @@ const FromFiles = () => {
     <div className="container mx-auto max-w-3xl p-4">
       {isLoading && (
         <Loader
-          description={
+          mainText={"Generating Quiz..."}
+          subText={
             "Please wait while we generate your quiz based on the document you provided. This may take a moment. Thank you for your patience!"
           }
-          title={"Quiz..."}
         />
       )}
 
@@ -249,7 +249,7 @@ const FromFiles = () => {
             <input
               type="number"
               id="numQuestions"
-              className="bg-dropdown-light dark:bg-dropdown-dark w-full rounded-lg border border-gray-300 p-3 text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:text-white"
+              className="w-full rounded-lg border border-gray-300 bg-dropdown-light p-3 text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white"
               value={numQuestions}
               onChange={(e) => {
                 const value = Math.max(

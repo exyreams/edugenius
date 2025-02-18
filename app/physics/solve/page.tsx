@@ -489,10 +489,10 @@ const Solve = () => {
         {isLoading && (
           <div className="flex h-[200px] items-center justify-center">
             <Loader
-              description={
+              subText={
                 "Please wait while we analyze your problems and generate step-by-step solutions. This may take a moment. Thank you for your patience!"
               }
-              title={"Solution..."}
+              mainText={"Generating Solution..."}
             />
           </div>
         )}
@@ -548,10 +548,10 @@ const Solve = () => {
             {isLoading ? (
               <div className="flex items-center gap-2">
                 <Loader
-                  description={
+                  mainText={"Generating Solution..."}
+                  subText={
                     "Please wait while we analyze your problems and generate step-by-step solutions. This may take a moment. Thank you for your patience!"
                   }
-                  title={"Solution..."}
                 />
               </div>
             ) : (

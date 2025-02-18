@@ -395,10 +395,10 @@ const ChallengesQuiz = () => {
     <div className="container mx-auto max-w-3xl p-4">
       {isLoading && quizQuestions.length === 0 && (
         <Loader
-          description={
+          mainText={"Generating Challenges..."}
+          subText={
             "Please wait while we generate your customized formula quiz based on your preferences. This may take a moment. Thank you for your patience!"
           }
-          title={"Quiz..."}
         />
       )}
 
