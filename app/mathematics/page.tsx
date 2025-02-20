@@ -22,7 +22,7 @@ import {
   Variable,
   Waves,
   Zap,
-} from "lucide-react"; // Make sure you have lucide-react installed!
+} from "lucide-react";
 import { MdStraight } from "react-icons/md";
 import { FaChevronRight, FaFileUpload } from "react-icons/fa";
 import { SiLibreofficemath } from "react-icons/si";
