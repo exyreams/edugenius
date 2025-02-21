@@ -1,4 +1,3 @@
-/* eslint-disable */
 "use client";
 
 import Link from "next/link";
@@ -345,8 +344,8 @@ const Navbar = () => {
                     aria-label="Enable light theme"
                     className={`flex items-center justify-center rounded-lg p-2 ${
                       resolvedTheme === "light"
-                        ? "bg-gray-100 border border-black/20 dark:border-white/20 text-black dark:bg-gray-700 dark:text-white"
-                        : "hover:bg-gray-100 border border-black/20 dark:border-white/20 dark:hover:bg-gray-700"
+                        ? "border border-black/20 bg-gray-100 text-black dark:border-white/20 dark:bg-gray-700 dark:text-white"
+                        : "border border-black/20 hover:bg-gray-100 dark:border-white/20 dark:hover:bg-gray-700"
                     }`}
                   >
                     <Sun className="h-6 w-6" />
@@ -357,8 +356,8 @@ const Navbar = () => {
                     aria-label="Enable dark theme"
                     className={`flex items-center justify-center rounded-lg p-2 ${
                       resolvedTheme === "dark"
-                        ? "bg-gray-100 border border-black/20 dark:border-white/20 text-black dark:bg-gray-700 dark:text-white"
-                        : "hover:bg-gray-100 border border-black/20 dark:border-white/20 dark:hover:bg-gray-700"
+                        ? "border border-black/20 bg-gray-100 text-black dark:border-white/20 dark:bg-gray-700 dark:text-white"
+                        : "border border-black/20 hover:bg-gray-100 dark:border-white/20 dark:hover:bg-gray-700"
                     }`}
                   >
                     <Moon className="h-6 w-6" />
@@ -369,8 +368,8 @@ const Navbar = () => {
                     aria-label="Use system theme"
                     className={`flex items-center justify-center rounded-lg p-2 ${
                       resolvedTheme === "system"
-                        ? "bg-gray-100 border border-black/20 dark:border-white/20 text-black dark:bg-gray-700 dark:text-white"
-                        : "hover:bg-gray-100 border border-black/20 dark:border-white/20 dark:hover:bg-gray-700"
+                        ? "border border-black/20 bg-gray-100 text-black dark:border-white/20 dark:bg-gray-700 dark:text-white"
+                        : "border border-black/20 hover:bg-gray-100 dark:border-white/20 dark:hover:bg-gray-700"
                     }`}
                   >
                     <Computer className="h-6 w-6" />
