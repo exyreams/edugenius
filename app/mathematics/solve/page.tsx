@@ -383,10 +383,11 @@ const Solve = () => {
         </p>
       </div>
 
-      <div className={`mb-8 flex items-center justify-center`}>
-        {/* Color Toggle */}
-        <ColorToggle onChange={setIsColorful} initialState={true} />
-      </div>
+      {!isLoading && (
+        <div className={`mb-2 flex items-center justify-center`}>
+          <ColorToggle onChange={setIsColorful} initialState={true} />
+        </div>
+      )}
 
       <div className={`container mx-auto max-w-3xl p-8`}>
         {uploadedFiles.length === 0 && !isLoading && solutions.length === 0 && (
@@ -487,7 +488,7 @@ const Solve = () => {
         )}
 
         {isLoading && (
-          <div className="flex h-[200px] items-center justify-center">
+          <div className="mb-16 mt-16 flex h-[200px] items-center justify-center">
             <Loader
               mainText={"Generating Solution..."}
               subText={
@@ -509,7 +510,7 @@ const Solve = () => {
                     alt={`Uploaded Image ${index + 1}`}
                     className="max-h-40 max-w-40 rounded-lg"
                   />
-                  <div className="mt-2 flex items-center justify-between">
+                  <div className="mt-2 flex items-center justify-start">
                     <p
                       className={`text-sm font-semibold text-gray-600 dark:text-gray-300 ${
                         isColorful ? "" : "text-gray-800 dark:text-gray-200"
@@ -518,10 +519,10 @@ const Solve = () => {
                       {file.name}
                     </p>
                     <button
-                      className={` rounded-md px-3 py-1 text-gray-500 hover:bg-gray-300 dark:hover:bg-gray-600 ${
+                      className={`ml-4 rounded-md px-3 py-1 text-gray-200 hover:bg-red-600 dark:hover:bg-red-700  ${
                         isColorful
-                          ? " dark:bg-gray-700"
-                          : "bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-200 "
+                          ? "bg-gray-800 hover:bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600"
+                          : "bg-blue-600 text-gray-100 dark:bg-gray-600 dark:text-gray-100"
                       }`}
                       onClick={() => handleRemoveFile(index)}
                       aria-label={`Remove file ${file.name}`}
@@ -546,7 +547,7 @@ const Solve = () => {
             disabled={isLoading}
           >
             {isLoading ? (
-              <div className="flex items-center gap-2">
+              <div className="mb-16 flex items-center gap-2">
                 <Loader
                   mainText={"Generating Solution..."}
                   subText={
@@ -561,7 +562,7 @@ const Solve = () => {
         )}
 
         {!isLoading && solutions.length > 0 && (
-          <div className="mt-8">
+          <div className="mt-4">
             <div className="space-y-4">
               <div className={`text-center`}>
                 <span
@@ -802,30 +803,33 @@ const Solve = () => {
           </div>
         )}
       </div>
+
       {/* Decorative Section Divider */}
-      <div className="mt-16 flex items-center justify-center space-x-4">
-        <div
-          className={`h-px flex-1 ${
-            isColorful
-              ? "bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:via-gray-400"
-              : "bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:via-gray-200"
-          }`}
-        />
-        <span
-          className={`text-sm italic ${
-            isColorful ? "text-gray-500 dark:text-gray-200" : "text-gray-200"
-          }`}
-        >
-          Unveiling the Universe&#39;s Secrets
-        </span>
-        <div
-          className={`h-px flex-1 ${
-            isColorful
-              ? "bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:via-gray-400"
-              : "bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:via-gray-200"
-          }`}
-        />
-      </div>
+      {!isLoading && (
+        <div className="mt-16 flex items-center justify-center space-x-4">
+          <div
+            className={`h-px flex-1 ${
+              isColorful
+                ? "bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:via-gray-400"
+                : "bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:via-gray-200"
+            }`}
+          />
+          <span
+            className={`text-sm italic ${
+              isColorful ? "text-gray-500 dark:text-gray-200" : "text-gray-200"
+            }`}
+          >
+            Unveiling the Universe&#39;s Secrets
+          </span>
+          <div
+            className={`h-px flex-1 ${
+              isColorful
+                ? "bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:via-gray-400"
+                : "bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:via-gray-200"
+            }`}
+          />
+        </div>
+      )}
     </div>
   );
 };
