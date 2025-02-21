@@ -3,11 +3,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Check, ChevronRight, Upload as UploadIcon, X } from "lucide-react";
 import { toast } from "sonner";
-import Loader from "@/components/Loader";
-import Results from "@/components/Results";
 import { InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
-import { useSession } from "next-auth/react"; // Import useSession
+import { useSession } from "next-auth/react";
+
+import Loader from "@/components/Loader";
+import Results from "@/components/Results";
 
 /**
  * Represents a single question in the quiz.

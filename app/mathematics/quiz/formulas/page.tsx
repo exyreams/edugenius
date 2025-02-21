@@ -5,9 +5,10 @@ import { Check, ChevronDown, ChevronRight, XCircle } from "lucide-react";
 import { toast } from "sonner";
 import "katex/dist/katex.min.css";
 import { InlineMath } from "react-katex";
+import { useSession } from "next-auth/react";
+
 import Results from "@/components/Results";
 import Loader from "@/components/Loader";
-import { useSession } from "next-auth/react"; // Import useSession
 
 /**
  * Represents a single question in the quiz.

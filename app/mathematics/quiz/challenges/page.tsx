@@ -27,11 +27,12 @@ import {
 import { toast } from "sonner";
 import "katex/dist/katex.min.css";
 import { InlineMath } from "react-katex";
-import Results from "@/components/Results";
-import Loader from "@/components/Loader";
 import { MdStraight } from "react-icons/md";
+import { useSession } from "next-auth/react";
 import { TbMath, TbMathIntegrals, TbMathIntegralX } from "react-icons/tb";
-import { useSession } from "next-auth/react"; // Import useSession
+
+import Loader from "@/components/Loader";
+import Results from "@/components/Results";
 
 /**
  * Interface for a single question in the quiz.
@@ -400,7 +401,7 @@ const ChallengesQuiz = () => {
     selectedDifficulty,
     quizQuestions.length,
     session,
-  ]); // Added missing dependencies and session
+  ]);
 
   /**
    * Tracks the time taken for the quiz.
