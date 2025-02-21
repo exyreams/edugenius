@@ -5,7 +5,9 @@ import { Check, ChevronDown, ChevronRight, XCircle } from "lucide-react";
 import { toast } from "sonner";
 import "katex/dist/katex.min.css";
 import { InlineMath } from "react-katex";
-import Results from "@/components/Results"; // Correct import
+import { useSession } from "next-auth/react";
+
+import Results from "@/components/Results";
 import Loader from "@/components/Loader";
 
 /**
@@ -28,7 +30,7 @@ interface Question {
 /**
  * A component for a math challenges quiz.
  * Allows users to select a topic, difficulty, and number of questions,
- * then takes a quiz generated using the Gemini API.
+ * then takes a quiz generated using the Gemini API.  Requires users to be logged in.
  * @returns {JSX.Element} The ChallengesQuiz component.
  */
 const ChallengesQuiz = () => {
@@ -48,12 +50,14 @@ const ChallengesQuiz = () => {
   const [quizDuration, setQuizDuration] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState<number>(0);
 
+  const { data: session } = useSession(); // Get user session
+
   /**
-   * Fetches quiz questions from the API when the quiz starts.
+   * Fetches quiz questions from the API when the quiz starts. Only runs if logged in.
    * @memberof ChallengesQuiz
    */
   useEffect(() => {
-    if (quizStarted && quizQuestions.length === 0) {
+    if (quizStarted && quizQuestions.length === 0 && session) {
       (async () => {
         setIsLoading(true);
         const prompt = `Generate a challenge quiz with ${numQuestions} mathematical problems on the topic of ${selectedTopic} at ${selectedDifficulty} difficulty. Each question should include the ID, problem statement, 4 options (including the correct answer in LaTeX), and the correct answer (in plain text).`; // Added "in LaTeX"
@@ -111,6 +115,7 @@ const ChallengesQuiz = () => {
     quizQuestions,
     selectedTopic,
     selectedDifficulty,
+    session,
   ]);
 
   /**
@@ -180,10 +185,15 @@ const ChallengesQuiz = () => {
 
   /**
    * Starts the quiz, loading questions from local storage if available,
-   * otherwise generating new questions.
+   * otherwise generating new questions.  Only starts if the user is logged in.
    * @memberof ChallengesQuiz
    */
   const handleStartQuiz = () => {
+    if (!session) {
+      toast.error("Please sign in to generate a quiz.");
+      return;
+    }
+
     const quizData = localStorage.getItem("challengesQuizData"); // Use the correct key
 
     if (quizData) {
@@ -313,23 +323,47 @@ const ChallengesQuiz = () => {
             speed.
           </p>
         </div>
+        {!session && (
+          <div className="mb-4 rounded-md bg-blue-100 p-4 text-center text-sm text-blue-700 dark:bg-blue-700 dark:text-blue-100">
+            <h3 className="mb-2 text-lg font-semibold">
+              Sign in to Generate Quiz
+            </h3>
+            <p>
+              Users are required to log in to limit API usage and prevent spam.
+            </p>
+          </div>
+        )}
 
-        {/* Topic Dropdown */}
+        {/* Topic Dropdown (disabled if not logged in) */}
         <div className="mb-6">
           <label
             htmlFor="topic"
-            className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent
-    dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
+            className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
           >
             Topic:
           </label>
           <div className="relative">
             <select
               id="topic"
-              className="w-full appearance-none rounded-lg border border-gray-300  bg-dropdown-light p-3 font-medium text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white" // Add appearance-none to hide default arrow
-              value={selectedTopic}
-              onChange={(e) => setSelectedTopic(e.target.value)}
+              className={`w-full appearance-none rounded-lg border  bg-dropdown-light p-3 font-medium  transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark ${
+                session
+                  ? "border-gray-300 text-black dark:text-white"
+                  : "border-gray-300 text-gray-500 dark:text-gray-500"
+              }`}
+              value={session ? selectedTopic : ""} // Controlled value when logged in, empty when not
+              onChange={(e) => {
+                if (session) {
+                  setSelectedTopic(e.target.value);
+                }
+              }}
+              disabled={!session} // Disable if not logged in
             >
+              <option
+                value=""
+                className="bg-dropdown-light font-medium text-gray-500 dark:bg-dropdown-dark dark:text-gray-500"
+              >
+                Select a Topic
+              </option>
               {topics.map((topic) => (
                 <option
                   key={topic}
@@ -340,29 +374,46 @@ const ChallengesQuiz = () => {
                 </option>
               ))}
             </select>
-            {/* Add ChevronDown icon */}
             <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-              <ChevronDown className="h-5 w-5 text-black dark:text-white" />
+              <ChevronDown
+                className={`h-5 w-5 ${
+                  session ? "text-black dark:text-white" : "text-gray-500"
+                }`}
+              />
             </div>
           </div>
         </div>
 
-        {/* Difficulty Dropdown */}
+        {/* Difficulty Dropdown (disabled if not logged in) */}
         <div className="mb-6">
           <label
             htmlFor="difficulty"
-            className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent
-    dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
+            className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
           >
             Difficulty:
           </label>
           <div className="relative">
             <select
               id="difficulty"
-              className="w-full appearance-none rounded-lg border border-gray-300  bg-dropdown-light p-3 font-medium text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white"
-              value={selectedDifficulty}
-              onChange={(e) => setSelectedDifficulty(e.target.value)}
+              className={`w-full appearance-none rounded-lg border  bg-dropdown-light p-3 font-medium  transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark ${
+                session
+                  ? "border-gray-300 text-black dark:text-white"
+                  : "border-gray-300 text-gray-500 dark:text-gray-500"
+              }`}
+              value={session ? selectedDifficulty : ""} // Controlled value when logged in, empty when not
+              onChange={(e) => {
+                if (session) {
+                  setSelectedDifficulty(e.target.value);
+                }
+              }}
+              disabled={!session} // Disable if not logged in
             >
+              <option
+                value=""
+                className="bg-dropdown-light font-medium text-gray-500 dark:bg-dropdown-dark dark:text-gray-500"
+              >
+                Select Difficulty
+              </option>
               {difficulties.map((difficulty) => (
                 <option
                   key={difficulty}
@@ -373,19 +424,21 @@ const ChallengesQuiz = () => {
                 </option>
               ))}
             </select>
-            {/* Add ChevronDown icon */}
             <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-              <ChevronDown className="h-5 w-5 text-black dark:text-white" />
+              <ChevronDown
+                className={`h-5 w-5 ${
+                  session ? "text-black dark:text-white" : "text-gray-500"
+                }`}
+              />
             </div>
           </div>
         </div>
 
-        {/* Number of Questions Input */}
+        {/* Number of Questions Input (disabled if not logged in) */}
         <div className="mb-6">
           <label
             htmlFor="numQuestions"
-            className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent
-    dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
+            className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
           >
             Number of Questions:
           </label>
@@ -394,13 +447,21 @@ const ChallengesQuiz = () => {
             id="numQuestions"
             min="3"
             max="20"
-            value={numQuestions}
-            onChange={(e) =>
-              setNumQuestions(
-                Math.max(1, Math.min(20, parseInt(e.target.value))),
-              )
-            }
-            className="w-full rounded-lg border border-gray-300 bg-white/40 p-3 text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-white/20 dark:text-white"
+            value={session ? numQuestions : ""} // Controlled value, empty string if not logged in
+            placeholder={session ? "" : "e.g. 5"} // Placeholder when not logged in
+            onChange={(e) => {
+              if (session) {
+                setNumQuestions(
+                  Math.max(1, Math.min(20, parseInt(e.target.value))),
+                );
+              }
+            }}
+            className={`w-full rounded-lg border  bg-white/40 p-3  transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-white/20  ${
+              session
+                ? "border-gray-300 text-black dark:text-white"
+                : "border-gray-300 text-gray-500 dark:text-gray-500"
+            }`}
+            disabled={!session} // Disable if not logged in
           />
         </div>
 
@@ -408,7 +469,7 @@ const ChallengesQuiz = () => {
         <button
           onClick={handleStartQuiz}
           className="flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-lg font-semibold text-white transition-colors hover:bg-blue-700 active:bg-blue-800"
-          disabled={isLoading}
+          disabled={isLoading || !session} // Disable if loading OR not logged in
         >
           {isLoading ? (
             <span className="animate-spin">
@@ -430,6 +491,11 @@ const ChallengesQuiz = () => {
             <span>Generate Quiz</span>
           )}
         </button>
+        {!session && (
+          <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+            You must be signed in to generate a quiz.
+          </p>
+        )}
       </div>
     );
   }
