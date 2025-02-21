@@ -13,7 +13,9 @@ import {
 } from "react-katex";
 
 import { Download, FileText, Images, Upload as UploadIcon } from "lucide-react";
+import { jsPDF } from "jspdf";
 import { toast } from "sonner";
+import { useSession } from "next-auth/react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 import Loader from "@/components/Loader";
@@ -23,7 +25,6 @@ import {
   problemBgColors,
   stepsBgColors,
 } from "./utils/colors";
-import { jsPDF } from "jspdf";
 
 interface Step {
   id: number;
@@ -125,6 +126,12 @@ const KatexEquation = ({ equation }: KatexEquationProps) => {
   }
 };
 
+/**
+ * A component that allows users to upload images containing physics problems and get step-by-step solutions.
+ * Requires users to be logged in.
+ * @returns {JSX.Element} The Solve component.
+ */
+
 const Solve = () => {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -139,6 +146,8 @@ const Solve = () => {
   const [exportLoading, setExportLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isColorful, setIsColorful] = useState(true);
+
+  const { data: session } = useSession(); // Get user session
 
   const handleFiles = (files: File[]) => {
     const validFiles = files.filter(
@@ -170,6 +179,10 @@ const Solve = () => {
   };
 
   const handleSolveProblem = async () => {
+    if (!session) {
+      toast.error("Please sign in to solve problems.");
+      return;
+    }
     if (uploadedFiles.length === 0) {
       toast.error("Please upload at least one file.");
       return;
@@ -382,13 +395,23 @@ const Solve = () => {
           step-by-step solutions.
         </p>
       </div>
-
       <div className={`mb-8 flex items-center justify-center`}>
         {/* Color Toggle */}
         <ColorToggle onChange={setIsColorful} initialState={true} />
       </div>
 
       <div className={`container mx-auto max-w-3xl p-8`}>
+        {/* Conditional rendering for login message */}
+        {!session && !isLoading && uploadedFiles.length === 0 && (
+          <div className="mb-4 rounded-md bg-blue-100 p-4 text-center text-sm text-blue-700 dark:bg-blue-700 dark:text-blue-100">
+            <h3 className="mb-2 text-lg font-semibold">
+              Sign in to Solve Problems
+            </h3>
+            <p>
+              Users are required to log in to limit API usage and prevent spam.
+            </p>
+          </div>
+        )}
         {uploadedFiles.length === 0 && !isLoading && solutions.length === 0 && (
           <div
             className={`mb-4 cursor-pointer rounded-lg border-2 border-dashed p-8 text-center transition-colors hover:border-gray-400 dark:hover:border-gray-500
@@ -410,7 +433,13 @@ const Solve = () => {
               const files = Array.from(e.dataTransfer.files);
               handleFiles(files);
             }}
-            onClick={() => fileInputRef.current?.click()}
+            onClick={() => {
+              if (session) {
+                fileInputRef.current?.click();
+              } else {
+                toast.error("Please sign in to upload files.");
+              }
+            }}
           >
             <UploadIcon
               className={`mx-auto mb-2 h-8 w-8 ${
@@ -440,6 +469,7 @@ const Solve = () => {
               onChange={(e) => handleFiles(Array.from(e.target.files || []))}
               accept="image/jpeg, image/png, image/webp"
               multiple
+              disabled={!session}
             />
           </div>
         )}
@@ -534,7 +564,7 @@ const Solve = () => {
             </div>
           </div>
         )}
-
+        {/* "Solve Problems" button - conditionally rendered */}
         {!isLoading && uploadedFiles.length > 0 && solutions.length === 0 && (
           <button
             className={`flex w-full items-center justify-center rounded-lg px-5 py-3 text-lg font-semibold text-white transition-colors hover:bg-blue-700 active:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-70 ${
@@ -543,20 +573,9 @@ const Solve = () => {
                 : "bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500"
             }`}
             onClick={handleSolveProblem}
-            disabled={isLoading}
+            disabled={isLoading || !session} // Disable if loading or not logged in
           >
-            {isLoading ? (
-              <div className="flex items-center gap-2">
-                <Loader
-                  mainText={"Generating Solution..."}
-                  subText={
-                    "Please wait while we analyze your problems and generate step-by-step solutions. This may take a moment. Thank you for your patience!"
-                  }
-                />
-              </div>
-            ) : (
-              "Solve Problems"
-            )}
+            Solve Problems
           </button>
         )}
 
