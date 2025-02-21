@@ -12,6 +12,8 @@ import {
   InlineMath as KatexInlineMath,
 } from "react-katex";
 
+import { jsPDF } from "jspdf";
+import { useSession } from "next-auth/react";
 import { Download, FileText, Images, Upload as UploadIcon } from "lucide-react";
 import { toast } from "sonner";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
@@ -23,8 +25,6 @@ import {
   problemBgColors,
   stepsBgColors,
 } from "./utils/colors";
-import { jsPDF } from "jspdf";
-import { useSession } from "next-auth/react";
 
 interface Step {
   id: number;
