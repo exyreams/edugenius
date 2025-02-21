@@ -4,9 +4,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { Check, ChevronRight, Upload as UploadIcon, X } from "lucide-react";
 import { toast } from "sonner";
 import Loader from "@/components/Loader";
-import Results from "@/components/Results"; // Correct import
+import Results from "@/components/Results";
 import { InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
+import { useSession } from "next-auth/react"; // Import useSession
 
 /**
  * Represents a single question in the quiz.
@@ -25,6 +26,7 @@ interface Question {
 
 /**
  * A component that allows users to upload a PDF or TXT file and generate a quiz from its content.
+ * Requires users to be logged in.
  * @returns {JSX.Element} The FromFiles component.
  */
 const FromFiles = () => {
@@ -46,6 +48,8 @@ const FromFiles = () => {
   const MAX_QUESTIONS = 20;
   const MIN_QUESTIONS = 3;
   const [quizDuration, setQuizDuration] = useState(0);
+
+  const { data: session } = useSession(); // Get user session
 
   /**
    * Loads quiz data from local storage if available when the quiz starts.
@@ -168,9 +172,15 @@ const FromFiles = () => {
 
   /**
    * Generates the quiz by sending the file content to the API.
+   * Only runs if the user is logged in.
    * @memberof FromFiles
    */
   const handleGenerateQuiz = async () => {
+    if (!session) {
+      toast.error("Please sign in to generate a quiz.");
+      return;
+    }
+
     if (!fileContent) {
       toast.error("Please upload a file first.");
       return;
@@ -320,20 +330,54 @@ const FromFiles = () => {
               concepts and identify areas for improvement.
             </p>
           </div>
+          {!session && (
+            <div className="mb-4 rounded-md bg-yellow-100 p-4 text-center text-sm text-yellow-700 dark:bg-yellow-700 dark:text-yellow-100">
+              <h3 className="mb-2 text-lg font-semibold">
+                Sign in to Generate Quiz
+              </h3>
+              <p>
+                Users are required to log in to limit API usage and prevent
+                spam.
+              </p>
+            </div>
+          )}
 
           <div
-            className="mb-4 cursor-pointer rounded-lg border-4 border-dashed border-gray-800 p-12 text-center dark:border-gray-400"
-            onClick={() => fileInputRef.current?.click()}
+            className={`mb-4 cursor-pointer rounded-lg border-4 p-12 text-center transition-colors ${
+              session
+                ? "border-dashed border-gray-800 dark:border-gray-400"
+                : "border-gray-300 dark:border-gray-700"
+            }`}
+            onClick={() => {
+              if (session) {
+                fileInputRef.current?.click();
+              } else {
+                toast.error("Please sign in to upload a file.");
+              }
+            }}
           >
-            <UploadIcon className="mx-auto mb-2 h-8 w-8 text-gray-600" />
-            <p className="text-gray-600">Click to select a file</p>
-            <p className="mt-2 text-sm text-gray-600">PDF or TXT file only</p>
+            <UploadIcon
+              className={`mx-auto mb-2 h-8 w-8 ${
+                session ? "text-gray-600" : "text-gray-400"
+              }`}
+            />
+            <p className={session ? "text-gray-600" : "text-gray-400"}>
+              Click to select a file
+            </p>
+            <p
+              className={`mt-2 text-sm ${
+                session ? "text-gray-600" : "text-gray-400"
+              }`}
+            >
+              PDF or TXT file only
+            </p>
             <input
               type="file"
               className="hidden"
               ref={fileInputRef}
               onChange={(e) => handleFileChange(e.target.files?.[0])} // Directly pass the file
               accept=".pdf,.txt"
+              disabled={!session}
             />
           </div>
 
@@ -344,37 +388,62 @@ const FromFiles = () => {
             </div>
           )}
 
-          <div className="mb-6 mt-10">
-            <label
-              htmlFor="numQuestions"
-              className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
-            >
-              Number of Questions (3-20):
-            </label>
-            <input
-              type="number"
-              id="numQuestions"
-              className="w-full rounded-lg border border-gray-300 bg-dropdown-light p-3 text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white"
-              value={numQuestions}
-              onChange={(e) => {
-                const value = Math.max(
-                  MIN_QUESTIONS,
-                  Math.min(MAX_QUESTIONS, Number(e.target.value)),
-                );
-                setNumQuestions(value);
-              }}
-              min={MIN_QUESTIONS}
-              max={MAX_QUESTIONS}
-            />
-          </div>
+          {session && (
+            <div className="mb-6 mt-10">
+              <label
+                htmlFor="numQuestions"
+                className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
+              >
+                Number of Questions (3-20):
+              </label>
+              <input
+                type="number"
+                id="numQuestions"
+                className="w-full rounded-lg border border-gray-300 bg-dropdown-light p-3 text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white"
+                value={numQuestions}
+                onChange={(e) => {
+                  const value = Math.max(
+                    MIN_QUESTIONS,
+                    Math.min(MAX_QUESTIONS, Number(e.target.value)),
+                  );
+                  setNumQuestions(value);
+                }}
+                min={MIN_QUESTIONS}
+                max={MAX_QUESTIONS}
+              />
+            </div>
+          )}
+          {!session && (
+            <div className="mb-6 mt-10">
+              <label
+                htmlFor="numQuestions"
+                className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
+              >
+                Number of Questions (3-20):
+              </label>
+              <input
+                type="number"
+                id="numQuestions"
+                className="w-full rounded-lg border border-gray-300 bg-dropdown-light p-3 text-gray-500 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-gray-500"
+                value="" // Empty Value
+                placeholder="e.g. 5"
+                disabled
+              />
+            </div>
+          )}
 
           <button
             className="flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-lg font-semibold text-white transition-colors hover:bg-blue-700 active:bg-blue-800"
             onClick={handleGenerateQuiz}
-            disabled={isLoading || !fileContent}
+            disabled={isLoading || !session || !fileContent} // Disable if loading, not logged in, or no file content
           >
             Generate Quiz
           </button>
+          {!session && (
+            <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+              You must be signed in to generate a quiz.
+            </p>
+          )}
         </div>
       )}
 

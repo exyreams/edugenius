@@ -31,6 +31,7 @@ import Results from "@/components/Results";
 import Loader from "@/components/Loader";
 import { MdStraight } from "react-icons/md";
 import { TbMath, TbMathIntegrals, TbMathIntegralX } from "react-icons/tb";
+import { useSession } from "next-auth/react"; // Import useSession
 
 /**
  * Interface for a single question in the quiz.
@@ -312,6 +313,8 @@ const intermediateAdvancedTopics: Topic[] = [
  * A component that renders a challenging math quiz.
  * The quiz fetches questions from an API, allows the user to select a topic, difficulty, and number of questions,
  * and displays the results at the end. It features timed questions and local storage persistence.
+ * Requires users to be logged in.
+ * @returns {JSX.Element} The ChallengesQuiz component
  */
 const ChallengesQuiz = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -330,12 +333,15 @@ const ChallengesQuiz = () => {
   const [quizDuration, setQuizDuration] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState<number>(0);
 
+  const { data: session } = useSession(); // Get user session
+
   /**
    * Fetches quiz questions from the API when the quiz starts or when parameters change.
-   * Stores the fetched questions in local storage.
+   * Stores the fetched questions in local storage.  Only runs if the user is logged in.
+   * @memberof ChallengesQuiz
    */
   useEffect(() => {
-    if (quizStarted && quizQuestions.length === 0) {
+    if (quizStarted && quizQuestions.length === 0 && session) {
       (async () => {
         setIsLoading(true);
         const prompt = `Generate a challenge quiz with ${numQuestions} mathematical problems on the topic of ${selectedTopic} at ${selectedDifficulty} difficulty. Each question should include the ID, problem statement, 4 options (including the correct answer), and the correct answer (in plain text).`;
@@ -393,10 +399,12 @@ const ChallengesQuiz = () => {
     selectedTopic,
     selectedDifficulty,
     quizQuestions.length,
-  ]); // Added missing dependencies
+    session,
+  ]); // Added missing dependencies and session
 
   /**
    * Tracks the time taken for the quiz.
+   * @memberof ChallengesQuiz
    */
   useEffect(() => {
     // eslint-disable-next-line no-undef
@@ -413,6 +421,7 @@ const ChallengesQuiz = () => {
   /**
    * Sets a timeout for each question based on the selected difficulty.
    * Automatically moves to the next question when the time runs out.
+   * @memberof ChallengesQuiz
    */
   useEffect(() => {
     if (!quizStarted || quizQuestions.length === 0) return;
@@ -449,6 +458,7 @@ const ChallengesQuiz = () => {
 
   /**
    * Tracks the time left for the current question.
+   * @memberof ChallengesQuiz
    */
   useEffect(() => {
     // eslint-disable-next-line no-undef
@@ -466,8 +476,15 @@ const ChallengesQuiz = () => {
    * Starts the quiz.  Checks for existing quiz data in local storage.
    * If data exists, prompts the user to either continue the existing quiz or start a new one.
    * If no data exists, or the user chooses to start a new quiz, fetches new questions.
+   * Only allows starting the quiz if the user is logged in.
+   * @memberof ChallengesQuiz
    */
   const handleStartQuiz = () => {
+    if (!session) {
+      toast.error("Please sign in to generate a quiz.");
+      return;
+    }
+
     const quizData = localStorage.getItem("formulaQuizData"); // Consistent key
 
     if (quizData) {
@@ -505,6 +522,7 @@ const ChallengesQuiz = () => {
    * Handles the selection of an answer option.
    * Marks the question as answered, updates the score, and displays a toast message.
    * @param {string} option - The selected answer option.
+   * @memberof ChallengesQuiz
    */
   const handleOptionSelect = (option: string) => {
     if (!isAnswered) {
@@ -523,6 +541,7 @@ const ChallengesQuiz = () => {
   /**
    * Moves to the next question in the quiz.
    * If the current question is the last one, shows the results.
+   * @memberof ChallengesQuiz
    */
   const handleNextQuestion = () => {
     if (currentQuestionIndex < quizQuestions.length - 1) {
@@ -546,12 +565,14 @@ const ChallengesQuiz = () => {
   /**
    * Array of available difficulty levels.
    * @type {string[]}
+   * @memberof ChallengesQuiz
    */
   const difficulties = ["Basic", "Intermediate", "Advanced"];
 
   /**
    * Resets the quiz state to start a new quiz.
    * Clears any existing quiz data from local storage.
+   * @memberof ChallengesQuiz
    */
   const handleStartAgain = () => {
     // Reset all states.
@@ -584,119 +605,211 @@ const ChallengesQuiz = () => {
           </p>
         </div>
 
-        {/* Topic Dropdown */}
-        <div className="mb-6">
-          <label
-            htmlFor="topic"
-            className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent
-    dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
-          >
-            Topic:
-          </label>
-          <div className="relative">
-            <select
-              id="topic"
-              className="w-full appearance-none rounded-lg border border-gray-300 bg-white/40 p-3 font-medium text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white"
-              value={selectedTopic}
-              onChange={(e) => setSelectedTopic(e.target.value)}
-            >
-              <optgroup
-                label="Foundational"
-                className="bg-gray-200 dark:bg-gray-600"
-              >
-                {foundationalTopics.map((topic) => (
-                  <option
-                    key={topic.id}
-                    value={topic.id}
-                    className="bg-dropdown-light font-medium text-black dark:bg-dropdown-dark dark:text-white"
-                  >
-                    {topic.name}
-                  </option>
-                ))}
-              </optgroup>
-              <optgroup
-                label="Intermediate/Advanced"
-                className="bg-gray-200 dark:bg-gray-600"
-              >
-                {intermediateAdvancedTopics.map((topic) => (
-                  <option
-                    key={topic.id}
-                    value={topic.id}
-                    className="bg-dropdown-light font-medium text-black dark:bg-dropdown-dark dark:text-white"
-                  >
-                    {topic.name}
-                  </option>
-                ))}
-              </optgroup>
-            </select>
-            <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-              <ChevronDown className="h-5 w-5 text-black dark:text-white" />
+        {!session && (
+          <>
+            <div className="mb-4 rounded-md bg-yellow-100 p-4 text-center text-sm text-yellow-700 dark:bg-yellow-700 dark:text-yellow-100">
+              <h3 className="mb-2 text-lg font-semibold">
+                Sign in to Generate Quiz
+              </h3>
+              <p>
+                Users are required to log in to limit API usage and prevent
+                spam.
+              </p>
             </div>
-          </div>
-        </div>
-
-        {/* Difficulty Dropdown */}
-        <div className="mb-6">
-          <label
-            htmlFor="difficulty"
-            className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent
-    dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
-          >
-            Difficulty:
-          </label>
-          <div className="relative">
-            <select
-              id="difficulty"
-              className="w-full appearance-none rounded-lg border border-gray-300  bg-white/40 p-3 font-medium text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white"
-              value={selectedDifficulty}
-              onChange={(e) => setSelectedDifficulty(e.target.value)}
-            >
-              {difficulties.map((difficulty) => (
-                <option
-                  key={difficulty}
-                  value={difficulty.toLowerCase()}
-                  className="bg-dropdown-light font-medium text-black dark:bg-dropdown-dark dark:text-white"
+            {/* Topic Dropdown (Disabled) */}
+            <div className="mb-6">
+              <label
+                htmlFor="topic"
+                className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
+              >
+                Topic:
+              </label>
+              <div className="relative">
+                <select
+                  id="topic"
+                  className="w-full appearance-none rounded-lg border border-gray-300 bg-white/40 p-3 font-medium text-gray-500 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-gray-500"
+                  value="" // Empty value when disabled
+                  disabled
                 >
-                  {difficulty}
-                </option>
-              ))}
-            </select>
-            {/* Add ChevronDown icon */}
-            <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-              <ChevronDown className="h-5 w-5 text-black dark:text-white" />
+                  <option
+                    value=""
+                    className="bg-dropdown-light font-medium text-gray-500 dark:bg-dropdown-dark dark:text-gray-500"
+                  >
+                    Select a Topic
+                  </option>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                  <ChevronDown className="h-5 w-5 text-gray-500" />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        {/* Number of Questions Input */}
-        <div className="mb-6">
-          <label
-            htmlFor="numQuestions"
-            className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent
-    dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
-          >
-            Number of Questions:
-          </label>
-          <input
-            type="number"
-            id="numQuestions"
-            min="3"
-            max="20"
-            value={numQuestions}
-            onChange={(e) =>
-              setNumQuestions(
-                Math.max(3, Math.min(20, parseInt(e.target.value))), // Ensure min is 3
-              )
-            }
-            className="w-full rounded-lg border border-gray-300 bg-white/40 p-3 text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-white/20 dark:text-white"
-          />
-        </div>
+            {/* Difficulty Dropdown (Disabled) */}
+            <div className="mb-6">
+              <label
+                htmlFor="difficulty"
+                className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
+              >
+                Difficulty:
+              </label>
+              <div className="relative">
+                <select
+                  id="difficulty"
+                  className="w-full appearance-none rounded-lg border border-gray-300 bg-white/40 p-3 font-medium text-gray-500 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-gray-500"
+                  value="" // Empty value when disabled
+                  disabled
+                >
+                  <option
+                    value=""
+                    className="bg-dropdown-light font-medium text-gray-500 dark:bg-dropdown-dark dark:text-gray-500"
+                  >
+                    Select Difficulty
+                  </option>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                  <ChevronDown className="h-5 w-5 text-gray-500" />
+                </div>
+              </div>
+            </div>
+
+            {/* Number of Questions Input (Disabled) */}
+            <div className="mb-6">
+              <label
+                htmlFor="numQuestions"
+                className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
+              >
+                Number of Questions:
+              </label>
+              <input
+                type="number"
+                id="numQuestions"
+                min="3"
+                max="20"
+                value=""
+                placeholder="e.g. 5"
+                className="w-full rounded-lg border border-gray-300 bg-white/40 p-3 text-gray-500 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-white/20 dark:text-gray-500"
+                disabled
+              />
+            </div>
+          </>
+        )}
+        {session && (
+          <>
+            {/* Topic Dropdown */}
+            <div className="mb-6">
+              <label
+                htmlFor="topic"
+                className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent
+        dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
+              >
+                Topic:
+              </label>
+              <div className="relative">
+                <select
+                  id="topic"
+                  className="w-full appearance-none rounded-lg border border-gray-300 bg-white/40 p-3 font-medium text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white"
+                  value={selectedTopic}
+                  onChange={(e) => setSelectedTopic(e.target.value)}
+                >
+                  <optgroup
+                    label="Foundational"
+                    className="bg-gray-200 dark:bg-gray-600"
+                  >
+                    {foundationalTopics.map((topic) => (
+                      <option
+                        key={topic.id}
+                        value={topic.id}
+                        className="bg-dropdown-light font-medium text-black dark:bg-dropdown-dark dark:text-white"
+                      >
+                        {topic.name}
+                      </option>
+                    ))}
+                  </optgroup>
+                  <optgroup
+                    label="Intermediate/Advanced"
+                    className="bg-gray-200 dark:bg-gray-600"
+                  >
+                    {intermediateAdvancedTopics.map((topic) => (
+                      <option
+                        key={topic.id}
+                        value={topic.id}
+                        className="bg-dropdown-light font-medium text-black dark:bg-dropdown-dark dark:text-white"
+                      >
+                        {topic.name}
+                      </option>
+                    ))}
+                  </optgroup>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                  <ChevronDown className="h-5 w-5 text-black dark:text-white" />
+                </div>
+              </div>
+            </div>
+
+            {/* Difficulty Dropdown */}
+            <div className="mb-6">
+              <label
+                htmlFor="difficulty"
+                className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent
+        dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
+              >
+                Difficulty:
+              </label>
+              <div className="relative">
+                <select
+                  id="difficulty"
+                  className="w-full appearance-none rounded-lg border border-gray-300  bg-white/40 p-3 font-medium text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white"
+                  value={selectedDifficulty}
+                  onChange={(e) => setSelectedDifficulty(e.target.value)}
+                >
+                  {difficulties.map((difficulty) => (
+                    <option
+                      key={difficulty}
+                      value={difficulty.toLowerCase()}
+                      className="bg-dropdown-light font-medium text-black dark:bg-dropdown-dark dark:text-white"
+                    >
+                      {difficulty}
+                    </option>
+                  ))}
+                </select>
+                {/* Add ChevronDown icon */}
+                <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                  <ChevronDown className="h-5 w-5 text-black dark:text-white" />
+                </div>
+              </div>
+            </div>
+
+            {/* Number of Questions Input */}
+            <div className="mb-6">
+              <label
+                htmlFor="numQuestions"
+                className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent
+      dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
+              >
+                Number of Questions:
+              </label>
+              <input
+                type="number"
+                id="numQuestions"
+                min="3"
+                max="20"
+                value={numQuestions}
+                onChange={(e) =>
+                  setNumQuestions(
+                    Math.max(3, Math.min(20, parseInt(e.target.value))), // Ensure min is 3
+                  )
+                }
+                className="w-full rounded-lg border border-gray-300 bg-white/40 p-3 text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-white/20 dark:text-white"
+              />
+            </div>
+          </>
+        )}
 
         {/* Start Quiz Button */}
         <button
           onClick={handleStartQuiz}
           className="flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-lg font-semibold text-white transition-colors hover:bg-blue-700 active:bg-blue-800"
-          disabled={isLoading}
+          disabled={isLoading || !session} // Disable if loading or not logged in
         >
           {isLoading ? (
             <span className="animate-spin">
@@ -718,6 +831,11 @@ const ChallengesQuiz = () => {
             <span>Generate Quiz</span>
           )}
         </button>
+        {!session && (
+          <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+            You must be signed in to generate a quiz.
+          </p>
+        )}
       </div>
     );
   }

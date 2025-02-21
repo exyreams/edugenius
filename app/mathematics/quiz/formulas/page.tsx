@@ -7,6 +7,7 @@ import "katex/dist/katex.min.css";
 import { InlineMath } from "react-katex";
 import Results from "@/components/Results";
 import Loader from "@/components/Loader";
+import { useSession } from "next-auth/react"; // Import useSession
 
 /**
  * Represents a single question in the quiz.
@@ -29,6 +30,7 @@ interface Question {
  * A component for a formula quiz.
  * Allows users to select a topic, difficulty, and number of questions,
  * then takes a quiz generated using the Gemini API.
+ * Requires users to be logged in to prevent API overuse.
  * @returns {JSX.Element} The FormulaQuiz component.
  */
 const FormulaQuiz = () => {
@@ -48,12 +50,15 @@ const FormulaQuiz = () => {
   const [quizDuration, setQuizDuration] = useState<number>(0); // Total time for the quiz
   const [timeLeft, setTimeLeft] = useState<number>(0);
 
+  const { data: session } = useSession(); // Get user session
+
   /**
    * Fetches quiz questions from the API when the quiz starts.
    * @memberof FormulaQuiz
    */
   useEffect(() => {
-    if (quizStarted && quizQuestions.length === 0) {
+    if (quizStarted && quizQuestions.length === 0 && session) {
+      // Check for user session
       (async () => {
         setIsLoading(true);
         const prompt = `Generate a formula quiz with ${numQuestions} questions on the topic of ${selectedTopic} at ${selectedDifficulty} difficulty. Each question should include the ID, question text, the correct formula in LaTeX format, 4 options (including the correct answer in LaTeX format), and the correct answer (in plain text).`;
@@ -112,6 +117,7 @@ const FormulaQuiz = () => {
     quizQuestions,
     selectedTopic,
     selectedDifficulty,
+    session,
   ]);
 
   /**
@@ -183,10 +189,15 @@ const FormulaQuiz = () => {
 
   /**
    * Starts the quiz, loading questions from local storage if available,
-   * otherwise generating new questions.
+   * otherwise generating new questions.  Only allows starting if the user is logged in.
    * @memberof FormulaQuiz
    */
   const handleStartQuiz = () => {
+    if (!session) {
+      toast.error("Please sign in to generate a quiz.");
+      return;
+    }
+
     const quizData = localStorage.getItem("formulaQuizData");
 
     if (quizData) {
@@ -316,101 +327,193 @@ const FormulaQuiz = () => {
           </p>
         </div>
 
-        {/* Topic Dropdown */}
-        <div className="mb-6">
-          <label
-            htmlFor="topic"
-            className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent
-    dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
-          >
-            Topic:
-          </label>
-          <div className="relative">
-            <select
-              id="topic"
-              className="w-full appearance-none rounded-lg border border-gray-300 bg-dropdown-light  p-3 font-figtree font-medium text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white" // Add appearance-none to hide default arrow
-              value={selectedTopic}
-              onChange={(e) => setSelectedTopic(e.target.value)}
-            >
-              {topics.map((topic) => (
-                <option
-                  key={topic}
-                  value={topic.toLowerCase()}
-                  className="bg-dropdown-light font-medium text-black dark:bg-dropdown-dark dark:text-white"
-                >
-                  {topic}
-                </option>
-              ))}
-            </select>
-            {/* Add ChevronDown icon */}
-            <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-              <ChevronDown className="h-5 w-5 text-black dark:text-white" />
+        {!session && (
+          <>
+            <div className="mb-4 rounded-md bg-yellow-100 p-4 text-center text-sm text-yellow-700 dark:bg-yellow-700 dark:text-yellow-100">
+              <h3 className="mb-2 text-lg font-semibold">
+                Sign in to Generate Quiz
+              </h3>
+              <p>
+                Users are required to log in to limit API usage and prevent
+                spam.
+              </p>
             </div>
-          </div>
-        </div>
-
-        {/* Difficulty Dropdown */}
-        <div className="mb-6">
-          <label
-            htmlFor="difficulty"
-            className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent
-    dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
-          >
-            Difficulty:
-          </label>
-          <div className="relative">
-            <select
-              id="difficulty"
-              className="w-full appearance-none rounded-lg border border-gray-300  bg-dropdown-light p-3 font-medium text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white"
-              value={selectedDifficulty}
-              onChange={(e) => setSelectedDifficulty(e.target.value)}
-            >
-              {difficulties.map((difficulty) => (
-                <option
-                  key={difficulty}
-                  value={difficulty.toLowerCase()}
-                  className="bg-dropdown-light font-medium text-black dark:bg-dropdown-dark dark:text-white"
+            {/* Placeholder for Topic */}
+            <div className="mb-6">
+              <label
+                htmlFor="topic"
+                className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
+              >
+                Topic:
+              </label>
+              <div className="relative">
+                <select
+                  id="topic"
+                  className="w-full appearance-none rounded-lg border border-gray-300 bg-dropdown-light p-3 font-figtree font-medium text-gray-500 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-gray-500"
+                  value="" // Empty value since it's disabled
+                  disabled
                 >
-                  {difficulty}
-                </option>
-              ))}
-            </select>
-            {/* Add ChevronDown icon */}
-            <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-              <ChevronDown className="h-5 w-5 text-black dark:text-white" />
+                  <option
+                    value=""
+                    className="bg-dropdown-light font-medium text-gray-500 dark:bg-dropdown-dark dark:text-gray-500"
+                  >
+                    Select a Topic
+                  </option>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                  <ChevronDown className="h-5 w-5 text-gray-500" />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        {/* Number of Questions Input */}
-        <div className="mb-6">
-          <label
-            htmlFor="numQuestions"
-            className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent
+            {/* Placeholder for Difficulty */}
+            <div className="mb-6">
+              <label
+                htmlFor="difficulty"
+                className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
+              >
+                Difficulty:
+              </label>
+              <div className="relative">
+                <select
+                  id="difficulty"
+                  className="w-full appearance-none rounded-lg border border-gray-300 bg-dropdown-light p-3 font-figtree font-medium text-gray-500 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-gray-500"
+                  value="" // Empty value since it's disabled
+                  disabled
+                >
+                  <option
+                    value=""
+                    className="bg-dropdown-light font-medium text-gray-500 dark:bg-dropdown-dark dark:text-gray-500"
+                  >
+                    Select Difficulty
+                  </option>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                  <ChevronDown className="h-5 w-5 text-gray-500" />
+                </div>
+              </div>
+            </div>
+
+            {/* Placeholder for Number of Questions */}
+            <div className="mb-6">
+              <label
+                htmlFor="numQuestions"
+                className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent
     dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
-          >
-            Number of Questions:
-          </label>
-          <input
-            type="number"
-            id="numQuestions"
-            min="3"
-            max="20"
-            value={numQuestions}
-            onChange={(e) =>
-              setNumQuestions(
-                Math.max(1, Math.min(20, parseInt(e.target.value))),
-              )
-            }
-            className="w-full rounded-lg border border-gray-300 bg-white/40 p-3 text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-white/20 dark:text-white"
-          />
-        </div>
+              >
+                Number of Questions:
+              </label>
+              <input
+                type="number"
+                id="numQuestions"
+                min="3"
+                max="20"
+                value="" // Empty value since its disabled.
+                placeholder="e.g., 10"
+                className="w-full rounded-lg border border-gray-300 bg-white/40 p-3 text-gray-500 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-white/20 dark:text-gray-500"
+                disabled
+              />
+            </div>
+          </>
+        )}
+
+        {session && (
+          <>
+            {/* Topic Dropdown */}
+            <div className="mb-6">
+              <label
+                htmlFor="topic"
+                className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent
+      dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
+              >
+                Topic:
+              </label>
+              <div className="relative">
+                <select
+                  id="topic"
+                  className="w-full appearance-none rounded-lg border border-gray-300 bg-dropdown-light  p-3 font-figtree font-medium text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white" // Add appearance-none to hide default arrow
+                  value={selectedTopic}
+                  onChange={(e) => setSelectedTopic(e.target.value)}
+                >
+                  {topics.map((topic) => (
+                    <option
+                      key={topic}
+                      value={topic.toLowerCase()}
+                      className="bg-dropdown-light font-medium text-black dark:bg-dropdown-dark dark:text-white"
+                    >
+                      {topic}
+                    </option>
+                  ))}
+                </select>
+                {/* Add ChevronDown icon */}
+                <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                  <ChevronDown className="h-5 w-5 text-black dark:text-white" />
+                </div>
+              </div>
+            </div>
+
+            {/* Difficulty Dropdown */}
+            <div className="mb-6">
+              <label
+                htmlFor="difficulty"
+                className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent
+      dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
+              >
+                Difficulty:
+              </label>
+              <div className="relative">
+                <select
+                  id="difficulty"
+                  className="w-full appearance-none rounded-lg border border-gray-300  bg-dropdown-light p-3 font-medium text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-dropdown-dark dark:text-white"
+                  value={selectedDifficulty}
+                  onChange={(e) => setSelectedDifficulty(e.target.value)}
+                >
+                  {difficulties.map((difficulty) => (
+                    <option
+                      key={difficulty}
+                      value={difficulty.toLowerCase()}
+                      className="bg-dropdown-light font-medium text-black dark:bg-dropdown-dark dark:text-white"
+                    >
+                      {difficulty}
+                    </option>
+                  ))}
+                </select>
+                {/* Add ChevronDown icon */}
+                <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                  <ChevronDown className="h-5 w-5 text-black dark:text-white" />
+                </div>
+              </div>
+            </div>
+            <div className="mb-6">
+              <label
+                htmlFor="numQuestions"
+                className="mb-2 block bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-lg font-bold text-transparent
+      dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300"
+              >
+                Number of Questions:
+              </label>
+              <input
+                type="number"
+                id="numQuestions"
+                min="3"
+                max="20"
+                value={numQuestions}
+                onChange={(e) =>
+                  setNumQuestions(
+                    Math.max(1, Math.min(20, parseInt(e.target.value))),
+                  )
+                }
+                className="w-full rounded-lg border border-gray-300 bg-white/40 p-3 text-black transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-white/20 dark:text-white"
+              />
+            </div>
+          </>
+        )}
 
         {/* Start Quiz Button */}
         <button
           onClick={handleStartQuiz}
           className="flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-lg font-semibold text-white transition-colors hover:bg-blue-700 active:bg-blue-800"
-          disabled={isLoading}
+          disabled={isLoading || !session} // Disable if loading or not logged in
         >
           {isLoading ? (
             <span className="animate-spin">
@@ -432,6 +535,11 @@ const FormulaQuiz = () => {
             <span>Generate Quiz</span>
           )}
         </button>
+        {!session && (
+          <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+            You must be signed in to generate a quiz.
+          </p>
+        )}
       </div>
     );
   }
