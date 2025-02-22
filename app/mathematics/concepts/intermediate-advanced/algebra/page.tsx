@@ -57,7 +57,7 @@ const formulas = [
   },
   {
     id: "factoring",
-    name: "Polynomial Factoring",
+    name: "Factoring",
     icon: <FunctionSquare className="h-6 w-6 text-current" />,
     description: "Decompose expressions into simpler factors",
     gradient:
