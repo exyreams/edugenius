@@ -287,13 +287,9 @@ export default function LinearEquations() {
               <div
                 className={`mt-2 overflow-x-auto rounded-lg p-4 ${
                   isColorful
-                    ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
-                    : "bg-gray-200 dark:bg-gray-700"
-                } ${
-                  isColorful
-                    ? "scrollbar-thin scrollbar-track-teal-200 scrollbar-thumb-teal-300 dark:scrollbar-track-teal-600 dark:scrollbar-thumb-teal-500"
-                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
-                }`}
+                    ? "bg-black/5 backdrop-blur-sm scrollbar-thin scrollbar-track-teal-200 scrollbar-thumb-teal-300 dark:bg-black/20 dark:scrollbar-track-teal-600 dark:scrollbar-thumb-teal-500"
+                    : "bg-gray-200 scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:bg-gray-700 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                } `}
               >
                 <BlockMath math="2x + 5 = 15 \Rightarrow 2x = 10 \Rightarrow x = 5" />
               </div>
@@ -324,13 +320,9 @@ export default function LinearEquations() {
               <div
                 className={`mt-2 overflow-x-auto rounded-lg p-4 ${
                   isColorful
-                    ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
-                    : "bg-gray-200 dark:bg-gray-700"
-                } ${
-                  isColorful
-                    ? "scrollbar-thin scrollbar-track-teal-200 scrollbar-thumb-teal-300 dark:scrollbar-track-teal-600 dark:scrollbar-thumb-teal-500"
-                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
-                }`}
+                    ? "bg-black/5 backdrop-blur-sm scrollbar-thin scrollbar-track-teal-200 scrollbar-thumb-teal-300 dark:bg-black/20 dark:scrollbar-track-teal-600 dark:scrollbar-thumb-teal-500"
+                    : "bg-gray-200 scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:bg-gray-700 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                } `}
               >
                 <BlockMath math="\frac{3}{4}x = 9 \Rightarrow x = 9 \times \frac{4}{3} = 12" />
               </div>
@@ -361,13 +353,9 @@ export default function LinearEquations() {
               <div
                 className={`mt-2 overflow-x-auto rounded-lg p-4 ${
                   isColorful
-                    ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
-                    : "bg-gray-200 dark:bg-gray-700"
-                } ${
-                  isColorful
-                    ? "scrollbar-thin scrollbar-track-teal-200 scrollbar-thumb-teal-300 dark:scrollbar-track-teal-600 dark:scrollbar-thumb-teal-500"
-                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
-                }`}
+                    ? "bg-black/5 backdrop-blur-sm scrollbar-thin scrollbar-track-teal-200 scrollbar-thumb-teal-300 dark:bg-black/20 dark:scrollbar-track-teal-600 dark:scrollbar-thumb-teal-500"
+                    : "bg-gray-200 scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:bg-gray-700 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                } `}
               >
                 <BlockMath math="5x - 3 = 2x + 9 \Rightarrow 3x = 12 \Rightarrow x = 4" />
               </div>
@@ -395,13 +383,9 @@ export default function LinearEquations() {
               <div
                 className={`mt-2 overflow-x-auto rounded-lg p-4 ${
                   isColorful
-                    ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
-                    : "bg-gray-200 dark:bg-gray-700"
-                } ${
-                  isColorful
-                    ? "scrollbar-thin scrollbar-track-teal-200 scrollbar-thumb-teal-300 dark:scrollbar-track-teal-600 dark:scrollbar-thumb-teal-500"
-                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
-                }`}
+                    ? "bg-black/5 backdrop-blur-sm scrollbar-thin scrollbar-track-teal-200 scrollbar-thumb-teal-300 dark:bg-black/20 dark:scrollbar-track-teal-600 dark:scrollbar-thumb-teal-500"
+                    : "bg-gray-200 scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:bg-gray-700 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                } `}
               >
                 <BlockMath math="\text{Check } x=5 \text{ in } 2(5) + 5 = 15" />
               </div>
