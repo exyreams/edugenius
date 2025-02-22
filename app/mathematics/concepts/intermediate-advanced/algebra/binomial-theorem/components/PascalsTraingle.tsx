@@ -100,25 +100,25 @@ const PascalTriangle: React.FC<PascalTriangleProps> = ({ isColorful }) => {
     <div className="space-y-8">
       {/* Interactive Triangle Section */}
       <div
-        className={`flex flex-col items-center p-8 ${
+        className={`flex flex-col items-center p-2 md:p-8 lg:p-4 ${
           isColorful
             ? "rounded-xl bg-black/5 shadow-lg backdrop-blur-sm dark:bg-black/20"
             : "glass rounded-xl shadow-md"
         }`}
       >
         <h2
-          className={`mb-6 text-xl font-semibold ${
+          className={`mb-4 text-lg font-semibold md:text-xl ${
             isColorful ? "" : "text-gray-800 dark:text-gray-200"
           }`}
         >
-          Interactive Pascal's Triangle
+          Interactive Pascal&#39;s Triangle
         </h2>
         {/* Triangle Rendering */}
-        <div className="flex flex-col items-center space-y-2">
+        <div className="flex flex-col items-center space-y-1 md:space-y-2">
           {triangle.map((row, rowIndex) => (
             <div
               key={rowIndex}
-              className="flex items-center justify-center space-x-2"
+              className="flex items-center justify-center space-x-1 md:space-x-2"
             >
               {row.map((value, colIndex) => {
                 const isHovered =
@@ -130,8 +130,8 @@ const PascalTriangle: React.FC<PascalTriangleProps> = ({ isColorful }) => {
                   <div
                     key={cellKey}
                     className={`
-                      flex h-12 w-12 items-center justify-center
-                      rounded-full font-mono text-sm transition-transform duration-200
+                      flex h-8 w-8 items-center justify-center rounded-full font-mono
+                      text-xs transition-transform duration-200 md:h-12 md:w-12 md:text-sm
                       ${textColor}
                       ${getColorClass(value)}
                       ${isHovered ? "scale-110" : ""}
@@ -149,7 +149,7 @@ const PascalTriangle: React.FC<PascalTriangleProps> = ({ isColorful }) => {
           ))}
           {/* Display Row and Position */}
           <div
-            className={`mt-6 text-sm  ${
+            className={`mt-4 text-xs md:text-sm ${
               isColorful
                 ? "text-gray-600 dark:text-gray-200"
                 : "text-gray-600 dark:text-gray-300"

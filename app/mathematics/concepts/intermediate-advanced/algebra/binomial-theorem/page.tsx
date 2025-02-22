@@ -119,7 +119,13 @@ export default function BinomialTheorem() {
             Extended Form
           </h2>
           {/* Extended Form Formula */}
-          <div className="mt-4 flex justify-start overflow-x-auto  p-4">
+          <div
+            className={`mt-4 h-auto overflow-x-auto rounded-lg  p-4 ${
+              isColorful
+                ? "bg-black/5 backdrop-blur-sm scrollbar-thin scrollbar-track-teal-200 scrollbar-thumb-teal-300 dark:bg-black/20 dark:scrollbar-track-teal-600 dark:scrollbar-thumb-teal-500"
+                : "bg-gray-200 scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:bg-gray-700 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+            }`}
+          >
             <BlockMath math="(a + b)^n = \binom{n}{0}a^n + \binom{n}{1}a^{n-1}b + \binom{n}{2}a^{n-2}b^2 + \cdots + \binom{n}{n-1}ab^{n-1} + \binom{n}{n}b^n" />
           </div>
           {/* Explanation of Extended Form */}
@@ -236,17 +242,14 @@ export default function BinomialTheorem() {
                 : "text-gray-800 dark:text-gray-200"
             } dark:from-purple-300 dark:to-indigo-300`}
           >
-            Pascal's Triangle Visualization
+            Pascal&#39;s Triangle Visualization
           </h2>
           {/* Pascal's Triangle and Explanation */}
           <div className="mt-4 flex flex-col items-center gap-6 md:flex-row">
-            <div
-              className={`flex-1 rounded-lg p-4 ${
-                isColorful ? "backdrop-blur-sm" : ""
-              }`}
-            >
+            <div className={`flex-1 rounded-lg p-4 ${isColorful ? "" : ""}`}>
               <PascalTriangle isColorful={true} />
             </div>
+
             <div className="flex-1 space-y-3">
               <p className="text-gray-600 dark:text-gray-300">
                 Each entry is the sum of the two entries directly above it:
@@ -329,7 +332,7 @@ export default function BinomialTheorem() {
 
         {/* Practice Problems */}
         <div
-          className={` rounded-lg p-6 shadow-md ${
+          className={`rounded-lg p-6 shadow-md ${
             isColorful
               ? "bg-gradient-to-br from-lime-200 to-green-200 dark:from-lime-600 dark:to-green-600"
               : "glass"
@@ -345,98 +348,353 @@ export default function BinomialTheorem() {
             Practice Exercises
           </h2>
           {/* Practice Problems Grid */}
-          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                problem: "\\text{Expand } (x + 2)^4",
-                solution: "x^4 + 8x^3 + 24x^2 + 32x + 16",
-              },
-              {
-                problem: "\\text{Find the 5th term in } (a - b)^7",
-                solution: "-35a^3b^4",
-              },
-              {
-                problem: "\\text{Calculate } \\sum_{k=0}^4 \\binom{4}{k}",
-                solution: "2^4 = 16",
-              },
-              {
-                problem: "\\text{Prove } \\binom{9}{2} = \\binom{9}{7}",
-                solution:
-                  "\\binom{9}{2} = \\frac{9!}{2!7!} = 36 = \\binom{9}{7}",
-              },
-              {
-                problem:
-                  "\\text{Find coefficient of } x^2 \\text{ in } (3x + 1)^5",
-                solution: "\\binom{5}{2}(3)^2(1)^3 = 10 \\times 9 = 90",
-              },
-              {
-                problem: "\\text{Verify } (1.01)^3 \\text{ using theorem}",
-                solution: "1 + 3(0.01) + 3(0.0001) + 0.000001 = 1.030301",
-              },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className={`rounded-lg  p-4 transition-all   ${
-                  isColorful
-                    ? `bg-gradient-to-br ${
-                        problemColors[index % problemColors.length]
-                      } dark:text-white`
-                    : "bg-gray-300 text-gray-800 dark:bg-gray-800 dark:text-white "
-                } hover:shadow-lg `}
-              >
-                {/* Problem Number */}
-                <div className="flex items-start justify-between">
-                  <span
-                    className={`text-sm font-medium text-gray-700 dark:text-gray-300`}
-                  >
-                    Problem {index + 1}
-                  </span>
-                </div>
-                {/* Problem Statement */}
-                <div className="mt-2 flex justify-start overflow-x-auto">
-                  <BlockMath math={item.problem} />
-                </div>
-                {/* Solution Dropdown */}
-                <details className="group mt-3">
-                  <summary
-                    className={`flex cursor-pointer items-center text-sm font-medium  ${
-                      isColorful
-                        ? " text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
-                        : "text-gray-700 dark:text-gray-300"
-                    }`}
-                  >
-                    <span>Show Solution</span>
-                    {/* Dropdown Arrow Icon */}
-                    <svg
-                      className={`ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </summary>
-                  {/* Solution Display */}
-                  <div
-                    className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3  ${
-                      isColorful
-                        ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
-                        : "bg-gray-200 dark:bg-gray-700"
-                    }`}
-                  >
-                    <BlockMath math={item.solution} />
-                  </div>
-                </details>
+          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {/* Problem 1 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[0 % problemColors.length]} dark:text-white`
+                  : "bg-gray-300 text-gray-800 dark:bg-gray-800 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Problem 1
+                </span>
               </div>
-            ))}
+              <div className="mt-2 flex justify-start overflow-x-auto">
+                <BlockMath math={"\\text{Expand } (x + 2)^4"} />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className="ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm scrollbar-thin scrollbar-track-red-200 scrollbar-thumb-red-300 dark:bg-black/20  dark:scrollbar-track-red-600 dark:scrollbar-thumb-red-500"
+                      : "bg-gray-200 scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:bg-gray-700 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath math="x^4 + 8x^3 + 24x^2 + 32x + 16" />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 2 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[1 % problemColors.length]} dark:text-white`
+                  : "bg-gray-300 text-gray-800 dark:bg-gray-800 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Problem 2
+                </span>
+              </div>
+              <div
+                className={`mt-2 flex justify-start overflow-x-auto rounded-lg  p-4 ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-amber-200 scrollbar-thumb-amber-300  dark:scrollbar-track-amber-600 dark:scrollbar-thumb-amber-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath math={"\\text{Find the 5th term in } (a - b)^7"} />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className="ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-700"
+                  }`}
+                >
+                  <BlockMath math="-35a^3b^4" />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 3 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[2 % problemColors.length]} dark:text-white`
+                  : "bg-gray-300 text-gray-800 dark:bg-gray-800 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Problem 3
+                </span>
+              </div>
+              <div className="mt-2 flex justify-start overflow-x-auto">
+                <BlockMath
+                  math={"\\text{Calculate } \\sum_{k=0}^4 \\binom{4}{k}"}
+                />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className="ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-700"
+                  }`}
+                >
+                  <BlockMath math="2^4 = 16" />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 4 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[3 % problemColors.length]} dark:text-white`
+                  : "bg-gray-300 text-gray-800 dark:bg-gray-800 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Problem 4
+                </span>
+              </div>
+              <div className="mt-2 flex justify-start overflow-x-auto">
+                <BlockMath
+                  math={"\\text{Prove } \\binom{9}{2} = \\binom{9}{7}"}
+                />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className="ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm scrollbar-thin scrollbar-track-emerald-200 scrollbar-thumb-emerald-300 dark:bg-black/20  dark:scrollbar-track-emerald-600 dark:scrollbar-thumb-emerald-500"
+                      : "bg-gray-200 scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:bg-gray-700 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath
+                    math={
+                      "\\binom{9}{2} = \\frac{9!}{2!7!} = 36 = \\binom{9}{7}"
+                    }
+                  />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 5 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[4 % problemColors.length]} dark:text-white`
+                  : "bg-gray-300 text-gray-800 dark:bg-gray-800 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Problem 5
+                </span>
+              </div>
+              <div
+                className={`mt-2 flex justify-start overflow-x-auto rounded-lg  p-4 ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-cyan-200 scrollbar-thumb-cyan-300  dark:scrollbar-track-cyan-600 dark:scrollbar-thumb-cyan-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath
+                  math={
+                    "\\text{Find coefficient of } x^2 \\text{ in } (3x + 1)^5"
+                  }
+                />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className="ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm scrollbar-thin scrollbar-track-cyan-200 scrollbar-thumb-cyan-300 dark:bg-black/20  dark:scrollbar-track-cyan-600 dark:scrollbar-thumb-cyan-500"
+                      : "bg-gray-200 scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:bg-gray-700 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath
+                    math={"\\binom{5}{2}(3)^2(1)^3 = 10 \\times 9 = 90"}
+                  />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 6 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[5 % problemColors.length]} dark:text-white`
+                  : "bg-gray-300 text-gray-800 dark:bg-gray-800 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Problem 6
+                </span>
+              </div>
+
+              <div
+                className={`mt-2 flex justify-start overflow-x-auto rounded-lg  p-4 ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-blue-200 scrollbar-thumb-blue-300  dark:scrollbar-track-blue-600 dark:scrollbar-thumb-blue-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath
+                  math={"\\text{Verify } (1.01)^3 \\text{ using theorem}"}
+                />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className="ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm scrollbar-thin scrollbar-track-blue-200 scrollbar-thumb-blue-300 dark:bg-black/20  dark:scrollbar-track-blue-600 dark:scrollbar-thumb-blue-500"
+                      : "bg-gray-200 scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:bg-gray-700 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath
+                    math={"1 + 3(0.01) + 3(0.0001) + 0.000001 = 1.030301"}
+                  />
+                </div>
+              </details>
+            </div>
           </div>
         </div>
       </div>
+
       {/* Decorative Section Divider */}
       <div className="mt-16 flex items-center justify-center space-x-4">
         <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:via-gray-400" />
