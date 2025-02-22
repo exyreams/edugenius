@@ -58,7 +58,7 @@ export default function PropertiesOfComplexNumbers() {
         <div
           className={`${
             isColorful
-              ? "bg-gradient-to-br from-gray-100 to-slate-200 dark:from-gray-800 dark:to-slate-700"
+              ? "bg-gradient-to-br from-yellow-50 to-amber-100 dark:from-yellow-900 dark:to-amber-800"
               : "glass"
           } rounded-lg p-6 shadow-md`}
         >
