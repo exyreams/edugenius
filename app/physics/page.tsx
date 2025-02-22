@@ -519,8 +519,7 @@ export default function Physics() {
           </Link>
 
           {/* Concept Explainer Section */}
-          <Link
-            href="/physics/explainer"
+          <div
             className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg ${
               isColorful
                 ? "bg-gradient-to-br from-green-200 to-teal-200 dark:from-green-600 dark:to-teal-600"
@@ -576,7 +575,7 @@ export default function Physics() {
                   : "bg-gray-300/50 dark:bg-gray-700/50"
               }`}
             />
-          </Link>
+          </div>
         </div>
       </div>
       {/* Decorative Section Divider */}
