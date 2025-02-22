@@ -1,19 +1,50 @@
 import React, { useState } from "react";
 
+/**
+ * @typedef {Object} Cell
+ * @property {number} row - The row index of the cell.
+ * @property {number} col - The column index of the cell.
+ */
 interface Cell {
   row: number;
   col: number;
 }
 
+/**
+ * @typedef {Object} PascalTriangleProps
+ * @property {boolean} isColorful - Determines if the triangle should use colorful styling.
+ */
 interface PascalTriangleProps {
   isColorful: boolean;
 }
 
+/**
+ * PascalTriangle Component
+ * @param {PascalTriangleProps} props - The props for the component.
+ * @param {boolean} props.isColorful - Whether to use colorful styling.
+ * @returns {JSX.Element} The Pascal's Triangle component.
+ * @description A React component that renders an interactive Pascal's Triangle.  It allows
+ * the user to hover over cells to see their row, position, and value.  The component
+ * supports both colorful and grayscale modes.
+ */
 const PascalTriangle: React.FC<PascalTriangleProps> = ({ isColorful }) => {
+  /**
+   * @type {[Cell | null, React.Dispatch<React.SetStateAction<Cell | null>>]} hoveredCell
+   * @description State to track the currently hovered cell.  `null` if no cell is hovered.
+   */
   const [hoveredCell, setHoveredCell] = useState<Cell | null>(null);
+
+  /**
+   * @type {[number, React.Dispatch<React.SetStateAction<number>>]} rows
+   * @description State to store the number of rows in the triangle. Initialized to 8.
+   */
   const [rows] = useState<number>(8);
 
-  // Generate Pascal's Triangle
+  /**
+   * Generates Pascal's Triangle up to the specified number of rows.
+   * @param {number} numRows - The number of rows to generate.
+   * @returns {number[][]} A 2D array representing Pascal's Triangle.
+   */
   const generateTriangle = (numRows: number): number[][] => {
     const triangle: number[][] = [];
     for (let i = 0; i < numRows; i++) {
@@ -33,7 +64,10 @@ const PascalTriangle: React.FC<PascalTriangleProps> = ({ isColorful }) => {
   const triangle: number[][] = generateTriangle(rows);
   const maxValue: number = Math.max(...triangle.flat());
 
-  // Define Tailwind classes for different color intensities
+  /**
+   * Tailwind CSS classes for different color intensities.
+   * @type {string[]}
+   */
   const colorClasses = [
     "bg-indigo-100 dark:bg-indigo-500",
     "bg-indigo-200 dark:bg-indigo-600",
@@ -41,6 +75,11 @@ const PascalTriangle: React.FC<PascalTriangleProps> = ({ isColorful }) => {
     "bg-indigo-400 dark:bg-indigo-800",
   ];
 
+  /**
+   * Gets the appropriate Tailwind CSS class for a cell's background color based on its value.
+   * @param {number} value - The value of the cell.
+   * @returns {string} The Tailwind CSS class for the cell's background.
+   */
   const getColorClass = (value: number): string => {
     if (isColorful) {
       const intensity = Math.floor((value / maxValue) * colorClasses.length);
@@ -50,7 +89,11 @@ const PascalTriangle: React.FC<PascalTriangleProps> = ({ isColorful }) => {
     }
   };
 
-  // Conditionally set text color based on isColorful
+  /**
+   * Conditionally set text color based on isColorful
+   * @type {string}
+   *
+   **/
   const textColor = isColorful ? "" : "text-gray-800 dark:text-white";
 
   return (
@@ -68,8 +111,9 @@ const PascalTriangle: React.FC<PascalTriangleProps> = ({ isColorful }) => {
             isColorful ? "" : "text-gray-800 dark:text-gray-200"
           }`}
         >
-          Interactive Pascal&#39;s Triangle
+          Interactive Pascal's Triangle
         </h2>
+        {/* Triangle Rendering */}
         <div className="flex flex-col items-center space-y-2">
           {triangle.map((row, rowIndex) => (
             <div
@@ -111,14 +155,15 @@ const PascalTriangle: React.FC<PascalTriangleProps> = ({ isColorful }) => {
                 : "text-gray-600 dark:text-gray-300"
             }`}
           >
+            {/* Hovered Cell Information */}
             {hoveredCell && (
               <p>
                 Row {hoveredCell.row + 1}, Position {hoveredCell.col + 1}:{" "}
                 {triangle[hoveredCell.row][hoveredCell.col]}
               </p>
             )}
+            {/* Default Text */}
             {!hoveredCell && <p>Hover over a cell to see its value</p>}{" "}
-            {/* Default text */}
           </div>
         </div>
       </div>

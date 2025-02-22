@@ -1,9 +1,10 @@
 "use client";
 
-import Breadcrumb from "@/components/Breadcrumb";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { useState } from "react";
+
+import Breadcrumb from "@/components/Breadcrumb";
 import ColorToggle from "@/components/ColorToggle";
 import PascalTriangle from "./components/PascalsTraingle";
 
