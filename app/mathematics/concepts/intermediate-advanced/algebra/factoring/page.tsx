@@ -95,11 +95,7 @@ export default function Factoring() {
                   isColorful
                     ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
                     : "bg-gray-200 dark:bg-gray-700"
-                } ${
-                  isColorful
-                    ? "scrollbar-thin scrollbar-track-blue-200 scrollbar-thumb-blue-300 dark:scrollbar-track-blue-600 dark:scrollbar-thumb-blue-500"
-                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
-                }`}
+                } `}
               >
                 <h3
                   className={`text-lg font-semibold ${
@@ -117,11 +113,7 @@ export default function Factoring() {
                   isColorful
                     ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
                     : "bg-gray-200 dark:bg-gray-700"
-                } ${
-                  isColorful
-                    ? "scrollbar-thin scrollbar-track-green-200 scrollbar-thumb-green-300 dark:scrollbar-track-green-600 dark:scrollbar-thumb-green-500"
-                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
-                }`}
+                } `}
               >
                 <h3
                   className={`text-lg font-semibold ${
@@ -141,11 +133,7 @@ export default function Factoring() {
                   isColorful
                     ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
                     : "bg-gray-200 dark:bg-gray-700"
-                } ${
-                  isColorful
-                    ? "scrollbar-thin scrollbar-track-rose-200 scrollbar-thumb-rose-300 dark:scrollbar-track-rose-600 dark:scrollbar-thumb-rose-500"
-                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
-                }`}
+                } `}
               >
                 <h3
                   className={`text-lg font-semibold ${
@@ -163,11 +151,7 @@ export default function Factoring() {
                   isColorful
                     ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
                     : "bg-gray-200 dark:bg-gray-700"
-                } ${
-                  isColorful
-                    ? "scrollbar-thin scrollbar-track-amber-200 scrollbar-thumb-amber-300 dark:scrollbar-track-amber-600 dark:scrollbar-thumb-amber-500"
-                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
-                }`}
+                } `}
               >
                 <h3
                   className={`text-lg font-semibold ${
@@ -289,11 +273,7 @@ export default function Factoring() {
                   isColorful
                     ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
                     : "bg-gray-200 dark:bg-gray-700"
-                } ${
-                  isColorful
-                    ? "scrollbar-thin scrollbar-track-indigo-200 scrollbar-thumb-indigo-300 dark:scrollbar-track-indigo-600 dark:scrollbar-thumb-indigo-500"
-                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
-                }`}
+                } `}
               >
                 <h3
                   className={`text-lg font-semibold ${
@@ -322,11 +302,7 @@ export default function Factoring() {
                   isColorful
                     ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
                     : "bg-gray-200 dark:bg-gray-700"
-                } ${
-                  isColorful
-                    ? "scrollbar-thin scrollbar-track-emerald-200 scrollbar-thumb-emerald-300 dark:scrollbar-track-emerald-600 dark:scrollbar-thumb-emerald-500"
-                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
-                }`}
+                } `}
               >
                 <h3
                   className={`text-lg font-semibold ${
