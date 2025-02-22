@@ -9,16 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f4249bfe-89d8-48ee-84d8-968725050d19" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/auth/signin/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/auth/signin/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/mathematics/quiz/challenges/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/mathematics/quiz/challenges/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/mathematics/quiz/formulas/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/mathematics/quiz/formulas/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/mathematics/quiz/from-files/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/mathematics/quiz/from-files/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/mathematics/solve/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/mathematics/solve/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/physics/concepts/electromagnetism/electrodynamics/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/physics/concepts/electromagnetism/electrodynamics/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/physics/quiz/challenges/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/physics/quiz/challenges/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/physics/quiz/from-files/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/physics/quiz/from-files/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/physics/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/physics/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +158,8 @@
       <workItem from="1740041633031" duration="21912000" />
       <workItem from="1740123463683" duration="613000" />
       <workItem from="1740137546121" duration="13484000" />
-      <workItem from="1740157720901" duration="1154000" />
+      <workItem from="1740157720901" duration="7741000" />
+      <workItem from="1740198092084" duration="4243000" />
     </task>
     <servers />
   </component>
