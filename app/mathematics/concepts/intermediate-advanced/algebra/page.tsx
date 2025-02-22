@@ -117,7 +117,7 @@ const formulas = [
   },
   {
     id: "properties-of-exponents",
-    name: "Exponent Rules",
+    name: "Exponent Properties & Rules",
     icon: <PieChart className="h-6 w-6 text-current" />,
     description: "Laws governing exponential expressions",
     gradient: "from-red-200 to-rose-200 dark:from-red-600 dark:to-rose-600",
