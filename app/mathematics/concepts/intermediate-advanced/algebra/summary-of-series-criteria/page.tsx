@@ -24,12 +24,12 @@ export default function SummaryOfSeriesCriteria() {
       href: "/mathematics/concepts/intermediate-advanced",
     },
     {
-      label: "Calculus",
-      href: "/mathematics/concepts/intermediate-advanced/calculus",
+      label: "Algebra",
+      href: "/mathematics/concepts/intermediate-advanced/algebra",
     },
     {
       label: "Summary of Series Criteria",
-      href: "/mathematics/concepts/intermediate-advanced/calculus/series-convergence",
+      href: "/mathematics/concepts/intermediate-advanced/algebra/summary-of-series-criteria",
     },
   ];
 
