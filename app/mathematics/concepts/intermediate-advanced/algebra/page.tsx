@@ -18,10 +18,25 @@ import {
 } from "lucide-react";
 import { PiBracketsSquareDuotone } from "react-icons/pi";
 import { FaSquareRootVariable, FaWaveSquare } from "react-icons/fa6";
-import Breadcrumb from "@/components/Breadcrumb";
 import { useState } from "react";
+
+import Breadcrumb from "@/components/Breadcrumb";
 import ColorToggle from "@/components/ColorToggle";
 
+/**
+ * @typedef {Object} Formula
+ * @property {string} id - Unique identifier for the formula.
+ * @property {string} name - Name of the formula.
+ * @property {JSX.Element} icon - Icon representing the formula.
+ * @property {string} description - Brief description of the formula.
+ * @property {string} gradient - CSS gradient class for the formula card background.
+ * @property {string} text - CSS class for text color.
+ */
+
+/**
+ * @type {Formula[]}
+ * @description Array of formula objects, each representing an algebraic concept.
+ */
 const formulas = [
   {
     id: "binomial-theorem",
@@ -160,7 +175,17 @@ const formulas = [
   },
 ];
 
+/**
+ * AlgebraFormulas Component
+ * @returns {JSX.Element} The Algebra Formulas page.
+ * @description Renders the Algebra Formulas page, displaying a list of algebraic concepts
+ * with interactive cards that link to detailed formula pages.
+ */
 export default function AlgebraFormulas() {
+  /**
+   * @type {Array<{label: string, href: string}>}
+   * @description Breadcrumb navigation items.
+   */
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
     { label: "Concepts", href: "/mathematics/concepts" },
@@ -174,6 +199,10 @@ export default function AlgebraFormulas() {
     },
   ];
 
+  /**
+   * @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]}
+   * @description State hook to manage the color mode of the component (colorful or grayscale).
+   */
   const [isColorful, setIsColorful] = useState(true); // Add state for color mode
 
   return (
@@ -189,7 +218,10 @@ export default function AlgebraFormulas() {
         </p>
       </div>
 
+      {/* Color Toggle */}
       <ColorToggle onChange={setIsColorful} initialState={true} />
+
+      {/* Breadcrumb Navigation */}
       <Breadcrumb items={breadcrumbItems} />
 
       {/* Formula Grid */}
@@ -207,6 +239,7 @@ export default function AlgebraFormulas() {
             {/* Set z-index to be higher than the animated element */}
             <div className="relative z-10 space-y-4">
               <div className="flex items-center gap-4">
+                {/* Formula Icon */}
                 <div
                   className={`rounded-lg p-3 ${
                     isColorful
@@ -216,6 +249,7 @@ export default function AlgebraFormulas() {
                 >
                   {formula.icon}
                 </div>
+                {/* Formula Name */}
                 <h3
                   className={`text-xl font-semibold ${
                     isColorful
@@ -226,9 +260,11 @@ export default function AlgebraFormulas() {
                   {formula.name}
                 </h3>
               </div>
+              {/* Formula Description */}
               <p className="text-sm leading-6 text-gray-600 dark:text-gray-200">
                 {formula.description}
               </p>
+              {/* Explore Formulas Link */}
               <div className="mt-2 flex items-center justify-between opacity-0 transition-opacity group-hover:opacity-100">
                 <span className="text-sm font-medium text-gray-700 dark:text-white/80">
                   Explore Formulas
@@ -242,7 +278,7 @@ export default function AlgebraFormulas() {
               className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
                 isColorful
                   ? "bg-black/5 dark:bg-white/10"
-                  : "bg-gray-200/50 dark:bg-gray-700/50" // Increased opacity here
+                  : "bg-gray-200/50 dark:bg-gray-700/50"
               }`}
             />
           </Link>
