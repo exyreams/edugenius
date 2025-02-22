@@ -304,7 +304,9 @@ export default function RadicalProperties() {
                 }`}
               >
                 You can add or subtract radical expressions only if they have
-                the *same index* and the *same radicand* (like radicals).
+                the <span className="font-bold">same index</span> and the{" "}
+                <span className="font-bold">same radicand</span> (like
+                radicals).
               </p>
             </div>
           </div>
