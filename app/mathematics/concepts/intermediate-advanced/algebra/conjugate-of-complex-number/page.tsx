@@ -238,7 +238,7 @@ export default function ConjugateOfComplexNumber() {
             <h3
               className={`text-xl font-semibold ${
                 isColorful
-                  ? "dark:text-100 text-gray-800"
+                  ? "text-amber-800 dark:text-orange-100"
                   : "text-gray-800 dark:text-gray-100"
               }`}
             >
@@ -289,7 +289,7 @@ export default function ConjugateOfComplexNumber() {
             <h3
               className={`text-xl font-semibold ${
                 isColorful
-                  ? "dark:text-100 text-gray-800"
+                  ? "text-fuchsia-800 dark:text-fuchsia-100"
                   : "text-gray-800 dark:text-gray-100"
               }`}
             >
@@ -341,7 +341,7 @@ export default function ConjugateOfComplexNumber() {
           <h2
             className={`text-2xl font-semibold ${
               isColorful
-                ? "dark:text-100 text-gray-800"
+                ? "text-pink-800 dark:text-pink-100"
                 : "text-gray-800 dark:text-gray-100"
             }`}
           >
@@ -440,7 +440,7 @@ export default function ConjugateOfComplexNumber() {
           <h2
             className={`text-2xl font-semibold ${
               isColorful
-                ? "dark:text-100 text-gray-800"
+                ? "text-green-800 dark:text-green-100"
                 : "text-gray-800 dark:text-gray-100"
             }`}
           >
