@@ -150,7 +150,7 @@ const formulas = [
   },
   {
     id: "representations-of-complex-number",
-    name: "Complex Representations",
+    name: "Representations of Complex Representations",
     icon: <GitCompare className="h-6 w-6 text-current" />,
     description: "Different forms of complex number notation",
     gradient: "from-pink-200 to-rose-200 dark:from-pink-600 dark:to-rose-600",
