@@ -7,7 +7,11 @@ import { useState } from "react";
 import ColorToggle from "@/components/ColorToggle";
 import PascalTriangle from "./components/PascalsTraingle";
 
-// Color Variations
+/**
+ * Array of color gradient classes for styling the practice problems.
+ * Each string is a Tailwind CSS class for a gradient background.
+ * @type {string[]}
+ */
 const problemColors = [
   "from-red-100 to-rose-200 dark:from-red-800 dark:to-rose-700",
   "from-orange-100 to-amber-200 dark:from-orange-800 dark:to-amber-700",
@@ -21,7 +25,18 @@ const problemColors = [
   "from-gray-100 to-slate-200 dark:from-gray-800 dark:to-slate-700",
 ];
 
+/**
+ * BinomialTheorem Component
+ * @returns {JSX.Element} The Binomial Theorem page.
+ * @description A React component that explains and demonstrates the Binomial Theorem,
+ * including its formula, properties, Pascal's Triangle visualization,
+ * real-world applications, and practice exercises.
+ */
 export default function BinomialTheorem() {
+  /**
+   * @type {Array<{label: string, href: string}>}
+   * @description Breadcrumb navigation items for the page.
+   */
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
     { label: "Concepts", href: "/mathematics/concepts" },
@@ -38,7 +53,10 @@ export default function BinomialTheorem() {
       href: "/mathematics/concepts/intermediate-advanced/algebra/binomial-theorem",
     },
   ];
-
+  /**
+   * @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]} isColorful
+   * @description State to manage to apply colorful style, or glass style to the page.
+   */
   const [isColorful, setIsColorful] = useState(true);
 
   return (
@@ -54,6 +72,7 @@ export default function BinomialTheorem() {
         </p>
       </div>
 
+      {/* Color Toggle and Breadcrumb */}
       <ColorToggle onChange={setIsColorful} initialState={true} />
       <Breadcrumb items={breadcrumbItems} />
 
@@ -75,6 +94,7 @@ export default function BinomialTheorem() {
           >
             Fundamental Expansion
           </h2>
+          {/* Fundamental Expansion Formula */}
           <div className="mt-4 flex justify-start overflow-x-auto  p-4">
             <BlockMath math="(a + b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^{k}" />
           </div>
@@ -97,9 +117,11 @@ export default function BinomialTheorem() {
           >
             Extended Form
           </h2>
+          {/* Extended Form Formula */}
           <div className="mt-4 flex justify-start overflow-x-auto  p-4">
             <BlockMath math="(a + b)^n = \binom{n}{0}a^n + \binom{n}{1}a^{n-1}b + \binom{n}{2}a^{n-2}b^2 + \cdots + \binom{n}{n-1}ab^{n-1} + \binom{n}{n}b^n" />
           </div>
+          {/* Explanation of Extended Form */}
           <div className="mt-4 text-gray-600 dark:text-gray-300">
             <p className="flex items-baseline gap-2">
               <span className="text-emerald-600 dark:text-emerald-400">●</span>
@@ -129,6 +151,7 @@ export default function BinomialTheorem() {
             >
               Binomial Coefficients
             </h3>
+            {/* Binomial Coefficients Formula and Explanation */}
             <div className="mt-4 space-y-3">
               <BlockMath math="\binom{n}{k} = \frac{n!}{k!(n-k)!}" />
               <p className={`text-gray-600 dark:text-gray-300 `}>
@@ -164,6 +187,7 @@ export default function BinomialTheorem() {
             >
               Key Properties
             </h3>
+            {/* Key Properties Formulas */}
             <div className="mt-4 space-y-3">
               <div
                 className={`rounded-lg  p-3 ${
@@ -211,8 +235,9 @@ export default function BinomialTheorem() {
                 : "text-gray-800 dark:text-gray-200"
             } dark:from-purple-300 dark:to-indigo-300`}
           >
-            Pascal&#39;s Triangle Visualization
+            Pascal's Triangle Visualization
           </h2>
+          {/* Pascal's Triangle and Explanation */}
           <div className="mt-4 flex flex-col items-center gap-6 md:flex-row">
             <div
               className={`flex-1 rounded-lg p-4 ${
@@ -247,8 +272,10 @@ export default function BinomialTheorem() {
           >
             Real-World Applications
           </h2>
+          {/* Real-World Applications Grid */}
           <div className="mt-6 grid gap-6 md:grid-cols-2">
             <div className="space-y-4">
+              {/* Probability Theory */}
               <div
                 className={`rounded-lg p-4 ${
                   isColorful
@@ -273,6 +300,7 @@ export default function BinomialTheorem() {
               </div>
             </div>
             <div className="space-y-4">
+              {/* Financial Mathematics */}
               <div
                 className={`rounded-lg p-4 ${
                   isColorful
@@ -315,6 +343,7 @@ export default function BinomialTheorem() {
           >
             Practice Exercises
           </h2>
+          {/* Practice Problems Grid */}
           <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {[
               {
@@ -354,6 +383,7 @@ export default function BinomialTheorem() {
                     : "bg-gray-300 text-gray-800 dark:bg-gray-800 dark:text-white "
                 } hover:shadow-lg `}
               >
+                {/* Problem Number */}
                 <div className="flex items-start justify-between">
                   <span
                     className={`text-sm font-medium text-gray-700 dark:text-gray-300`}
@@ -361,9 +391,11 @@ export default function BinomialTheorem() {
                     Problem {index + 1}
                   </span>
                 </div>
+                {/* Problem Statement */}
                 <div className="mt-2 flex justify-start overflow-x-auto">
                   <BlockMath math={item.problem} />
                 </div>
+                {/* Solution Dropdown */}
                 <details className="group mt-3">
                   <summary
                     className={`flex cursor-pointer items-center text-sm font-medium  ${
@@ -373,6 +405,7 @@ export default function BinomialTheorem() {
                     }`}
                   >
                     <span>Show Solution</span>
+                    {/* Dropdown Arrow Icon */}
                     <svg
                       className={`ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300`}
                       fill="none"
@@ -387,6 +420,7 @@ export default function BinomialTheorem() {
                       />
                     </svg>
                   </summary>
+                  {/* Solution Display */}
                   <div
                     className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3  ${
                       isColorful
