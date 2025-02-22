@@ -170,11 +170,18 @@ const formulas = [
 export default function MultivariableCalculusFormulas() {
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
-    { label: "Formulas", href: "/mathematics/formulas" },
-    { label: "Calculus", href: "/mathematics/formulas/calculus" },
+    { label: "Concepts", href: "/mathematics/concepts" },
+    {
+      label: "Intermediate & Advanced",
+      href: "/mathematics/concepts/intermediate-advanced",
+    },
+    {
+      label: "Calculus",
+      href: "/mathematics/concepts/intermediate-advanced/calculus",
+    },
     {
       label: "Multivariable",
-      href: "/mathematics/formulas/calculus/multivariable",
+      href: "/mathematics/concepts/intermediate-advanced/calculus/multivariable",
     },
   ];
 

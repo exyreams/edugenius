@@ -107,11 +107,18 @@ const formulas = [
 export default function DifferentialCalculusFormulas() {
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
-    { label: "Formulas", href: "/mathematics/formulas" },
-    { label: "Calculus", href: "/mathematics/formulas/calculus" },
+    { label: "Concepts", href: "/mathematics/concepts" },
+    {
+      label: "Intermediate & Advanced",
+      href: "/mathematics/concepts/intermediate-advanced",
+    },
+    {
+      label: "Calculus",
+      href: "/mathematics/concepts/intermediate-advanced/calculus",
+    },
     {
       label: "Differential Calculus",
-      href: "/mathematics/formulas/calculus/differential",
+      href: "/mathematics/concepts/intermediate-advanced/calculus/differential",
     },
   ];
 
