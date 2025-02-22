@@ -23,6 +23,22 @@ import { useState } from "react";
 import Breadcrumb from "@/components/Breadcrumb";
 import ColorToggle from "@/components/ColorToggle";
 
+/**
+ * @typedef {Object} Topic
+ * @property {string} id - The unique identifier of the topic.
+ * @property {string} name - The name of the topic.
+ * @property {LucideIcon} icon - The Lucide icon component for the topic.
+ * @property {string} color - The text color class for the icon.
+ * @property {string} gradient - The background gradient class for the card.
+ * @property {string} text - The text color class for the card content.
+ * @property {string} description - A brief description of the topic.
+ */
+
+/**
+ * @type {Topic[]}
+ * @description Array of foundational mathematics topics. Each object represents a topic
+ * with its ID, name, icon, color, gradient, text color, and description.
+ */
 const foundationalTopics = [
   {
     id: "number-systems",
@@ -158,13 +174,27 @@ const foundationalTopics = [
   },
 ];
 
+/**
+ * Foundational Component
+ * @returns {JSX.Element} Foundational concepts page
+ * @description Renders the foundational concepts page with a list of topics. Each topic is
+ * presented as a card with an icon, name, description, and a link to explore further.
+ */
 export default function Foundational() {
+  /**
+   * @type {Array<{label: string, href: string}>} breadcrumbItems
+   * @description Breadcrumb navigation items for the page.
+   */
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
     { label: "Concepts", href: "/mathematics/concepts" },
     { label: "Foundational", href: "/mathematics/concepts/foundational" },
   ];
 
+  /**
+   * @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]} isColorful
+   * @description State hook to manage the color mode of the component (colorful or grayscale).
+   */
   const [isColorful, setIsColorful] = useState(true);
 
   return (
@@ -183,9 +213,10 @@ export default function Foundational() {
       {/* Color Toggle */}
       <ColorToggle onChange={setIsColorful} initialState={true} />
 
+      {/* Breadcrumb Navigation */}
       <Breadcrumb items={breadcrumbItems} />
 
-      {/* Foundational Mathematics */}
+      {/* Foundational Mathematics Topics */}
       <div className="mt-12">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {foundationalTopics.map((topic) => (
@@ -199,6 +230,7 @@ export default function Foundational() {
               }`}
             >
               <div className="space-y-4">
+                {/* Icon and Topic Name */}
                 <div className="flex items-center gap-3">
                   <div
                     className={`rounded-lg p-2 ${
@@ -217,6 +249,7 @@ export default function Foundational() {
                   </div>
                   <h4 className={`font-medium ${topic.text}`}>{topic.name}</h4>
                 </div>
+                {/* Topic Description */}
                 <p
                   className={`text-sm leading-6 ${
                     isColorful

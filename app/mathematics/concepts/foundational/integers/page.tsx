@@ -7,6 +7,10 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ColorToggle from "@/components/ColorToggle";
 import IntegerNumberLineVisualizer from "./components/IntegerNumberLineVisualizer";
 
+/**
+ * Array of color gradient classes for practice problems.
+ * Each string represents a Tailwind CSS gradient class for a different color scheme.
+ */
 const problemColors = [
   "from-red-100 to-rose-200 dark:from-red-800 dark:to-rose-700",
   "from-orange-100 to-amber-200 dark:from-orange-800 dark:to-amber-700",
@@ -20,7 +24,17 @@ const problemColors = [
   "from-gray-100 to-slate-200 dark:from-gray-800 dark:to-slate-700",
 ];
 
+/**
+ * Integers component that provides an interactive guide to understanding integers.
+ * It includes explanations, visualizations, and practice problems for integer operations.
+ *
+ * @returns {JSX.Element} The Integers component.
+ */
 export default function Integers() {
+  /**
+   * Breadcrumb items for navigation.
+   * @type {Array<{label: string, href: string}>}
+   */
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
     { label: "Concepts", href: "/mathematics/concepts" },
@@ -28,6 +42,10 @@ export default function Integers() {
     { label: "Integers", href: "/mathematics/concepts/foundational/integers" },
   ];
 
+  /**
+   * State to manage the colorful mode of the component.
+   * @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]}
+   */
   const [isColorful, setIsColorful] = useState(true);
 
   return (
@@ -45,7 +63,9 @@ export default function Integers() {
         </p>
       </div>
 
+      {/* Toggle for colorful/grayscale mode */}
       <ColorToggle onChange={setIsColorful} initialState={true} />
+      {/* Breadcrumb navigation */}
       <Breadcrumb items={breadcrumbItems} />
 
       <div className="mt-6 space-y-8">
@@ -417,6 +437,7 @@ export default function Integers() {
                     : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-white"
                 } hover:shadow-lg`}
               >
+                {/* Problem number */}
                 <div className="flex items-start justify-between">
                   <span
                     className={`text-sm font-medium text-gray-700 dark:text-gray-300`}
@@ -424,9 +445,11 @@ export default function Integers() {
                     Problem {index + 1}
                   </span>
                 </div>
+                {/* Problem statement */}
                 <div className="mt-2 flex justify-start overflow-x-auto">
                   <BlockMath math={item.problem} />
                 </div>
+                {/* Details for showing the solution */}
                 <details className="group mt-3">
                   <summary
                     className={`flex cursor-pointer items-center text-sm font-medium  ${
@@ -436,6 +459,7 @@ export default function Integers() {
                     }`}
                   >
                     <span>Show Solution</span>
+                    {/* SVG for the dropdown arrow */}
                     <svg
                       className={`ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300`}
                       fill="none"
@@ -450,6 +474,7 @@ export default function Integers() {
                       />
                     </svg>
                   </summary>
+                  {/* Solution display */}
                   <div
                     className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3  ${
                       isColorful
