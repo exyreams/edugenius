@@ -58,14 +58,6 @@ export default function Factoring() {
     "from-gray-100 to-slate-200 dark:from-gray-800 dark:to-slate-700",
   ];
 
-  /**
-   * @description Dynamically generated scrollbar styles based on the `isColorful` state.  Includes
-   * responsive variations using Tailwind's `sm:` prefix.
-   */
-  const scrollbarStyle = isColorful
-    ? "scrollbar-thin sm:scrollbar-thin scrollbar-track-blue-200 sm:scrollbar-track-blue-300 scrollbar-thumb-blue-300 sm:scrollbar-thumb-blue-400 dark:scrollbar-track-blue-600 dark:sm:scrollbar-track-blue-700 dark:scrollbar-thumb-blue-500 dark:sm:scrollbar-thumb-blue-600"
-    : "scrollbar-thin sm:scrollbar-thin scrollbar-track-gray-200 sm:scrollbar-track-gray-300 scrollbar-thumb-gray-300 sm:scrollbar-thumb-gray-400 dark:scrollbar-track-gray-600 dark:sm:scrollbar-track-gray-700 dark:scrollbar-thumb-gray-500 dark:sm:scrollbar-thumb-gray-600";
-
   return (
     <div className="mx-auto w-full px-4 py-8 sm:px-6 md:max-w-7xl md:py-12">
       <h1
@@ -85,7 +77,7 @@ export default function Factoring() {
         <div
           className={`${
             isColorful
-              ? "bg-gradient-to-br from-gray-100 to-slate-200 dark:from-gray-800 dark:to-slate-700"
+              ? "bg-gradient-to-br from-blue-100 to-red-200 dark:from-blue-600 dark:to-red-600"
               : "glass"
           } rounded-lg p-6 shadow-md`}
         >
@@ -103,7 +95,11 @@ export default function Factoring() {
                   isColorful
                     ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
                     : "bg-gray-200 dark:bg-gray-700"
-                } ${scrollbarStyle}`}
+                } ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-blue-200 scrollbar-thumb-blue-300 dark:scrollbar-track-blue-600 dark:scrollbar-thumb-blue-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
               >
                 <h3
                   className={`text-lg font-semibold ${
@@ -114,14 +110,18 @@ export default function Factoring() {
                 >
                   Greatest Common Factor (GCF)
                 </h3>
-                <BlockMath math="6x^3 + 9x = 3x(2x^2 + 3)" />
+                <BlockMath math={"6x^3 + 9x = 3x(2x^2 + 3)"} />
               </div>
               <div
                 className={`rounded-lg p-4 ${
                   isColorful
                     ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
                     : "bg-gray-200 dark:bg-gray-700"
-                } ${scrollbarStyle}`}
+                } ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-green-200 scrollbar-thumb-green-300 dark:scrollbar-track-green-600 dark:scrollbar-thumb-green-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
               >
                 <h3
                   className={`text-lg font-semibold ${
@@ -132,7 +132,7 @@ export default function Factoring() {
                 >
                   Difference of Squares
                 </h3>
-                <BlockMath math="a^2 - b^2 = (a - b)(a + b)" />
+                <BlockMath math={"a^2 - b^2 = (a - b)(a + b)"} />
               </div>
             </div>
             <div className="space-y-4">
@@ -141,7 +141,11 @@ export default function Factoring() {
                   isColorful
                     ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
                     : "bg-gray-200 dark:bg-gray-700"
-                } ${scrollbarStyle}`}
+                } ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-rose-200 scrollbar-thumb-rose-300 dark:scrollbar-track-rose-600 dark:scrollbar-thumb-rose-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
               >
                 <h3
                   className={`text-lg font-semibold ${
@@ -152,14 +156,18 @@ export default function Factoring() {
                 >
                   Perfect Square Trinomial
                 </h3>
-                <BlockMath math="a^2 \pm 2ab + b^2 = (a \pm b)^2" />
+                <BlockMath math={"a^2 \\pm 2ab + b^2 = (a \\pm b)^2"} />
               </div>
               <div
                 className={`rounded-lg p-4 ${
                   isColorful
                     ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
                     : "bg-gray-200 dark:bg-gray-700"
-                } ${scrollbarStyle}`}
+                } ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-amber-200 scrollbar-thumb-amber-300 dark:scrollbar-track-amber-600 dark:scrollbar-thumb-amber-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
               >
                 <h3
                   className={`text-lg font-semibold ${
@@ -170,7 +178,9 @@ export default function Factoring() {
                 >
                   Sum/Difference of Cubes
                 </h3>
-                <BlockMath math="a^3 \pm b^3 = (a \pm b)(a^2 \mp ab + b^2)" />
+                <BlockMath
+                  math={"a^3 \\pm b^3 = (a \\pm b)(a^2 \\mp ab + b^2)"}
+                />
               </div>
             </div>
           </div>
@@ -279,7 +289,11 @@ export default function Factoring() {
                   isColorful
                     ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
                     : "bg-gray-200 dark:bg-gray-700"
-                } ${scrollbarStyle}`}
+                } ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-indigo-200 scrollbar-thumb-indigo-300 dark:scrollbar-track-indigo-600 dark:scrollbar-thumb-indigo-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
               >
                 <h3
                   className={`text-lg font-semibold ${
@@ -290,7 +304,7 @@ export default function Factoring() {
                 >
                   Quadratic Trinomial
                 </h3>
-                <BlockMath math="x^2 + 5x + 6 = (x + 2)(x + 3)" />
+                <BlockMath math={"x^2 + 5x + 6 = (x + 2)(x + 3)"} />
                 <p
                   className={`mt-2 ${
                     isColorful
@@ -308,7 +322,11 @@ export default function Factoring() {
                   isColorful
                     ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
                     : "bg-gray-200 dark:bg-gray-700"
-                } ${scrollbarStyle}`}
+                } ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-emerald-200 scrollbar-thumb-emerald-300 dark:scrollbar-track-emerald-600 dark:scrollbar-thumb-emerald-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
               >
                 <h3
                   className={`text-lg font-semibold ${
@@ -319,7 +337,7 @@ export default function Factoring() {
                 >
                   Difference of Cubes
                 </h3>
-                <BlockMath math="8x^3 - 27 = (2x - 3)(4x^2 + 6x + 9)" />
+                <BlockMath math={"8x^3 - 27 = (2x - 3)(4x^2 + 6x + 9)"} />
                 <p
                   className={`mt-2 ${
                     isColorful
@@ -351,109 +369,585 @@ export default function Factoring() {
             Practice Exercises
           </h2>
           <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                problem: "\\text{Factor } x^2 - 9",
-                solution: "(x - 3)(x + 3)",
-              },
-              {
-                problem: "\\text{Factor } 4y^2 + 12y + 9",
-                solution: "(2y + 3)^2",
-              },
-              {
-                problem: "\\text{Factor } z^3 + 8",
-                solution: "(z + 2)(z^2 - 2z + 4)",
-              },
-              {
-                problem: "\\text{Factor } 3x^3 - 6x^2",
-                solution: "3x^2(x - 2)",
-              },
-              {
-                problem: "\\text{Factor } t^2 - 4t - 12",
-                solution: "(t - 6)(t + 2)",
-              },
-              {
-                problem: "\\text{Factor } 25m^2 - 16n^2",
-                solution: "(5m - 4n)(5m + 4n)",
-              },
-              {
-                problem: "\\text{Factor } 2w^2 + 5w - 3",
-                solution: "(2w - 1)(w + 3)",
-              },
-              {
-                problem: "\\text{Factor } 27p^3 - 1",
-                solution: "(3p - 1)(9p^2 + 3p + 1)",
-              },
-              {
-                problem: "\\text{Factor } x^4 - 16",
-                solution: "(x^2 - 4)(x^2 + 4) = (x - 2)(x + 2)(x^2 + 4)",
-              },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className={`rounded-lg p-4 transition-all ${
-                  isColorful
-                    ? `bg-gradient-to-br ${problemColors[index]} dark:text-white`
-                    : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-white"
-                } hover:shadow-lg`}
-              >
-                <div className="flex items-start justify-between">
-                  <span
-                    className={`text-sm font-medium text-gray-700 dark:text-gray-300`}
-                  >
-                    Problem {index + 1}
-                  </span>
-                </div>
-                <div
-                  className={`mt-2 flex justify-start overflow-x-auto ${scrollbarStyle}`}
+            {/* Problem 1 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[0]} dark:text-white`
+                  : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span
+                  className={`text-sm font-medium text-gray-700 dark:text-gray-300`}
                 >
-                  <BlockMath math={item.problem} />
-                </div>
-                <details className="group mt-3">
-                  <summary
-                    className={`flex cursor-pointer items-center text-sm font-medium ${
-                      isColorful
-                        ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
-                        : "text-gray-700 dark:text-gray-300"
-                    }`}
-                  >
-                    <span>Show Solution</span>
-                    <svg
-                      className={`ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </summary>
-                  <div
-                    className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
-                      isColorful
-                        ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
-                        : "bg-gray-200 dark:bg-gray-600"
-                    } ${scrollbarStyle}`}
-                  >
-                    <BlockMath math={item.solution} />
-                  </div>
-                </details>
+                  Problem 1
+                </span>
               </div>
-            ))}
+              <div
+                className={`mt-2 flex justify-start overflow-x-auto ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-red-200 scrollbar-thumb-red-300 dark:scrollbar-track-red-600 dark:scrollbar-thumb-red-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath math={"\\text{Factor } x^2 - 9"} />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className={`ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-red-200 scrollbar-thumb-red-300 dark:scrollbar-track-red-600 dark:scrollbar-thumb-red-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath math={"(x - 3)(x + 3)"} />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 2 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[1]} dark:text-white`
+                  : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span
+                  className={`text-sm font-medium text-gray-700 dark:text-gray-300`}
+                >
+                  Problem 2
+                </span>
+              </div>
+              <div
+                className={`mt-2 flex justify-start overflow-x-auto ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-orange-200 scrollbar-thumb-orange-300 dark:scrollbar-track-orange-600 dark:scrollbar-thumb-orange-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath math={"\\text{Factor } 4y^2 + 12y + 9"} />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className={`ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-orange-200 scrollbar-thumb-orange-300 dark:scrollbar-track-orange-600 dark:scrollbar-thumb-orange-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath math={"(2y + 3)^2"} />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 3 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[2]} dark:text-white`
+                  : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span
+                  className={`text-sm font-medium text-gray-700 dark:text-gray-300`}
+                >
+                  Problem 3
+                </span>
+              </div>
+              <div
+                className={`mt-2 flex justify-start overflow-x-auto ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-yellow-200 scrollbar-thumb-yellow-300 dark:scrollbar-track-yellow-600 dark:scrollbar-thumb-yellow-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath math={"\\text{Factor } z^3 + 8"} />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className={`ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-yellow-200 scrollbar-thumb-yellow-300 dark:scrollbar-track-yellow-600 dark:scrollbar-thumb-yellow-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath math={"(z + 2)(z^2 - 2z + 4)"} />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 4 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[3]} dark:text-white`
+                  : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span
+                  className={`text-sm font-medium text-gray-700 dark:text-gray-300`}
+                >
+                  Problem 4
+                </span>
+              </div>
+              <div
+                className={`mt-2 flex justify-start overflow-x-auto ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-green-200 scrollbar-thumb-green-300 dark:scrollbar-track-green-600 dark:scrollbar-thumb-green-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath math={"\\text{Factor } 3x^3 - 6x^2"} />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className={`ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-green-200 scrollbar-thumb-green-300 dark:scrollbar-track-green-600 dark:scrollbar-thumb-green-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath math={"3x^2(x - 2)"} />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 5 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[4]} dark:text-white`
+                  : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span
+                  className={`text-sm font-medium text-gray-700 dark:text-gray-300`}
+                >
+                  Problem 5
+                </span>
+              </div>
+              <div
+                className={`mt-2 flex justify-start overflow-x-auto ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-teal-200 scrollbar-thumb-teal-300 dark:scrollbar-track-teal-600 dark:scrollbar-thumb-teal-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath math={"\\text{Factor } t^2 - 4t - 12"} />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className={`ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-teal-200 scrollbar-thumb-teal-300 dark:scrollbar-track-teal-600 dark:scrollbar-thumb-teal-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath math={"(t - 6)(t + 2)"} />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 6 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[5]} dark:text-white`
+                  : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span
+                  className={`text-sm font-medium text-gray-700 dark:text-gray-300`}
+                >
+                  Problem 6
+                </span>
+              </div>
+              <div
+                className={`mt-2 flex justify-start overflow-x-auto ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-sky-200 scrollbar-thumb-sky-300 dark:scrollbar-track-sky-600 dark:scrollbar-thumb-sky-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath math={"\\text{Factor } 25m^2 - 16n^2"} />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className={`ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-sky-200 scrollbar-thumb-sky-300 dark:scrollbar-track-sky-600 dark:scrollbar-thumb-sky-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath math={"(5m - 4n)(5m + 4n)"} />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 7 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[6]} dark:text-white`
+                  : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span
+                  className={`text-sm font-medium text-gray-700 dark:text-gray-300`}
+                >
+                  Problem 7
+                </span>
+              </div>
+              <div
+                className={`mt-2 flex justify-start overflow-x-auto ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-indigo-200 scrollbar-thumb-indigo-300 dark:scrollbar-track-indigo-600 dark:scrollbar-thumb-indigo-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath math={"\\text{Factor } 2w^2 + 5w - 3"} />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className={`ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-indigo-200 scrollbar-thumb-indigo-300 dark:scrollbar-track-indigo-600 dark:scrollbar-thumb-indigo-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath math={"(2w - 1)(w + 3)"} />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 8 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[7]} dark:text-white`
+                  : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span
+                  className={`text-sm font-medium text-gray-700 dark:text-gray-300`}
+                >
+                  Problem 8
+                </span>
+              </div>
+              <div
+                className={`mt-2 flex justify-start overflow-x-auto ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-purple-200 scrollbar-thumb-purple-300 dark:scrollbar-track-purple-600 dark:scrollbar-thumb-purple-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath math={"\\text{Factor } 27p^3 - 1"} />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className={`ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-purple-200 scrollbar-thumb-purple-300 dark:scrollbar-track-purple-600 dark:scrollbar-thumb-purple-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath math={"(3p - 1)(9p^2 + 3p + 1)"} />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 9 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[8]} dark:text-white`
+                  : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span
+                  className={`text-sm font-medium text-gray-700 dark:text-gray-300`}
+                >
+                  Problem 9
+                </span>
+              </div>
+              <div
+                className={`mt-2 flex justify-start overflow-x-auto ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-pink-200 scrollbar-thumb-pink-300 dark:scrollbar-track-pink-600 dark:scrollbar-thumb-pink-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath math={"\\text{Factor } x^4 - 16"} />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className={`ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-pink-200 scrollbar-thumb-pink-300 dark:scrollbar-track-pink-600 dark:scrollbar-thumb-pink-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath
+                    math={"(x^2 - 4)(x^2 + 4) = (x - 2)(x + 2)(x^2 + 4)"}
+                  />
+                </div>
+              </details>
+            </div>
           </div>
         </div>
-      </div>
-      {/* Decorative Section Divider */}
-      <div className="mt-16 flex items-center justify-center space-x-4">
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:via-gray-400" />
-        <span className="text-sm italic text-gray-700 dark:text-gray-200">
-          Factoring Techniques
-        </span>
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:via-gray-400" />
+
+        {/* Decorative Section Divider */}
+        <div className="mt-16 flex items-center justify-center space-x-4">
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:via-gray-400" />
+          <span className="text-sm italic text-gray-700 dark:text-gray-200">
+            Factoring Techniques
+          </span>
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:via-gray-400" />
+        </div>
       </div>
     </div>
   );
