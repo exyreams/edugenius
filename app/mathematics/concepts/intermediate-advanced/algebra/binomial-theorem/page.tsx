@@ -7,8 +7,8 @@ import { useState } from "react";
 import ColorToggle from "@/components/ColorToggle";
 import PascalTriangle from "./components/PascalsTraingle";
 
+// Color Variations
 const problemColors = [
-  // Original Variations (and others from your previous examples)
   "from-red-100 to-rose-200 dark:from-red-800 dark:to-rose-700",
   "from-orange-100 to-amber-200 dark:from-orange-800 dark:to-amber-700",
   "from-yellow-100 to-lime-200 dark:from-yellow-800 dark:to-lime-700",
@@ -24,11 +24,18 @@ const problemColors = [
 export default function BinomialTheorem() {
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
-    { label: "Formulas", href: "/mathematics/formulas" },
-    { label: "Algebra", href: "/mathematics/formulas/algebra" },
+    { label: "Concepts", href: "/mathematics/concepts" },
+    {
+      label: "Intermediate & Advanced",
+      href: "/mathematics/concepts/intermediate-advanced",
+    },
+    {
+      label: "Algebra",
+      href: "/mathematics/concepts/intermediate-advanced/algebra",
+    },
     {
       label: "Binomial Theorem",
-      href: "/mathematics/formulas/algebra/binomial-theorem",
+      href: "/mathematics/concepts/intermediate-advanced/algebra/binomial-theorem",
     },
   ];
 
