@@ -42,13 +42,17 @@ export default function PropertiesOfInequality() {
 
   return (
     <div className="mx-auto w-full px-4 py-8 sm:px-6 md:max-w-7xl md:py-12">
-      <h1
-        className={`mb-4 bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-3xl font-bold text-transparent dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300 md:mb-6 md:text-4xl ${
-          isColorful ? "" : "text-gray-800 dark:text-white"
-        }`}
-      >
-        Properties of Inequalities
-      </h1>
+      {/* Hero Section */}
+      <div className="mb-12 space-y-6 text-center">
+        <h1 className="bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-4xl font-bold text-transparent dark:from-blue-200 dark:to-purple-300 md:text-5xl lg:text-6xl">
+          Properties of Inequalities
+        </h1>
+        <p className="mx-auto max-w-2xl text-lg text-gray-600 dark:text-gray-300 md:text-xl">
+          Learn the fundamental rules and techniques for working with
+          inequalities, including addition, multiplication, and special cases.
+        </p>
+      </div>
+
       {/* Color Toggle and Breadcrumb */}
       <ColorToggle onChange={setIsColorful} initialState={true} />
       <Breadcrumb items={breadcrumbItems} />

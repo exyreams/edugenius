@@ -3,7 +3,7 @@
 import Breadcrumb from "@/components/Breadcrumb";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import ColorToggle from "@/components/ColorToggle";
 
 /**
@@ -41,14 +41,17 @@ export default function LogarithmProperties() {
 
   return (
     <div className="mx-auto w-full px-4 py-8 sm:px-6 md:max-w-7xl md:py-12">
-      {/* Page Title */}
-      <h1
-        className={`mb-4 bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-3xl font-bold text-transparent dark:from-blue-200 dark:to-purple-300 md:mb-6 md:text-4xl ${
-          isColorful ? "" : "text-gray-800 dark:text-white"
-        }`}
-      >
-        Logarithm Properties: Unlocking the Power of Exponents
-      </h1>
+      {/* Hero Section */}
+      <div className="mb-12 space-y-6 text-center">
+        <h1 className="bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-4xl font-bold text-transparent dark:from-blue-200 dark:to-purple-300 md:text-5xl lg:text-6xl">
+          Logarithm Properties
+        </h1>
+        <p className="mx-auto max-w-2xl text-lg text-gray-600 dark:text-gray-300 md:text-xl">
+          Discover the essential properties of logarithms and their applications
+          in simplifying expressions and solving equations.
+        </p>
+      </div>
+
       <div className="mb-4 flex justify-center">
         <ColorToggle onChange={setIsColorful} initialState={true} />
       </div>

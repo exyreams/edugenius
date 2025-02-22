@@ -60,13 +60,18 @@ export default function Factoring() {
 
   return (
     <div className="mx-auto w-full px-4 py-8 sm:px-6 md:max-w-7xl md:py-12">
-      <h1
-        className={`mb-4 bg-gradient-to-r from-indigo-700 to-purple-800 bg-clip-text text-3xl font-bold text-transparent dark:from-blue-200 dark:to-purple-300 md:mb-6 md:text-4xl ${
-          isColorful ? "" : "text-gray-800 dark:text-white"
-        }`}
-      >
-        Factoring Formulas
-      </h1>
+      {/* Hero Section */}
+      <div className="mb-12 space-y-6 text-center">
+        <h1 className="bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-4xl font-bold text-transparent dark:from-blue-200 dark:to-purple-300 md:text-5xl lg:text-6xl">
+          Factoring
+        </h1>
+        <p className="mx-auto max-w-2xl text-lg text-gray-600 dark:text-gray-300 md:text-xl">
+          Unlock the power of factoring to simplify expressions, solve
+          polynomials, and reveal the underlying structure of algebraic
+          equations.
+        </p>
+      </div>
+
       <div className="mb-4 flex justify-center">
         <ColorToggle onChange={setIsColorful} initialState={true} />
       </div>
