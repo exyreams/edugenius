@@ -448,113 +448,631 @@ export default function ConjugateOfComplexNumber() {
           </h2>
           {/* Practice Problems Grid */}
           <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                problem: "\\text{Find } \\overline{z} \\text{ if } z = 3 - 4i",
-                solution: "3 + 4i",
-              },
-              {
-                problem: "\\text{Compute } (2+i) + \\overline{(2+i)}",
-                solution: "4",
-              },
-              {
-                problem: "\\text{Simplify } \\frac{1}{1+i}",
-                solution: "\\frac{1}{2} - \\frac{1}{2}i",
-              },
-              {
-                problem:
-                  "\\text{Verify } |\\overline{z}| = |z| \\text{ for } z = 5+12i",
-                solution: "\\sqrt{5^2 + 12^2} = 13",
-              },
-              {
-                problem: "\\text{Solve } z + \\overline{z} = 10",
-                solution: "z = 5 + bi \\text{ (any real } b\\text{)}",
-              },
-              {
-                problem: "\\text{Calculate } (3+2i)(3-2i)",
-                solution: "9 + 4 = 13",
-              },
-              {
-                problem: "\\text{Find } \\overline{e^{i\\theta}}",
-                solution: "e^{-i\\theta}",
-              },
-              {
-                problem: "\\text{Prove } \\overline{\\overline{z}} = z",
-                solution: "\\text{Double conjugation returns original}",
-              },
-              {
-                problem: "\\text{Express Re(z) using } \\overline{z}",
-                solution: "\\frac{z + \\overline{z}}{2}",
-              },
-              {
-                problem: "\\text{Find roots of } x^2 - 4x + 13 = 0",
-                solution: "2 \\pm 3i",
-              },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className={`rounded-lg  p-4 transition-all ${
-                  isColorful
-                    ? `bg-gradient-to-br ${problemColors[index]} dark:text-white`
-                    : "bg-gray-300 text-gray-800 dark:bg-gray-700 dark:text-white"
-                } hover:shadow-lg`}
-              >
-                {/* Problem Number */}
-                <div className="flex items-start justify-between">
-                  <span
-                    className={`text-sm font-medium text-gray-700 dark:text-gray-300`}
-                  >
-                    Problem {index + 1}
-                  </span>
-                </div>
-                {/* Problem Statement */}
-                <div
-                  className={`mt-2 flex justify-start overflow-x-auto ${scrollbarStyle}`}
-                >
-                  <BlockMath math={item.problem} />
-                </div>
-                {/* Solution Dropdown */}
-                <details className="group mt-3">
-                  <summary
-                    className={`flex cursor-pointer items-center text-sm font-medium ${
-                      isColorful
-                        ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
-                        : "text-gray-700 dark:text-gray-300"
-                    }`}
-                  >
-                    <span>Show Solution</span>
-                    {/* Dropdown Arrow */}
-                    <svg
-                      className={`ml-2 h-4 w-4 rotate-0 transition-transform group-open:rotate-180 ${
-                        isColorful
-                          ? "text-gray-700 dark:text-gray-300"
-                          : "text-gray-700 dark:text-gray-300"
-                      }`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </summary>
-                  {/* Solution Display */}
-                  <div
-                    className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
-                      isColorful
-                        ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
-                        : "bg-gray-200 dark:bg-gray-600"
-                    } ${scrollbarStyle}`}
-                  >
-                    <BlockMath math={item.solution} />
-                  </div>
-                </details>
+            {/* Problem 1 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[0]} dark:text-white`
+                  : "bg-gray-300 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Problem 1
+                </span>
               </div>
-            ))}
+              <div
+                className={`mt-2 h-auto overflow-x-auto rounded-lg p-4 ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-red-200 scrollbar-thumb-red-300 dark:scrollbar-track-red-600 dark:scrollbar-thumb-red-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath
+                  math={"\\text{Find } \\overline{z} \\text{ if } z = 3 - 4i"}
+                />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className="ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-red-200 scrollbar-thumb-red-300 dark:scrollbar-track-red-600 dark:scrollbar-thumb-red-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath math={"3 + 4i"} />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 2 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[1]} dark:text-white`
+                  : "bg-gray-300 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Problem 2
+                </span>
+              </div>
+              <div
+                className={`mt-2 h-auto overflow-x-auto rounded-lg p-4 ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-orange-200 scrollbar-thumb-orange-300 dark:scrollbar-track-orange-600 dark:scrollbar-thumb-orange-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath
+                  math={"\\text{Compute } (2+i) + \\overline{(2+i)}"}
+                />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className="ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-orange-200 scrollbar-thumb-orange-300 dark:scrollbar-track-orange-600 dark:scrollbar-thumb-orange-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath math={"4"} />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 3 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[2]} dark:text-white`
+                  : "bg-gray-300 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Problem 3
+                </span>
+              </div>
+              <div
+                className={`mt-2 h-auto overflow-x-auto rounded-lg p-4 ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-yellow-200 scrollbar-thumb-yellow-300 dark:scrollbar-track-yellow-600 dark:scrollbar-thumb-yellow-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath math={"\\text{Simplify } \\frac{1}{1+i}"} />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className="ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-yellow-200 scrollbar-thumb-yellow-300 dark:scrollbar-track-yellow-600 dark:scrollbar-thumb-yellow-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath math={"\\frac{1}{2} - \\frac{1}{2}i"} />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 4 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[3]} dark:text-white`
+                  : "bg-gray-300 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Problem 4
+                </span>
+              </div>
+              <div
+                className={`mt-2 h-auto overflow-x-auto rounded-lg p-4 ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-green-200 scrollbar-thumb-green-300 dark:scrollbar-track-green-600 dark:scrollbar-thumb-green-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath
+                  math={
+                    "\\text{Verify } |\\overline{z}| = |z| \\text{ for } z = 5+12i"
+                  }
+                />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className="ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-green-200 scrollbar-thumb-green-300 dark:scrollbar-track-green-600 dark:scrollbar-thumb-green-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath math={"\\sqrt{5^2 + 12^2} = 13"} />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 5 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[4]} dark:text-white`
+                  : "bg-gray-300 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Problem 5
+                </span>
+              </div>
+              <div
+                className={`mt-2 h-auto overflow-x-auto rounded-lg p-4 ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-teal-200 scrollbar-thumb-teal-300 dark:scrollbar-track-teal-600 dark:scrollbar-thumb-teal-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath math={"\\text{Solve } z + \\overline{z} = 10"} />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className="ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-teal-200 scrollbar-thumb-teal-300 dark:scrollbar-track-teal-600 dark:scrollbar-thumb-teal-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath
+                    math={"z = 5 + bi \\text{ (any real } b\\text{)}"}
+                  />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 6 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[5]} dark:text-white`
+                  : "bg-gray-300 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Problem 6
+                </span>
+              </div>
+              <div
+                className={`mt-2 h-auto overflow-x-auto rounded-lg p-4 ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-sky-200 scrollbar-thumb-sky-300 dark:scrollbar-track-sky-600 dark:scrollbar-thumb-sky-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath math={"\\text{Calculate } (3+2i)(3-2i)"} />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className="ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-sky-200 scrollbar-thumb-sky-300 dark:scrollbar-track-sky-600 dark:scrollbar-thumb-sky-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath math={"9 + 4 = 13"} />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 7 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[6]} dark:text-white`
+                  : "bg-gray-300 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Problem 7
+                </span>
+              </div>
+              <div
+                className={`mt-2 h-auto overflow-x-auto rounded-lg p-4 ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-indigo-200 scrollbar-thumb-indigo-300 dark:scrollbar-track-indigo-600 dark:scrollbar-thumb-indigo-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath math={"\\text{Find } \\overline{e^{i\\theta}}"} />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className="ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-indigo-200 scrollbar-thumb-indigo-300 dark:scrollbar-track-indigo-600 dark:scrollbar-thumb-indigo-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath math={"e^{-i\\theta}"} />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 8 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[7]} dark:text-white`
+                  : "bg-gray-300 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Problem 8
+                </span>
+              </div>
+              <div
+                className={`mt-2 h-auto overflow-x-auto rounded-lg p-4 ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-purple-200 scrollbar-thumb-purple-300 dark:scrollbar-track-purple-600 dark:scrollbar-thumb-purple-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath
+                  math={"\\text{Prove } \\overline{\\overline{z}} = z"}
+                />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className="ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-purple-200 scrollbar-thumb-purple-300 dark:scrollbar-track-purple-600 dark:scrollbar-thumb-purple-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath
+                    math={"\\text{Double conjugation returns original}"}
+                  />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 9 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[8]} dark:text-white`
+                  : "bg-gray-300 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Problem 9
+                </span>
+              </div>
+              <div
+                className={`mt-2 h-auto overflow-x-auto rounded-lg p-4 ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-pink-200 scrollbar-thumb-pink-300 dark:scrollbar-track-pink-600 dark:scrollbar-thumb-pink-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath
+                  math={"\\text{Express Re(z) using } \\overline{z}"}
+                />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className="ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-pink-200 scrollbar-thumb-pink-300 dark:scrollbar-track-pink-600 dark:scrollbar-thumb-pink-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath math={"\\frac{z + \\overline{z}}{2}"} />
+                </div>
+              </details>
+            </div>
+
+            {/* Problem 10 */}
+            <div
+              className={`rounded-lg p-4 transition-all ${
+                isColorful
+                  ? `bg-gradient-to-br ${problemColors[9]} dark:text-white`
+                  : "bg-gray-300 text-gray-800 dark:bg-gray-700 dark:text-white"
+              } hover:shadow-lg`}
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Problem 10
+                </span>
+              </div>
+              <div
+                className={`mt-2 h-auto overflow-x-auto rounded-lg p-4 ${
+                  isColorful
+                    ? "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-600 dark:scrollbar-thumb-gray-500"
+                    : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                }`}
+              >
+                <BlockMath math={"\\text{Find roots of } x^2 - 4x + 13 = 0"} />
+              </div>
+              <details className="group mt-3">
+                <summary
+                  className={`flex cursor-pointer items-center text-sm font-medium ${
+                    isColorful
+                      ? "text-gray-700 hover:text-lime-600 dark:text-gray-300 dark:hover:text-lime-300"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <span>Show Solution</span>
+                  <svg
+                    className="ml-2 h-4 w-4 rotate-0 text-gray-700 transition-transform group-open:rotate-180 dark:text-gray-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div
+                  className={`mt-2 flex justify-start overflow-x-auto rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  } ${
+                    isColorful
+                      ? "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-600 dark:scrollbar-thumb-gray-500"
+                      : "scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
+                  }`}
+                >
+                  <BlockMath math={"2 \\pm 3i"} />
+                </div>
+              </details>
+            </div>
           </div>
         </div>
       </div>
