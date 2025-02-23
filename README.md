@@ -1,7 +1,6 @@
 # EduGenius: Your Interactive Learning Companion
 
-![edugenius](https://github.com/user-attachments/assets/d2a9eaf1-f7b0-4758-80b4-71c2dcf497f4)
-
+https://github.com/user-attachments/assets/d2a9eaf1-f7b0-4758-80b4-71c2dcf497f4
 
 <!-- Badges -->
 <p align="center">
