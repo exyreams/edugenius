@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Computer, LogOut, Moon, Sun, SunMoon, UserCircle } from "lucide-react";
+import { Computer, LogOut, Moon, Sun, SunMoon } from "lucide-react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -175,19 +175,10 @@ const Navbar = () => {
                   </button>
 
                   {isUserDropdownOpen && (
-                    <div className="dark:bg-midnight/85 absolute right-0 z-50 mt-2 w-48 overflow-hidden rounded-lg border border-white/20 bg-gray-400/80 text-black shadow-lg backdrop-blur-lg dark:text-white">
-                      <Link
-                        href="/dashboard"
-                        className="block px-4 py-2 hover:rounded-lg hover:bg-gray-300/40 dark:hover:bg-white/20"
-                      >
-                        <div className="flex items-center space-x-2">
-                          <UserCircle className="h-5 w-5" />
-                          <span>Dashboard</span>
-                        </div>
-                      </Link>
+                    <div className="dark:bg-midnight/85 absolute right-0 z-50 mt-2 w-48 overflow-hidden rounded-lg border border-black/30 bg-gradient-to-br from-gray-200 to-indigo-200 text-black shadow-lg backdrop-blur-lg dark:border-white/30 dark:from-gray-950 dark:to-gray-800 dark:text-white">
                       <button
                         onClick={() => signOut()}
-                        className="block w-full px-4 py-2 text-left hover:rounded-lg hover:bg-gray-300/40 dark:hover:bg-white/20"
+                        className="block w-full px-4 py-2 text-left hover:rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
                       >
                         <div className="flex items-center space-x-2">
                           <LogOut className="h-5 w-5" />
@@ -310,17 +301,9 @@ const Navbar = () => {
               <div className="mt-4 pt-4">
                 {session ? (
                   <div className="space-y-2">
-                    <Link
-                      href="/dashboard"
-                      className="flex items-center justify-center space-x-2 rounded-lg p-2 hover:bg-indigo-100 dark:hover:bg-gray-700"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      <UserCircle className="h-5 w-5" />
-                      <span>Dashboard</span>
-                    </Link>
                     <button
                       onClick={() => signOut()}
-                      className="flex w-full items-center justify-center space-x-2 rounded-lg p-2 hover:bg-indigo-100 dark:hover:bg-gray-700"
+                      className="flex w-full items-center justify-center space-x-2 rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                     >
                       <LogOut className="h-5 w-5" />
                       <span>Sign Out</span>

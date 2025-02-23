@@ -9,8 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f4249bfe-89d8-48ee-84d8-968725050d19" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/auth/[...nextauth]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/auth/[...nextauth]/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eslint.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/eslint.config.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Navbar.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +161,7 @@
       <workItem from="1740137546121" duration="13484000" />
       <workItem from="1740157720901" duration="7741000" />
       <workItem from="1740198092084" duration="43176000" />
-      <workItem from="1740280896477" duration="27286000" />
+      <workItem from="1740280896477" duration="28479000" />
     </task>
     <servers />
   </component>
