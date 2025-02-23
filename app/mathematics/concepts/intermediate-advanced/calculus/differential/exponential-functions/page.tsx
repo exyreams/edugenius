@@ -28,7 +28,7 @@ export default function ExponentialDerivatives() {
       href: "/mathematics/concepts/intermediate-advanced/calculus",
     },
     {
-      label: "Differential Calculus",
+      label: "Differential",
       href: "/mathematics/concepts/intermediate-advanced/calculus/differential",
     },
     {
