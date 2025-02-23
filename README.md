@@ -97,6 +97,10 @@ EduGenius is an interactive web application designed to help students learn and 
     ```bash
     npm run dev
     ```
+    OR
+    ```bash
+    npx next dev
+    ```
 
     The application will be accessible at `http://localhost:3000`.
 
