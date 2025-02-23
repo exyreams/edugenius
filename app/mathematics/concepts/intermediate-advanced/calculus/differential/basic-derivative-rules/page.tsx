@@ -797,7 +797,7 @@ export default function DerivativeRules() {
                         : "bg-gray-200 scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-300 dark:bg-gray-600 dark:scrollbar-track-gray-400 dark:scrollbar-thumb-gray-500"
                     }`}
                   >
-                    <BlockMath math="e^x\\cos(x) - e^x\\sin(x)" />
+                    <BlockMath math="e^xcos(x) - e^xsin(x)" />
                   </div>
                 </details>
               </div>
