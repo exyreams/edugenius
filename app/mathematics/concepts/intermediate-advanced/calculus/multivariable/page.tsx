@@ -50,7 +50,7 @@ const multivariableTopics = [
     text: "text-gray-800 dark:text-white",
   },
   {
-    id: "area-of-a-surface-of-revolution",
+    id: "area-of-surface-of-revolution",
     name: "Surface of Revolution",
     icon: (
       <FunctionSquare className="h-6 w-6 text-blue-400 dark:text-blue-300" />
@@ -60,7 +60,7 @@ const multivariableTopics = [
     text: "text-gray-800 dark:text-white",
   },
   {
-    id: "areas-under-the-curve",
+    id: "areas-under-curve",
     name: "Curve Areas",
     icon: (
       <IoMdCube className="h-6 w-6 text-emerald-400 dark:text-emerald-300" />
@@ -71,7 +71,7 @@ const multivariableTopics = [
     text: "text-gray-800 dark:text-white",
   },
   {
-    id: "derivative-of-a-vector-function",
+    id: "derivative-of-vector-function",
     name: "Vector Derivatives",
     icon: <Crosshair className="h-6 w-6 text-rose-400 dark:text-rose-300" />,
     description: "Differentiate multivariable vector fields",
