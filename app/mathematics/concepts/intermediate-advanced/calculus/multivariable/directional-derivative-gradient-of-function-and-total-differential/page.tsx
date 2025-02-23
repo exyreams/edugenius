@@ -3,16 +3,23 @@ import Breadcrumb from "@/components/Breadcrumb";
 export default function DirectionalDerivativeGradientOfFunctionAndTotalDifferential() {
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
-    { label: "Formulas", href: "/mathematics/" },
-    { label: "Calculus", href: "/mathematics/formulas/calculus" },
+    { label: "Concepts", href: "/mathematics/concepts" },
     {
-      label: "Differential Calculus",
-      href: "/mathematics/formulas/calculus/multivariable",
+      label: "Intermediate & Advanced",
+      href: "/mathematics/concepts/intermediate-advanced",
+    },
+    {
+      label: "Calculus",
+      href: "/mathematics/concepts/intermediate-advanced/calculus",
+    },
+    {
+      label: "Multivariable",
+      href: "/mathematics/concepts/intermediate-advanced/calculus/multivariable",
     },
     {
       label:
         "Directional Derivative, Gradient of a Function, and Total Differential",
-      href: "/mathematics/formulas/calculus/multivariable/directional-derivative-gradient-of-function-and-total-differential",
+      href: "/mathematics/concepts/intermediate-advanced/calculus/multivariable/directional-derivative-gradient-of-function-and-total-differential",
     },
   ];
 

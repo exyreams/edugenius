@@ -3,15 +3,22 @@ import Breadcrumb from "@/components/Breadcrumb";
 export default function PropertiesOfLimitsOfFunctionsOfSeveralVariables() {
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
-    { label: "Formulas", href: "/mathematics/" },
-    { label: "Calculus", href: "/mathematics/formulas/calculus" },
+    { label: "Concepts", href: "/mathematics/concepts" },
     {
-      label: "Differential Calculus",
-      href: "/mathematics/formulas/calculus/multivariable",
+      label: "Intermediate & Advanced",
+      href: "/mathematics/concepts/intermediate-advanced",
+    },
+    {
+      label: "Calculus",
+      href: "/mathematics/concepts/intermediate-advanced/calculus",
+    },
+    {
+      label: "Multivariable",
+      href: "/mathematics/concepts/intermediate-advanced/calculus/multivariable",
     },
     {
       label: "Properties of Limits of Functions of Several Variables",
-      href: "/mathematics/formulas/calculus/multivariable/properties-of-limits-of-functions-of-several-variables",
+      href: "/mathematics/concepts/intermediate-advanced/calculus/multivariable/properties-of-limits-of-functions-of-several-variables",
     },
   ];
 

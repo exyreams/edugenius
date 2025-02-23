@@ -3,15 +3,22 @@ import Breadcrumb from "@/components/Breadcrumb";
 export default function VectorIdentities() {
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
-    { label: "Formulas", href: "/mathematics/" },
-    { label: "Calculus", href: "/mathematics/formulas/calculus" },
+    { label: "Concepts", href: "/mathematics/concepts" },
     {
-      label: "Differential Calculus",
-      href: "/mathematics/formulas/calculus/multivariable",
+      label: "Intermediate & Advanced",
+      href: "/mathematics/concepts/intermediate-advanced",
+    },
+    {
+      label: "Calculus",
+      href: "/mathematics/concepts/intermediate-advanced/calculus",
+    },
+    {
+      label: "Multivariable",
+      href: "/mathematics/concepts/intermediate-advanced/calculus/multivariable",
     },
     {
       label: "Vector Identities",
-      href: "/mathematics/formulas/calculus/multivariable/vector-identities",
+      href: "/mathematics/concepts/intermediate-advanced/calculus/multivariable/vector-identities",
     },
   ];
 

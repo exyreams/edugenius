@@ -7,21 +7,28 @@ import "katex/dist/katex.min.css";
 export default function TaylorSeries() {
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
-    { label: "Formulas", href: "/mathematics/formulas" },
-    { label: "Calculus", href: "/mathematics/formulas/calculus" },
+    { label: "Concepts", href: "/mathematics/concepts" },
+    {
+      label: "Intermediate & Advanced",
+      href: "/mathematics/concepts/intermediate-advanced",
+    },
+    {
+      label: "Calculus",
+      href: "/mathematics/concepts/intermediate-advanced/calculus",
+    },
     {
       label: "Multivariable",
-      href: "/mathematics/formulas/calculus/multivariable",
+      href: "/mathematics/concepts/intermediate-advanced/calculus/multivariable",
     },
     {
       label: "Taylor & Maclaurin Series",
-      href: "/mathematics/formulas/calculus/multivariable/taylor-series",
+      href: "/mathematics/concepts/intermediate-advanced/calculus/multivariable/taylor-series",
     },
   ];
 
   return (
     <div className="mx-auto w-full px-4 py-8 sm:px-6 md:max-w-7xl md:py-12">
-      <h1 className="mb-4 bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-3xl font-bold text-transparent md:mb-6 md:text-4xl dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300">
+      <h1 className="mb-4 bg-gradient-to-r from-gray-800 to-indigo-800 bg-clip-text text-3xl font-bold text-transparent dark:bg-gradient-to-r dark:from-blue-200 dark:to-purple-300 md:mb-6 md:text-4xl">
         Taylor & Maclaurin Series
       </h1>
       <Breadcrumb items={breadcrumbItems} />

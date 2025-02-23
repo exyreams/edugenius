@@ -3,15 +3,22 @@ import Breadcrumb from "@/components/Breadcrumb";
 export default function FubinisTheorem() {
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
-    { label: "Formulas", href: "/mathematics/" },
-    { label: "Calculus", href: "/mathematics/formulas/calculus" },
+    { label: "Concepts", href: "/mathematics/concepts" },
     {
-      label: "Differential Calculus",
-      href: "/mathematics/formulas/calculus/multivariable",
+      label: "Intermediate & Advanced",
+      href: "/mathematics/concepts/intermediate-advanced",
+    },
+    {
+      label: "Calculus",
+      href: "/mathematics/concepts/intermediate-advanced/calculus",
+    },
+    {
+      label: "Multivariable",
+      href: "/mathematics/concepts/intermediate-advanced/calculus/multivariable",
     },
     {
       label: "Fubini's Theorem",
-      href: "/mathematics/formulas/calculus/multivariable/fubinis-theorem",
+      href: "/mathematics/concepts/intermediate-advanced/calculus/multivariable/fubinis-theorem",
     },
   ];
 
