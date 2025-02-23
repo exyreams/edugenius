@@ -13,17 +13,27 @@ https://github.com/user-attachments/assets/d2a9eaf1-f7b0-4758-80b4-71c2dcf497f4
 </p>
 EduGenius is an interactive web application designed to help students learn and practice Mathematics and Physics concepts.  It provides a comprehensive, engaging, and personalized learning experience, leveraging AI-powered features to make education more effective.
 
+
 ## Demos:
-* **Application URI : https://educationgenius.vercel.app**
-* **Quizzies Demo:**
-  * **Challenge quiz:**
-    * https://github.com/user-attachments/assets/b4eb20f0-cb0e-4e00-a1d9-215e3595ca66
-  * **Formula quiz:**
-    * https://github.com/user-attachments/assets/f9714389-d7b8-4f6b-8e45-793bfd3bdb23
-  * **From Files:**
-    * https://github.com/user-attachments/assets/a3239abd-6062-470b-8e16-9e43dd6b97ff
+* **Application URI :** https://educationgenius.vercel.app
+
+
+* **Challenge quiz:**
+
+  https://github.com/user-attachments/assets/b4eb20f0-cb0e-4e00-a1d9-215e3595ca66
+* **Formula quiz:**
+
+  https://github.com/user-attachments/assets/f9714389-d7b8-4f6b-8e45-793bfd3bdb23
+
+* **From Files:**
+
+  https://github.com/user-attachments/assets/a3239abd-6062-470b-8e16-9e43dd6b97ff
+
 * **Problem Solver:**
-  * https://github.com/user-attachments/assets/ee8a2692-fecc-44ea-b456-5911557935a3
+
+  https://github.com/user-attachments/assets/ee8a2692-fecc-44ea-b456-5911557935a3
+
+
 ## Features
 
 *   **Interactive Learning Modules:** Explore key concepts in Mathematics and Physics through interactive lessons, visualizations, and practice exercises.
