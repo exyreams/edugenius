@@ -28,6 +28,21 @@ import { useState } from "react";
 import Breadcrumb from "@/components/Breadcrumb";
 import ColorToggle from "@/components/ColorToggle";
 
+/**
+ * @typedef {Object} Topic
+ * @property {string} id - Unique identifier for the topic.
+ * @property {string} name - Name of the topic.
+ * @property {Function} icon - React component for the topic icon.
+ * @property {string} color - Tailwind CSS class for the icon color.
+ * @property {string} gradient - Tailwind CSS classes for the background gradient.
+ * @property {string} text - Tailwind CSS class for text color.
+ * @property {string} description - Short description of the topic.
+ */
+
+/**
+ * @type {Topic[]}
+ * @description Array of foundational mathematics topics.
+ */
 const foundationalTopics = [
   {
     id: "number-systems",
@@ -163,6 +178,10 @@ const foundationalTopics = [
   },
 ];
 
+/**
+ * @type {Topic[]}
+ * @description Array of intermediate and advanced mathematics topics.
+ */
 const intermediateAdvancedTopics = [
   {
     id: "algebra",
@@ -269,7 +288,25 @@ const intermediateAdvancedTopics = [
   },
 ];
 
-export default function Mathematics() {
+/**
+ * @returns {JSX.Element} - "Coming Soon" tag component.
+ */
+const ComingSoonTag = () => (
+  <span className="absolute right-2 top-2 z-10 rounded-full bg-white px-2 py-1 text-xs font-semibold text-black">
+    Coming Soon
+  </span>
+);
+
+/**
+ * @function Concepts
+ * @description Main component for the Mathematics page.
+ * @returns {JSX.Element} The Mathematics component.
+ */
+export default function Concepts() {
+  /**
+   * @type {Array<{label: string, href: string}>}
+   * @description Breadcrumb items for navigation.
+   */
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
     { label: "Concepts", href: "/mathematics/concepts" },
@@ -308,6 +345,7 @@ export default function Mathematics() {
         </h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {foundationalTopics.map((topic) => (
+            // All the topics are clickable so, no need to check whether they are coimg soon or not, just wrap all of them in a <Link> tag
             <Link
               href={`/mathematics/concepts/foundational/${topic.id}`}
               key={topic.id}
@@ -386,74 +424,133 @@ export default function Mathematics() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {intermediateAdvancedTopics.map((topic) => {
             const Icon = topic.icon;
+            const isComingSoon = !["algebra", "calculus"].includes(topic.id);
             return (
-              <Link
-                href={`/mathematics/concepts/intermediate-advanced/${topic.id}`}
+              // Use a div as a wrapper, applying hover styles to it
+              <div
                 key={topic.id}
-                className={`group relative overflow-hidden rounded-xl  p-4 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30 ${
+                className={`group relative overflow-hidden rounded-xl p-4 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30 ${
                   isColorful
                     ? `bg-gradient-to-br ${topic.gradient} ${topic.text}`
                     : "glass text-gray-800 dark:text-white"
                 }`}
               >
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`rounded-lg p-2 ${
-                        isColorful
-                          ? `bg-black/5 ${topic.text} backdrop-blur-sm dark:bg-black/25`
-                          : "bg-gray-200 dark:bg-gray-700"
-                      }`}
-                    >
-                      <Icon
-                        className={`h-5 w-5 ${
+                {isComingSoon ? <ComingSoonTag /> : null}
+                {/* Conditional Link: Wrap entire content if NOT coming soon */}
+                {isComingSoon ? (
+                  <span>
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-3">
+                        <div
+                          className={`rounded-lg p-2 ${
+                            isColorful
+                              ? `bg-black/5 ${topic.text} backdrop-blur-sm dark:bg-black/25`
+                              : "bg-gray-200 dark:bg-gray-700"
+                          }`}
+                        >
+                          <Icon
+                            className={`h-5 w-5 ${
+                              isColorful
+                                ? "text-current"
+                                : "text-gray-700 dark:text-gray-300"
+                            }`}
+                          />
+                        </div>
+                        <h4 className={`font-medium ${topic.text}`}>
+                          {topic.name}
+                        </h4>
+                      </div>
+                      <p
+                        className={`text-sm leading-6 ${
                           isColorful
-                            ? "text-current"
-                            : "text-gray-700 dark:text-gray-300"
+                            ? "text-gray-600 dark:text-gray-200"
+                            : "text-gray-600 dark:text-gray-300"
                         }`}
-                      />
+                      >
+                        {topic.description}
+                      </p>
+                      {/* "Explore Now" and Chevron (hidden for Coming Soon) */}
+                      <div className={`mt-2 flex items-center justify-between`}>
+                        <span
+                          className={`text-sm font-medium text-gray-700 dark:text-white/80`}
+                        >
+                          Explore Now
+                        </span>
+                      </div>
                     </div>
-                    <h4 className={`font-medium ${topic.text}`}>
-                      {topic.name}
-                    </h4>
-                  </div>
-                  <p
-                    className={`text-sm leading-6 ${
-                      isColorful
-                        ? "text-gray-600 dark:text-gray-200"
-                        : "text-gray-600 dark:text-gray-300"
-                    }`}
-                  >
-                    {topic.description}
-                  </p>
-                  {/* "Explore Now" and Chevron */}
-                  <div
-                    className={`mt-2 flex items-center justify-between opacity-0 transition-opacity group-hover:opacity-100`}
-                  >
-                    <span
-                      className={`text-sm font-medium text-gray-700 dark:text-white/80`}
-                    >
-                      Explore Now
-                    </span>
-                    <FaChevronRight
-                      className={`h-4 w-4 text-gray-700 transition-transform group-hover:translate-x-1 dark:text-white/80`}
+
+                    {/* Animated background element */}
+                    <div
+                      className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
+                        isColorful
+                          ? "bg-black/5 dark:bg-white/10"
+                          : "bg-gray-300/50 dark:bg-gray-700/50"
+                      }`}
                     />
-                  </div>
-                </div>
-                {/* Animated background element */}
-                <div
-                  className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
-                    isColorful
-                      ? "bg-black/5 dark:bg-white/10"
-                      : "bg-gray-300/50 dark:bg-gray-700/50"
-                  }`}
-                />
-              </Link>
+                  </span>
+                ) : (
+                  <Link
+                    href={`/mathematics/concepts/intermediate-advanced/${topic.id}`}
+                  >
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-3">
+                        <div
+                          className={`rounded-lg p-2 ${
+                            isColorful
+                              ? `bg-black/5 ${topic.text} backdrop-blur-sm dark:bg-black/25`
+                              : "bg-gray-200 dark:bg-gray-700"
+                          }`}
+                        >
+                          <Icon
+                            className={`h-5 w-5 ${
+                              isColorful
+                                ? "text-current"
+                                : "text-gray-700 dark:text-gray-300"
+                            }`}
+                          />
+                        </div>
+                        <h4 className={`font-medium ${topic.text}`}>
+                          {topic.name}
+                        </h4>
+                      </div>
+                      <p
+                        className={`text-sm leading-6 ${
+                          isColorful
+                            ? "text-gray-600 dark:text-gray-200"
+                            : "text-gray-600 dark:text-gray-300"
+                        }`}
+                      >
+                        {topic.description}
+                      </p>
+                      {/* "Explore Now" and Chevron */}
+                      <div
+                        className={`mt-2 flex items-center justify-between opacity-0 transition-opacity group-hover:opacity-100`}
+                      >
+                        <span
+                          className={`text-sm font-medium text-gray-700 dark:text-white/80`}
+                        >
+                          Explore Now
+                        </span>
+                        <FaChevronRight
+                          className={`h-4 w-4 text-gray-700 transition-transform group-hover:translate-x-1 dark:text-white/80`}
+                        />
+                      </div>
+                    </div>
+                    {/* Animated background element */}
+                    <div
+                      className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
+                        isColorful
+                          ? "bg-black/5 dark:bg-white/10"
+                          : "bg-gray-300/50 dark:bg-gray-700/50"
+                      }`}
+                    />
+                  </Link>
+                )}
+              </div>
             );
           })}
         </div>
       </div>
-
       {/* Decorative Section Divider */}
       <div className="mt-16 flex items-center justify-center space-x-4">
         <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:from-transparent dark:via-gray-400 dark:to-transparent" />

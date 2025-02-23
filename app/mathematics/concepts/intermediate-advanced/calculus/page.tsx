@@ -62,6 +62,16 @@ const formulas = [
 ];
 
 /**
+ * @returns {JSX.Element} - "Coming Soon" tag component.
+ * @description - Renders a "Coming Soon" tag.
+ */
+const ComingSoonTag = () => (
+  <span className="absolute right-2 top-2 z-10 rounded-full bg-white px-2 py-1 text-xs font-semibold text-black">
+    Coming Soon
+  </span>
+);
+
+/**
  * Calculus Component
  *  @returns {JSX.Element} The Calculus Formulas page.
  * @description A React component that displays a list of calculus concepts,
@@ -110,63 +120,112 @@ export default function Calculus() {
 
       {/* Formula Grid */}
       <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {formulas.map((formula) => (
-          <Link
-            href={`/mathematics/concepts/intermediate-advanced/calculus/${formula.id}`}
-            key={formula.id}
-            className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30 ${
-              isColorful
-                ? `bg-gradient-to-br ${formula.gradient} ${formula.text}`
-                : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-white"
-            }`}
-          >
-            {/* Card Content */}
-            <div className="relative z-10 space-y-4">
-              <div className="flex items-center gap-4">
-                {/* Formula Icon */}
-                <div
-                  className={`rounded-lg p-3 ${
-                    isColorful
-                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
-                      : "bg-gray-200 dark:bg-gray-700"
-                  }`}
-                >
-                  {formula.icon}
-                </div>
-                {/* Formula Name */}
-                <h3
-                  className={`text-2xl font-semibold ${
-                    isColorful
-                      ? "currentcolor"
-                      : "text-gray-800 dark:text-white"
-                  }`}
-                >
-                  {formula.name}
-                </h3>
-              </div>
-              {/* Formula Description */}
-              <p className="text-sm leading-6 text-gray-600 dark:text-gray-200">
-                {formula.description}
-              </p>
-              {/* Explore Concepts Link */}
-              <div className="mt-4 flex items-center justify-between opacity-0 transition-opacity group-hover:opacity-100">
-                <span className="text-sm font-medium text-gray-700 dark:text-white/80">
-                  Explore Concepts
-                </span>
-                <ChevronRight className="h-5 w-5 text-gray-700 transition-transform group-hover:translate-x-1 dark:text-white/80" />
-              </div>
-            </div>
-
-            {/* Animated background element */}
+        {formulas.map((formula) => {
+          const isComingSoon = formula.id === "multivariable";
+          return (
+            // Wrapper div for hover effects
             <div
-              className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
+              key={formula.id}
+              className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30 ${
                 isColorful
-                  ? "bg-black/5 dark:bg-white/10"
-                  : "bg-gray-200/50 dark:bg-gray-700/50"
+                  ? `bg-gradient-to-br ${formula.gradient} ${formula.text}`
+                  : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-white"
               }`}
-            />
-          </Link>
-        ))}
+            >
+              {isComingSoon && <ComingSoonTag />}
+              {/* Conditional Link: Wrap entire content if NOT coming soon */}
+              {isComingSoon ? (
+                <span>
+                  <div className="relative z-10 space-y-4">
+                    <div className="flex items-center gap-4">
+                      {/* Formula Icon */}
+                      <div
+                        className={`rounded-lg p-3 ${
+                          isColorful
+                            ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                            : "bg-gray-200 dark:bg-gray-700"
+                        }`}
+                      >
+                        {formula.icon}
+                      </div>
+                      {/* Formula Name */}
+                      <h3
+                        className={`text-2xl font-semibold ${
+                          isColorful
+                            ? "currentcolor"
+                            : "text-gray-800 dark:text-white"
+                        }`}
+                      >
+                        {formula.name}
+                      </h3>
+                    </div>
+                    {/* Formula Description */}
+                    <p className="text-sm leading-6 text-gray-600 dark:text-gray-200">
+                      {formula.description}
+                    </p>
+                    {/* "Explore Concepts" - hidden for "Coming Soon" */}
+                    <div className="mt-4 flex items-center justify-between">
+                      <span className="text-sm font-medium text-gray-700 dark:text-white/80">
+                        Explore Concepts
+                      </span>
+                      {/* Chevron removed */}
+                    </div>
+                  </div>
+                </span>
+              ) : (
+                <Link
+                  href={`/mathematics/concepts/intermediate-advanced/calculus/${formula.id}`}
+                >
+                  {/* Card Content */}
+                  <div className="relative z-10 space-y-4">
+                    <div className="flex items-center gap-4">
+                      {/* Formula Icon */}
+                      <div
+                        className={`rounded-lg p-3 ${
+                          isColorful
+                            ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                            : "bg-gray-200 dark:bg-gray-700"
+                        }`}
+                      >
+                        {formula.icon}
+                      </div>
+                      {/* Formula Name */}
+                      <h3
+                        className={`text-2xl font-semibold ${
+                          isColorful
+                            ? "currentcolor"
+                            : "text-gray-800 dark:text-white"
+                        }`}
+                      >
+                        {formula.name}
+                      </h3>
+                    </div>
+                    {/* Formula Description */}
+                    <p className="text-sm leading-6 text-gray-600 dark:text-gray-200">
+                      {formula.description}
+                    </p>
+                    {/* Explore Concepts Link */}
+                    <div className="mt-4 flex items-center justify-between opacity-0 transition-opacity group-hover:opacity-100">
+                      <span className="text-sm font-medium text-gray-700 dark:text-white/80">
+                        Explore Concepts
+                      </span>
+                      <ChevronRight className="h-5 w-5 text-gray-700 transition-transform group-hover:translate-x-1 dark:text-white/80" />
+                    </div>
+                  </div>
+                </Link>
+              )}
+
+              {/* Animated background element */}
+              <div
+                className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
+                  isColorful
+                    ? "bg-black/5 dark:bg-white/10"
+                    : "bg-gray-200/50 dark:bg-gray-700/50"
+                }`}
+              />
+            </div>
+          );
+        })}
       </div>
 
       {/* Decorative Section Divider */}
