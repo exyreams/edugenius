@@ -158,7 +158,7 @@ export default function IntegralCalculus() {
     },
     {
       label: "Integral Calculus",
-      href: "/mathematics/concepts/intermediate-advanced/calculus/integral-calculus",
+      href: "/mathematics/concepts/intermediate-advanced/calculus/integral",
     },
   ];
 
@@ -185,7 +185,7 @@ export default function IntegralCalculus() {
       <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {integralTopics.map((integral) => (
           <Link
-            href={`/mathematics/concepts/intermediate-advanced/calculus/integral-calculus/${integral.id}`}
+            href={`/mathematics/concepts/intermediate-advanced/calculus/integral/${integral.id}`}
             key={integral.id}
             className={`group relative overflow-hidden rounded-2xl  p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30 ${
               isColorful
