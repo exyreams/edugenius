@@ -71,7 +71,7 @@ const differentialTopics = [
   },
   {
     id: "inverse-hyperbolic-functions",
-    name: "Inverse Hyperbolics",
+    name: "Inverse Hyperbolics Functions",
     icon: <Shapes className="h-6 w-6 text-amber-400 dark:text-amber-300" />,
     description: "Derivatives of inverse hyperbolic relations",
     gradient:
@@ -80,7 +80,7 @@ const differentialTopics = [
   },
   {
     id: "inverse-trigonometric-functions",
-    name: "Inverse Trig",
+    name: "Inverse Trigonometric Functions",
     icon: <TbMathSin className="h-6 w-6 text-pink-400 dark:text-pink-300" />,
     description: "Differentiate arcsin, arctan, and counterparts",
     gradient: "from-pink-200 to-red-200 dark:from-pink-600 dark:to-red-600",
@@ -88,7 +88,7 @@ const differentialTopics = [
   },
   {
     id: "logarithmic-functions",
-    name: "Logarithms",
+    name: "Logarithmic Functions",
     icon: <TbMathMax className="h-6 w-6 text-sky-400 dark:text-sky-300" />,
     description: "Master logarithmic differentiation",
     gradient: "from-sky-200 to-blue-200 dark:from-sky-600 dark:to-blue-600",
@@ -96,7 +96,7 @@ const differentialTopics = [
   },
   {
     id: "properties-of-limits",
-    name: "Limit Properties",
+    name: "Properties of Limits",
     icon: <Infinity className="h-6 w-6 text-lime-400 dark:text-lime-300" />,
     description: "Essential limit laws and behaviors",
     gradient: "from-lime-200 to-green-200 dark:from-lime-600 dark:to-green-600",
@@ -104,7 +104,7 @@ const differentialTopics = [
   },
   {
     id: "properties-of-trigonometric-limits",
-    name: "Trig Limits",
+    name: "Properties Of Trigonometric Limits",
     icon: (
       <TbMathSin className="h-6 w-6 text-violet-400 dark:text-violet-300" />
     ),
@@ -115,7 +115,7 @@ const differentialTopics = [
   },
   {
     id: "trigonometric-functions",
-    name: "Trig Derivatives",
+    name: "Trigonometric Functions",
     icon: <TbMathSin className="h-6 w-6 text-cyan-400 dark:text-cyan-300" />,
     description: "Differentiate sine, cosine, and related functions",
     gradient: "from-cyan-200 to-sky-200 dark:from-cyan-600 dark:to-sky-600",
