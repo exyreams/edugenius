@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Axis3d,
@@ -18,8 +20,26 @@ import {
 } from "lucide-react";
 import { IoMdCube } from "react-icons/io";
 import Breadcrumb from "@/components/Breadcrumb";
+import { useState } from "react";
+import ColorToggle from "@/components/ColorToggle";
 
-const formulas = [
+/**
+ * @typedef {Object} Concepts
+ * @property {string} id - Unique identifier for the concept.
+ * @property {string} name - Name of the concept.
+ * @property {JSX.Element} icon - Icon representing the concept.
+ * @property {string} description - Brief description of the concept.
+ * @property {string} gradient - Tailwind CSS classes for the gradient background.
+ * @property {string} text - Tailwind CSS classes for text color.
+ */
+
+/**
+ * @type {multivariableTopics[]}
+ * @description Array of concepts related to integral calculus, including their names, descriptions,
+ * and associated icons.  Each object defines properties for rendering a card in the UI.
+ */
+
+const multivariableTopics = [
   {
     id: "arc-length",
     name: "Arc Length",
@@ -167,7 +187,18 @@ const formulas = [
   },
 ];
 
-export default function MultivariableCalculusFormulas() {
+/**
+ * @component MultivariableCalculusConcepts
+ * @description A React component that displays a list of multivariable calculus concepts.
+ * Each concept is presented as a card with its name, description, and a link to explore it further.
+ * It includes a color toggle to switch between colorful and glassmorphism styles.
+ * @returns {JSX.Element} The Multivariable Calculus Concepts page.
+ */
+export default function MultivariableCalculusConcepts() {
+  /**
+   * @type {Array<{label: string, href: string}>}
+   * @description Breadcrumb navigation items for the page.
+   */
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
     { label: "Concepts", href: "/mathematics/concepts" },
@@ -185,6 +216,13 @@ export default function MultivariableCalculusFormulas() {
     },
   ];
 
+  /**
+   * @state isColorful
+   * @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]}
+   * @description State to manage whether to apply colorful styles or a glassmorphism style.
+   */
+  const [isColorful, setIsColorful] = useState(true);
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Hero Section */}
@@ -199,27 +237,47 @@ export default function MultivariableCalculusFormulas() {
         </p>
       </div>
 
+      {/* Color Toggle and Breadcrumb */}
+      <div className="mb-4 flex justify-center">
+        <ColorToggle onChange={setIsColorful} initialState={true} />
+      </div>
       <Breadcrumb items={breadcrumbItems} />
 
-      {/* Formula Grid */}
-      <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {formulas.map((formula) => (
+      {/* Concepts Topics Grid */}
+      <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {multivariableTopics.map((multivariable) => (
           <Link
-            href={`/mathematics/concepts/calculus/multivariable/${formula.id}`}
-            key={formula.id}
-            className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${formula.gradient} p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30`}
+            href={`/mathematics/concepts/intermediate-advanced/calculus/multivariable/${multivariable.id}`}
+            key={multivariable.id}
+            className={`group relative overflow-hidden rounded-2xl  p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30 ${
+              isColorful
+                ? `bg-gradient-to-br ${multivariable.gradient}`
+                : "glass"
+            }`}
           >
             <div className="space-y-4">
               <div className="flex items-center gap-4">
-                <div className="rounded-lg bg-black/5 p-3 backdrop-blur-sm dark:bg-black/20">
-                  {formula.icon}
+                <div
+                  className={`rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-700"
+                  }`}
+                >
+                  {multivariable.icon}
                 </div>
-                <h3 className={`text-xl font-semibold ${formula.text}`}>
-                  {formula.name}
+                <h3
+                  className={`text-xl font-semibold ${
+                    isColorful
+                      ? multivariable.text
+                      : "text-gray-800 dark:text-white"
+                  }`}
+                >
+                  {multivariable.name}
                 </h3>
               </div>
               <p className="text-sm leading-6 text-gray-600 dark:text-gray-200">
-                {formula.description}
+                {multivariable.description}
               </p>
               <div className="mt-4 flex items-center justify-between opacity-0 transition-opacity group-hover:opacity-100">
                 <span className="text-sm font-medium text-gray-700 dark:text-white/80">
@@ -230,11 +288,14 @@ export default function MultivariableCalculusFormulas() {
             </div>
 
             {/* Animated background element */}
-            <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-black/5 transition-all duration-500 group-hover:-right-4 group-hover:-top-4 dark:bg-white/10" />
+            <div
+              className={`absolute -right-8 -top-8 h-24 w-24 rounded-full bg-black/5 transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
+                isColorful ? "" : "dark:bg-white/10"
+              }`}
+            />
           </Link>
         ))}
       </div>
-
       {/* Decorative Section Divider */}
       <div className="mt-16 flex items-center justify-center space-x-4">
         <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:via-gray-400" />

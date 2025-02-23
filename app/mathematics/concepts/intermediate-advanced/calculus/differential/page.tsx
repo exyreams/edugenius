@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   ChevronRight,
@@ -8,9 +10,26 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { TbMathMax, TbMathSin } from "react-icons/tb";
-import Breadcrumb from "@/components/Breadcrumb";
+import { useState } from "react";
 
-const formulas = [
+import Breadcrumb from "@/components/Breadcrumb";
+import ColorToggle from "@/components/ColorToggle";
+
+/**
+ * @typedef {Object} Concepts
+ * @property {string} id - Unique identifier for the concepts.
+ * @property {string} name - Name of the concepts.
+ * @property {JSX.Element} icon - Icon representing the concepts.
+ * @property {string} description - Short description of the concepts.
+ * @property {string} gradient - Tailwind CSS gradient classes for the card background.
+ * @property {string} text - Tailwind CSS text color classes.
+ */
+
+/**
+ * @type {differentialTopics[]}
+ * @description Array of concepts objects, each representing a differential calculus concept.
+ */
+const differentialTopics = [
   {
     id: "basic-derivative-rules",
     name: "Derivative Rules",
@@ -104,7 +123,16 @@ const formulas = [
   },
 ];
 
-export default function DifferentialCalculusFormulas() {
+/**
+ * @component DifferentialCalculusConcepts
+ * @description Renders the main page for Differential Calculus Concepts.
+ * @returns {JSX.Element} The Differential Calculus Concepts page.
+ */
+export default function DifferentialCalculus() {
+  /**
+   * @type {Array<{label: string, href: string}>}
+   * @description Breadcrumb navigation items.
+   */
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
     { label: "Concepts", href: "/mathematics/concepts" },
@@ -122,6 +150,13 @@ export default function DifferentialCalculusFormulas() {
     },
   ];
 
+  /**
+   * @state isColorful
+   * @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]}
+   * @description State to manage whether to apply colorful styles or a glassmorphism style.
+   */
+  const [isColorful, setIsColorful] = useState(true);
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Hero Section */}
@@ -135,38 +170,61 @@ export default function DifferentialCalculusFormulas() {
         </p>
       </div>
 
+      {/* Color Toggle */}
+      <div className="mb-4 flex justify-center">
+        <ColorToggle onChange={setIsColorful} initialState={true} />
+      </div>
+      {/* Breadcrumb Navigation */}
       <Breadcrumb items={breadcrumbItems} />
 
-      {/* Formula Grid */}
-      <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {formulas.map((formula) => (
+      {/* Concepts Topics Grid */}
+      <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {differentialTopics.map((differential) => (
           <Link
-            href={`/mathematics/concepts/calculus/differential/${formula.id}`}
-            key={formula.id}
-            className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${formula.gradient} ${formula.text} p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30`}
+            href={`/mathematics/concepts/intermediate-advanced/calculus/differential/${differential.id}`}
+            key={differential.id}
+            className={`group relative overflow-hidden rounded-2xl  p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30 ${
+              isColorful
+                ? `bg-gradient-to-br ${differential.gradient} ${differential.text}`
+                : "glass text-gray-800 dark:text-white"
+            }`}
           >
             <div className="space-y-4">
               <div className="flex items-center gap-4">
-                <div className="rounded-lg bg-black/5 p-3 backdrop-blur-sm dark:bg-black/20">
-                  {formula.icon}
+                <div
+                  className={`rounded-lg p-3 ${isColorful ? "bg-black/5 backdrop-blur-sm dark:bg-black/20" : "bg-gray-200 dark:bg-gray-700"}`}
+                >
+                  {differential.icon}
                 </div>
-                <h3 className="currentcolor text-2xl font-semibold">
-                  {formula.name}
+                <h3
+                  className={`text-2xl font-semibold ${isColorful ? "currentcolor" : "text-gray-800 dark:text-white"}`}
+                >
+                  {differential.name}
                 </h3>
               </div>
-              <p className="text-sm leading-6 text-gray-600 dark:text-gray-200">
-                {formula.description}
+              <p
+                className={`text-sm leading-6  ${isColorful ? "text-gray-600 dark:text-gray-200" : "text-gray-700 dark:text-gray-300"}`}
+              >
+                {differential.description}
               </p>
               <div className="mt-4 flex items-center justify-between opacity-0 transition-opacity group-hover:opacity-100">
-                <span className="text-sm font-medium text-gray-700 dark:text-white/80">
+                <span
+                  className={`text-sm font-medium ${isColorful ? "text-gray-700 dark:text-white/80" : "text-gray-800 dark:text-white"}`}
+                >
                   Explore Concepts
                 </span>
-                <ChevronRight className="h-5 w-5 text-gray-700 transition-transform group-hover:translate-x-1 dark:text-white/80" />
+                <ChevronRight
+                  className={`h-5 w-5  transition-transform group-hover:translate-x-1 ${isColorful ? "text-gray-700 dark:text-white/80" : "text-gray-800 dark:text-white"}`}
+                />
               </div>
             </div>
 
             {/* Animated background element */}
-            <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-black/5 transition-all duration-500 group-hover:-right-4 group-hover:-top-4 dark:bg-white/10" />
+            <div
+              className={`absolute -right-8 -top-8 h-24 w-24 rounded-full bg-black/5 transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
+                isColorful ? "" : "dark:bg-white/10"
+              }`}
+            />
           </Link>
         ))}
       </div>

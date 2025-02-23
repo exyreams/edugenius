@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   BookOpen,
@@ -10,9 +12,27 @@ import {
   Triangle,
 } from "lucide-react";
 import { TbMathSin } from "react-icons/tb";
-import Breadcrumb from "@/components/Breadcrumb";
+import { useState } from "react";
 
-const formulas = [
+import Breadcrumb from "@/components/Breadcrumb";
+import ColorToggle from "@/components/ColorToggle";
+
+/**
+ * @typedef {Object} Concepts
+ * @property {string} id - Unique identifier for the concept.
+ * @property {string} name - Name of the concept.
+ * @property {JSX.Element} icon - Icon representing the concept.
+ * @property {string} description - Brief description of the concept.
+ * @property {string} gradient - Tailwind CSS classes for the gradient background.
+ * @property {string} text - Tailwind CSS classes for text color.
+ */
+
+/**
+ * @type {integralTopics[]}
+ * @description Array of concepts related to integral calculus, including their names, descriptions,
+ * and associated icons.  Each object defines properties for rendering a card in the UI.
+ */
+const integralTopics = [
   {
     id: "basic-integration-rules",
     name: "Basic Integration Rules",
@@ -106,7 +126,25 @@ const formulas = [
   },
 ];
 
-export default function IntegralCalculusFormulas() {
+/**
+ * @component IntegralCalculus
+ * @description Renders a page displaying a collection of integral calculus concepts.
+ * Each concept is presented in a card format with its name, description, and a relevant icon.
+ * The page includes a hero section, breadcrumb navigation, a color toggle, and a grid layout for the concept cards.
+ * @returns {JSX.Element} The Integral Calculus Concepts page.
+ */
+export default function IntegralCalculus() {
+  /**
+   * @state isColorful
+   * @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]}
+   * @description State to manage whether to apply colorful styles or a glassmorphism style.
+   */
+  const [isColorful, setIsColorful] = useState(true);
+
+  /**
+   * @type {Array<{label: string, href: string}>}
+   * @description Breadcrumb navigation items for the page, structured for the Breadcrumb component.
+   */
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
     { label: "Concepts", href: "/mathematics/concepts" },
@@ -120,7 +158,7 @@ export default function IntegralCalculusFormulas() {
     },
     {
       label: "Integral Calculus",
-      href: "/mathematics/concepts/intermediate-advanced/calculus/integral",
+      href: "/mathematics/concepts/intermediate-advanced/calculus/integral-calculus",
     },
   ];
 
@@ -137,27 +175,44 @@ export default function IntegralCalculusFormulas() {
         </p>
       </div>
 
+      {/* Color Toggle and Breadcrumb */}
+      <div className="mb-4 flex justify-center">
+        <ColorToggle onChange={setIsColorful} initialState={true} />
+      </div>
       <Breadcrumb items={breadcrumbItems} />
 
-      {/* Formula Grid */}
-      <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {formulas.map((formula) => (
+      {/* Concepts Topics Grid */}
+      <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {integralTopics.map((integral) => (
           <Link
-            href={`/mathematics/concepts/calculus/integral/${formula.id}`}
-            key={formula.id}
-            className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${formula.gradient} ${formula.text} p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30`}
+            href={`/mathematics/concepts/intermediate-advanced/calculus/integral-calculus/${integral.id}`}
+            key={integral.id}
+            className={`group relative overflow-hidden rounded-2xl  p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30 ${
+              isColorful
+                ? `bg-gradient-to-br ${integral.gradient} ${integral.text}`
+                : "glass"
+            }`}
           >
             <div className="space-y-4">
               <div className="flex items-center gap-4">
-                <div className="rounded-lg bg-black/5 p-3 backdrop-blur-sm dark:bg-black/20">
-                  {formula.icon}
+                <div
+                  className={`rounded-lg p-3 ${
+                    isColorful
+                      ? "bg-black/5  backdrop-blur-sm dark:bg-black/20"
+                      : "bg-gray-200 dark:bg-gray-700"
+                  }`}
+                >
+                  {integral.icon}
                 </div>
-                <h3 className="currentcolor text-xl font-semibold">
-                  {formula.name}
+                <h3
+                  className={`text-xl font-semibold 
+                  `}
+                >
+                  {integral.name}
                 </h3>
               </div>
               <p className="text-sm leading-6 text-gray-600 dark:text-gray-200">
-                {formula.description}
+                {integral.description}
               </p>
               <div className="mt-4 flex items-center justify-between opacity-0 transition-opacity group-hover:opacity-100">
                 <span className="text-sm font-medium text-gray-700 dark:text-white/80">
@@ -168,7 +223,11 @@ export default function IntegralCalculusFormulas() {
             </div>
 
             {/* Animated background element */}
-            <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-black/5 transition-all duration-500 group-hover:-right-4 group-hover:-top-4 dark:bg-white/10" />
+            <div
+              className={`absolute -right-8 -top-8 h-24 w-24 rounded-full bg-black/5 transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
+                isColorful ? "" : "dark:bg-white/10"
+              }`}
+            />
           </Link>
         ))}
       </div>
