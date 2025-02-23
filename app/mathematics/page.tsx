@@ -426,7 +426,7 @@ export default function Mathematics() {
                 {isComingSoon ? <ComingSoonTag /> : null}
                 {/* Conditional Link: Wrap entire content if NOT coming soon */}
                 {isComingSoon ? (
-                  <span className="cursor-not-allowed">
+                  <span>
                     <div className="space-y-4">
                       <div className="flex items-center gap-3">
                         <div
