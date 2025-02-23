@@ -18,8 +18,6 @@ const eslintConfig = [
     "plugin:tailwindcss/recommended",
     "prettier",
   ),
-
-  // Add custom configurations
   {
     plugins: {
       tailwindcss: tailwindcssPlugin,
