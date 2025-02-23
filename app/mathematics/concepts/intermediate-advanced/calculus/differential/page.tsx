@@ -51,7 +51,7 @@ const differentialTopics = [
   },
   {
     id: "exponential-functions",
-    name: "Exponentials",
+    name: "Exponential Functions",
     icon: <TrendingUp className="h-6 w-6 text-rose-400 dark:text-rose-300" />,
     description: "Differentiate exponential growth functions",
     gradient:
