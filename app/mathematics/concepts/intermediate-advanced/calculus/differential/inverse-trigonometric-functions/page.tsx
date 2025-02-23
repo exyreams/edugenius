@@ -33,7 +33,7 @@ export default function InverseTrigFunctions() {
     },
     {
       label: "Inverse Trig Functions",
-      href: "/mathematics/concepts/intermediate-advanced/calculus/differential/inverse-trig-functions",
+      href: "/mathematics/concepts/intermediate-advanced/calculus/differential/inverse-trigonometric-functions",
     },
   ];
   /**
