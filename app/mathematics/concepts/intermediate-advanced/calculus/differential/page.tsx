@@ -43,7 +43,7 @@ const differentialTopics = [
   },
   {
     id: "criterion-of-first-and-second-derivative",
-    name: "Derivative Tests",
+    name: "Criterion Of First And Second Derivative",
     icon: <Crosshair className="h-6 w-6 text-blue-400 dark:text-blue-300" />,
     description: "Analyze functions using derivative criteria",
     gradient: "from-blue-200 to-cyan-200 dark:from-blue-600 dark:to-cyan-600",
