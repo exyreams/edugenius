@@ -31,11 +31,11 @@ export default function CriterionOfFirstAndSecondDerivative() {
     },
     {
       label: "Differential",
-      href: "/mathematics/concepts/intermediate-advanced/calculus/differential-calculus",
+      href: "/mathematics/concepts/intermediate-advanced/calculus/differential",
     },
     {
       label: "Criterion of First & Second derivative",
-      href: "/mathematics/concepts/intermediate-advanced/calculus/differential-calculus/criterion-of-first-and-second-derivative",
+      href: "/mathematics/concepts/intermediate-advanced/calculus/differential/criterion-of-first-and-second-derivative",
     },
   ];
 
