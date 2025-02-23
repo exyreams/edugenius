@@ -24,20 +24,20 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ColorToggle from "@/components/ColorToggle";
 
 /**
- * @typedef {Object} Formula
- * @property {string} id - Unique identifier for the formula.
- * @property {string} name - Name of the formula.
- * @property {JSX.Element} icon - Icon representing the formula.
- * @property {string} description - Brief description of the formula.
- * @property {string} gradient - CSS gradient class for the formula card background.
+ * @typedef {Object} Concepts
+ * @property {string} id - Unique identifier for the concept.
+ * @property {string} name - Name of the concept.
+ * @property {JSX.Element} icon - Icon representing the concept.
+ * @property {string} description - Brief description of the concept.
+ * @property {string} gradient - CSS gradient class for the concept card background.
  * @property {string} text - CSS class for text color.
  */
 
 /**
- * @type {Formula[]}
- * @description Array of formula objects, each representing an algebraic concept.
+ * @type {algebraTopics[]}
+ * @description Array of concept objects, each representing an algebraic concept.
  */
-const formulas = [
+const algebraTopics = [
   {
     id: "binomial-theorem",
     name: "Binomial Theorem",
@@ -176,12 +176,12 @@ const formulas = [
 ];
 
 /**
- * AlgebraFormulas Component
- * @returns {JSX.Element} The Algebra Formulas page.
- * @description Renders the Algebra Formulas page, displaying a list of algebraic concepts
- * with interactive cards that link to detailed formula pages.
+ * AlgebraTopics Component
+ * @returns {JSX.Element} The Algebra Concepts page.
+ * @description Renders the Algebra Concepts page, displaying a list of algebraic concepts
+ * with interactive cards that link to detailed concepts pages.
  */
-export default function AlgebraFormulas() {
+export default function AlgebraTopics() {
   /**
    * @type {Array<{label: string, href: string}>}
    * @description Breadcrumb navigation items.
@@ -224,22 +224,22 @@ export default function AlgebraFormulas() {
       {/* Breadcrumb Navigation */}
       <Breadcrumb items={breadcrumbItems} />
 
-      {/* Formula Grid */}
+      {/* Algebra Concepts Grid */}
       <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {formulas.map((formula) => (
+        {algebraTopics.map((algebra) => (
           <Link
-            href={`/mathematics/concepts/intermediate-advanced/algebra/${formula.id}`}
-            key={formula.id}
+            href={`/mathematics/concepts/intermediate-advanced/algebra/${algebra.id}`}
+            key={algebra.id}
             className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30 ${
               isColorful
-                ? `bg-gradient-to-br ${formula.gradient} ${formula.text}`
+                ? `bg-gradient-to-br ${algebra.gradient} ${algebra.text}`
                 : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-white"
             }`}
           >
             {/* Set z-index to be higher than the animated element */}
             <div className="relative z-10 space-y-4">
               <div className="flex items-center gap-4">
-                {/* Formula Icon */}
+                {/* Algebra Icon */}
                 <div
                   className={`rounded-lg p-3 ${
                     isColorful
@@ -247,9 +247,9 @@ export default function AlgebraFormulas() {
                       : "bg-gray-200 dark:bg-gray-700"
                   }`}
                 >
-                  {formula.icon}
+                  {algebra.icon}
                 </div>
-                {/* Formula Name */}
+                {/* concept Name */}
                 <h3
                   className={`text-xl font-semibold ${
                     isColorful
@@ -257,14 +257,14 @@ export default function AlgebraFormulas() {
                       : "text-gray-800 dark:text-white"
                   }`}
                 >
-                  {formula.name}
+                  {algebra.name}
                 </h3>
               </div>
-              {/* Formula Description */}
+              {/* concept Description */}
               <p className="text-sm leading-6 text-gray-600 dark:text-gray-200">
-                {formula.description}
+                {algebra.description}
               </p>
-              {/* Explore Formulas Link */}
+              {/* Explore concepts Link */}
               <div className="mt-2 flex items-center justify-between opacity-0 transition-opacity group-hover:opacity-100">
                 <span className="text-sm font-medium text-gray-700 dark:text-white/80">
                   Explore Formulas
