@@ -1,4 +1,8 @@
 # EduGenius: Your Interactive Learning Companion
+
+![edugenius](https://github.com/user-attachments/assets/d2a9eaf1-f7b0-4758-80b4-71c2dcf497f4)
+
+
 <!-- Badges -->
 <p align="center">
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
