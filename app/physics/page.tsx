@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import ColorToggle from "@/components/ColorToggle";
 import {
   Atom,
   BookOpen,
@@ -12,12 +10,15 @@ import {
   Droplet,
   Eye,
   Layout,
+  Lightbulb,
   Thermometer,
   Waves,
   Zap,
 } from "lucide-react";
 import { SiLibreofficemath } from "react-icons/si";
 import { FaFileUpload } from "react-icons/fa";
+import { useState } from "react";
+import ColorToggle from "@/components/ColorToggle";
 
 const topics = [
   {
@@ -89,7 +90,53 @@ const topics = [
   },
 ];
 
-// Helper function to render the "Coming Soon" tag
+const interactiveTools = [
+  {
+    id: "challenges",
+    title: "Challenges",
+    description: "Solve problems to test your physics skills.",
+    href: "/physics/quiz/challenges",
+    icon: SiLibreofficemath,
+    cta: "Take Challenge",
+    gradient: "from-sky-200 to-blue-200 dark:from-sky-600 dark:to-blue-600",
+    comingSoon: false,
+    span: "lg:col-span-1",
+  },
+  {
+    id: "problem-solver",
+    title: "Problem Solver",
+    description: "Practice solving physics problems with step-by-step guidance.",
+    href: "/physics/solve",
+    icon: Lightbulb,
+    cta: "Start Solving",
+    gradient: "from-purple-200 to-blue-200 dark:from-purple-600 dark:to-blue-600",
+    comingSoon: false,
+    span: "lg:col-span-2",
+  },
+  {
+    id: "quiz-from-file",
+    title: "Quiz from File",
+    description: "Upload a file to generate a custom quiz.",
+    href: "/physics/quiz/from-files",
+    icon: FaFileUpload,
+    cta: "Start Quiz",
+    gradient: "from-yellow-200 to-amber-200 dark:from-yellow-600 dark:to-amber-600",
+    comingSoon: false,
+    span: "lg:col-span-1",
+  },
+    {
+    id: "concept-explainer",
+    title: "Concept Explainer",
+    description: "Deep dive into complex physics concepts with interactive explanations.",
+    href: "#",
+    icon: BookOpen,
+    cta: "Learn More",
+    gradient: "from-green-200 to-teal-200 dark:from-green-600 dark:to-teal-600",
+    comingSoon: true,
+    span: "lg:col-span-1",
+  },
+];
+
 const ComingSoonTag = () => (
   <span className="absolute right-2 top-2 z-10 rounded-full bg-white px-2 py-1 text-xs font-semibold text-black">
     Coming Soon
@@ -104,109 +151,140 @@ export default function Physics() {
       {/* Hero Section */}
       <div className="mb-12 space-y-6 text-center">
         <h1 className="bg-gradient-to-r from-indigo-700 to-purple-800 bg-clip-text text-4xl font-bold text-transparent dark:from-indigo-200 dark:to-purple-300 sm:text-5xl md:text-6xl">
-          Intermediate & Advanced Physics
+          Physics
         </h1>
         <p className="mx-auto max-w-2xl text-lg text-gray-600 dark:text-gray-300 md:text-xl">
-          Explore the fundamental laws of the universe, from quantum phenomena
-          to cosmic scales
+          Explore the fundamental laws of the universe, from quantum phenomena to cosmic scales.
         </p>
       </div>
 
       {/* Color Toggle */}
       <ColorToggle onChange={setIsColorful} initialState={true} />
 
-      {/* Main Topic Grid */}
-      <h2
-        className={`mb-6 mt-8 text-center text-2xl font-bold ${
-          isColorful
-            ? "bg-gradient-to-r from-blue-700 to-cyan-700 bg-clip-text text-transparent dark:from-blue-600 dark:to-cyan-600"
-            : "text-gray-800 dark:text-gray-200"
-        } `}
-      >
-        Learn Concepts
-      </h2>
-      <div className="mt-4 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {topics.map((topic) => {
-          const Icon = topic.icon;
-          return (
-            <Link
-              href={`/physics/concepts/${topic.id}`}
-              key={topic.id}
-              className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30 ${
-                isColorful
-                  ? `bg-gradient-to-br ${topic.gradient} ${topic.text}`
-                  : "glass text-gray-800 dark:text-white"
-              }`}
-            >
-              <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <div
-                    className={`rounded-lg p-3 ${
-                      isColorful
-                        ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
-                        : "bg-gray-200 dark:bg-gray-700"
-                    }`}
-                  >
-                    <Icon
-                      className={`h-6 w-6 ${
+      {/* Interactive Tools Section */}
+      <div className="mt-16">
+        <h2
+          className={`mb-8 text-center text-3xl font-bold ${
+            isColorful
+              ? "bg-gradient-to-r from-amber-700 to-orange-700 bg-clip-text text-transparent dark:from-amber-600 dark:to-orange-600"
+              : "text-gray-800 dark:text-gray-200"
+          } `}
+        >
+          Interactive Tools
+        </h2>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {interactiveTools.map((tool) => {
+            const cardContent = (
+              <>
+                {tool.comingSoon && <ComingSoonTag />}
+                <div className="flex h-full flex-col justify-between p-8">
+                  <div>
+                    <div className="mb-4 flex items-center gap-4">
+                      <div
+                        className={`rounded-lg p-3 ${
+                          isColorful
+                            ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                            : "bg-gray-300 dark:bg-gray-700"
+                        }`}
+                      >
+                        <tool.icon
+                          className={`h-8 w-8 ${
+                            isColorful
+                              ? "text-black dark:text-white"
+                              : "text-gray-800 dark:text-white"
+                          }`}
+                        />
+                      </div>
+                      <h3
+                        className={`text-2xl font-semibold ${
+                          isColorful
+                            ? "text-black dark:text-white"
+                            : "text-gray-800 dark:text-white"
+                        }`}
+                      >
+                        {tool.title}
+                      </h3>
+                    </div>
+                    <p
+                      className={`mb-6 text-base leading-relaxed ${
                         isColorful
-                          ? "text-current"
-                          : "text-gray-700 dark:text-gray-300"
+                          ? "text-gray-600 dark:text-gray-200"
+                          : "text-gray-600 dark:text-gray-300"
+                      }`}
+                    >
+                      {tool.description}
+                    </p>
+                  </div>
+                  <div className="mt-auto flex items-center justify-between">
+                    <span
+                      className={`text-md font-medium ${
+                        isColorful
+                          ? "text-gray-700 dark:text-white/80"
+                          : "text-gray-700 dark:text-white/80"
+                      }`}
+                    >
+                      {tool.cta}
+                    </span>
+                    <ChevronRight
+                      className={`h-6 w-6 transition-transform group-hover:translate-x-1 ${
+                        isColorful
+                          ? "text-gray-700 dark:text-white/80"
+                          : "text-gray-700 dark:text-white/80"
                       }`}
                     />
                   </div>
-                  <h3
-                    className={`text-lg font-semibold ${
-                      isColorful
-                        ? "currentcolor"
-                        : "text-gray-800 dark:text-white"
-                    }`}
-                  >
-                    {topic.name}
-                  </h3>
                 </div>
-                <p
-                  className={`text-sm leading-6 ${
+                <div
+                  className={`absolute -right-12 -top-12 h-32 w-32 rounded-full transition-all duration-500 group-hover:-right-8 group-hover:-top-8 ${
                     isColorful
-                      ? "text-gray-600 dark:text-gray-200"
-                      : "text-gray-600 dark:text-gray-300"
+                      ? "bg-black/5 dark:bg-white/10"
+                      : "bg-gray-300/50 dark:bg-gray-700/50"
                   }`}
-                >
-                  {topic.description}
-                </p>
-                <div className="mt-4 flex items-center justify-between">
-                  <span
-                    className={`text-sm font-medium ${
-                      isColorful
-                        ? "text-gray-700 dark:text-white/80"
-                        : "text-gray-700 dark:text-white/80"
-                    }`}
-                  >
-                    Explore Now
-                  </span>
-                  <ChevronRight
-                    className={`h-5 w-5 transition-transform group-hover:translate-x-1 ${
-                      isColorful
-                        ? "text-gray-700 dark:text-white/80"
-                        : "text-gray-700 dark:text-white/80"
-                    }`}
-                  />
-                </div>
-              </div>
+                />
+              </>
+            );
 
-              {/* Animated background element */}
-              <div
-                className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
-                  isColorful
-                    ? "bg-black/5 dark:bg-white/10"
-                    : "bg-gray-300/50 dark:bg-gray-700/50"
-                }`}
-              />
-            </Link>
-          );
-        })}
+            const cardClasses = `group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl dark:hover:shadow-black/40 flex flex-col ${
+              isColorful ? `bg-gradient-to-br ${tool.gradient}` : "glass"
+            } ${
+              tool.comingSoon ? "cursor-not-allowed opacity-70" : ""
+            } ${tool.span}`;
+
+            if (tool.comingSoon) {
+              return (
+                <div key={tool.id} className={cardClasses}>
+                  {cardContent}
+                </div>
+              );
+            }
+
+            return (
+              <Link href={tool.href} key={tool.id} className={cardClasses}>
+                {cardContent}
+              </Link>
+            );
+          })}
+        </div>
       </div>
-      <div className="mt-16">
+
+      {/* Foundational Physics */}
+      <div className="mt-12">
+        <h2
+          className={`mb-6 mt-8 text-center text-2xl font-bold ${
+            isColorful
+              ? "bg-gradient-to-r from-blue-700 to-cyan-700 bg-clip-text text-transparent dark:from-blue-600 dark:to-cyan-600"
+              : "text-gray-800 dark:text-gray-200"
+          } `}
+        >
+          Foundational Physics
+        </h2>
+        <div className="text-center text-gray-500 dark:text-gray-400">
+            Coming Soon
+        </div>
+      </div>
+
+      {/* Intermediate & Advanced Physics */}
+      <div className="mt-12">
         <h2
           className={`mb-6 text-center text-2xl font-bold ${
             isColorful
@@ -214,377 +292,76 @@ export default function Physics() {
               : "text-gray-800 dark:text-gray-200"
           } `}
         >
-          Essential Formulas
+          Intermediate & Advanced Physics
         </h2>
-        <div
-          className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 ${
-            isColorful
-              ? "bg-gradient-to-br from-teal-200 to-cyan-200 dark:from-teal-700 dark:to-cyan-700"
-              : "glass"
-          }`}
-        >
-          {/* Animated background element */}
-          <div
-            className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
-              isColorful
-                ? "bg-black/5 dark:bg-white/10"
-                : "bg-gray-300/50 dark:bg-gray-700/50"
-            }`}
-          />
-
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {topics.slice(0, 6).map((topic) => {
-              const Icon = topic.icon;
-              return (
-                <Link
-                  href={`/physics/formula/${topic.id}`}
-                  key={topic.id}
-                  className={`group flex items-center gap-4 rounded-xl p-4 transition-all ${
-                    isColorful
-                      ? "hover:bg-teal-300/50 dark:hover:bg-teal-600/50"
-                      : "hover:bg-gray-300 dark:hover:bg-gray-800"
-                  }`}
-                >
-                  <div
-                    className={`rounded-lg p-3 ${
-                      isColorful
-                        ? `bg-black/5 ${topic.text} backdrop-blur-sm dark:bg-black/20`
-                        : "bg-gray-200 dark:bg-gray-700"
-                    }`}
-                  >
-                    <Icon
-                      className={`h-6 w-6 ${
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {topics.map((topic) => {
+            const Icon = topic.icon;
+            return (
+              <Link
+                href={`/physics/concepts/${topic.id}`}
+                key={topic.id}
+                className={`group relative overflow-hidden rounded-xl p-4 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30 ${
+                  isColorful
+                    ? `bg-gradient-to-br ${topic.gradient} ${topic.text}`
+                    : "glass text-gray-800 dark:text-white"
+                }`}
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div
+                      className={`rounded-lg p-2 ${
                         isColorful
-                          ? "text-current"
-                          : "text-gray-600 dark:text-gray-300"
-                      }`}
-                    />
-                  </div>
-                  <div>
-                    <h4
-                      className={`text-lg font-semibold ${
-                        isColorful ? "" : "text-gray-800 dark:text-white"
+                          ? `bg-black/5 ${topic.text} backdrop-blur-sm dark:bg-black/25`
+                          : "bg-gray-200 dark:bg-gray-700"
                       }`}
                     >
-                      {topic.name}
-                    </h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      Key equations and relationships
-                    </p>
+                      <Icon
+                        className={`h-5 w-5 ${
+                          isColorful
+                            ? "text-current"
+                            : "text-gray-700 dark:text-gray-300"
+                        }`}
+                      />
+                    </div>
+                    <h4 className={`font-medium ${topic.text}`}>{topic.name}</h4>
                   </div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
-      {/* Quiz Section */}
-      <div className="mt-16">
-        <h2
-          className={`mb-6 text-center text-2xl font-bold ${
-            isColorful
-              ? "bg-gradient-to-r from-amber-700 to-orange-700 bg-clip-text text-transparent dark:from-amber-600 dark:to-orange-600"
-              : "text-gray-800 dark:text-gray-200"
-          } `}
-        >
-          Quizzes
-        </h2>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
-          {/* Challenges */}
-          <Link
-            href="/physics/quiz/challenges"
-            className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg ${
-              isColorful
-                ? "bg-gradient-to-br from-sky-200 to-blue-200 dark:from-sky-600 dark:to-blue-600"
-                : "glass"
-            }`}
-          >
-            <div
-              className={`space-y-4 ${
-                isColorful ? "text-gray-800" : "text-gray-800 dark:text-white"
-              }`}
-            >
-              <div className="flex items-center gap-4">
-                <div
-                  className={`rounded-lg p-3 ${
-                    isColorful
-                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
-                      : "bg-gray-300 dark:bg-gray-700"
-                  }`}
-                >
-                  <SiLibreofficemath
-                    className={`h-6 w-6 ${
-                      isColorful
-                        ? "text-black dark:text-white"
-                        : "text-gray-800 dark:text-white"
-                    }`}
-                  />
+                  <div className="flex justify-between">
+                    <p
+                      className={`text-sm leading-6 ${
+                        isColorful
+                          ? "text-gray-600 dark:text-gray-200"
+                          : "text-gray-600 dark:text-gray-300"
+                      }`}
+                    >
+                      {topic.description}
+                    </p>
+                    <ChevronRight
+                      className={`text-gray-700 dark:text-gray-300`}
+                    />
+                  </div>
                 </div>
-                <h3
-                  className={`text-xl font-semibold ${
+                {/* Animated background element */}
+                <div
+                  className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
                     isColorful
-                      ? "text-black dark:text-white"
-                      : "text-gray-800 dark:text-white"
-                  }`}
-                >
-                  Challenges
-                </h3>
-              </div>
-              <p
-                className={`text-sm leading-6 ${
-                  isColorful
-                    ? "text-gray-600 dark:text-gray-200"
-                    : "text-gray-600 dark:text-gray-200"
-                }`}
-              >
-                Solve problems to test your physics skills
-              </p>
-              <div className="mt-4 flex items-center justify-between">
-                <span
-                  className={`text-sm font-medium ${
-                    isColorful
-                      ? "text-gray-700 dark:text-white/80"
-                      : "text-gray-700 dark:text-white/80"
-                  }`}
-                >
-                  Take Challenge
-                </span>
-                <ChevronRight
-                  className={`h-5 w-5 transition-transform group-hover:translate-x-1 ${
-                    isColorful
-                      ? "text-gray-700 dark:text-white/80"
-                      : "text-gray-700 dark:text-white/80"
+                      ? "bg-black/5 dark:bg-white/10"
+                      : "bg-gray-300/50 dark:bg-gray-700/50"
                   }`}
                 />
-              </div>
-            </div>
-            {/* Animated background element */}
-            <div
-              className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
-                isColorful
-                  ? "bg-black/5 dark:bg-white/10"
-                  : "bg-gray-300/50 dark:bg-gray-700/50"
-              }`}
-            />
-          </Link>
-          {/* Quiz from File */}
-          <Link
-            href="/physics/quiz/from-files"
-            className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg ${
-              isColorful
-                ? "bg-gradient-to-br from-yellow-200 to-amber-200 dark:from-yellow-600 dark:to-amber-600"
-                : "glass"
-            }`}
-          >
-            <div
-              className={`space-y-4 ${
-                isColorful ? "text-gray-800" : "text-gray-800 dark:text-white"
-              }`}
-            >
-              <div className="flex items-center gap-4">
-                <div
-                  className={`rounded-lg p-3 ${
-                    isColorful
-                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
-                      : "bg-gray-300 dark:bg-gray-700"
-                  }`}
-                >
-                  <FaFileUpload
-                    className={`h-6 w-6 ${
-                      isColorful
-                        ? "text-black dark:text-white"
-                        : "text-gray-800 dark:text-white"
-                    }`}
-                  />
-                </div>
-                <h3
-                  className={`text-xl font-semibold ${
-                    isColorful
-                      ? "text-black dark:text-white"
-                      : "text-gray-800 dark:text-white"
-                  }`}
-                >
-                  Quiz from File
-                </h3>
-              </div>
-              <p
-                className={`text-sm leading-6 ${
-                  isColorful
-                    ? "text-gray-600 dark:text-gray-200"
-                    : "text-gray-600 dark:text-gray-200"
-                }`}
-              >
-                Upload a file to generate a custom quiz
-              </p>
-              <div className="mt-4 flex items-center justify-between">
-                <span
-                  className={`text-sm font-medium ${
-                    isColorful
-                      ? "text-gray-700 dark:text-white/80"
-                      : "text-gray-700 dark:text-white/80"
-                  }`}
-                >
-                  Start Quiz
-                </span>
-                <ChevronRight
-                  className={`h-5 w-5 transition-transform group-hover:translate-x-1 ${
-                    isColorful
-                      ? "text-gray-700 dark:text-white/80"
-                      : "text-gray-700 dark:text-white/80"
-                  }`}
-                />
-              </div>
-            </div>
-            {/* Animated background element */}
-            <div
-              className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
-                isColorful
-                  ? "bg-black/5 dark:bg-white/10"
-                  : "bg-gray-300/50 dark:bg-gray-700/50"
-              }`}
-            />
-          </Link>
+              </Link>
+            );
+          })}
         </div>
       </div>
 
-      {/* Tools Section */}
-      <div className="mt-16">
-        <h2
-          className={`mb-6 text-center text-2xl font-bold ${
-            isColorful
-              ? "bg-gradient-to-r from-purple-700 to-pink-700 bg-clip-text text-transparent dark:from-purple-600 dark:to-pink-600"
-              : "text-gray-800 dark:text-gray-200"
-          } `}
-        >
-          Solutions & Explanations
-        </h2>
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-          {/* Problem-Solving Section */}
-          <Link
-            href="/physics/solve"
-            className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg ${
-              isColorful
-                ? "bg-gradient-to-br from-purple-200 to-blue-200 dark:from-purple-600 dark:to-blue-600"
-                : "glass"
-            }`}
-          >
-            <div className="flex items-center gap-4">
-              <Calculator
-                className={`h-8 w-8 ${
-                  isColorful
-                    ? "text-current"
-                    : "text-gray-700 dark:text-gray-300"
-                }`}
-              />
-              <div>
-                <h3
-                  className={`text-xl font-semibold ${
-                    isColorful ? "" : "text-gray-800 dark:text-white"
-                  }`}
-                >
-                  Problem Solver
-                </h3>
-                <p className="mt-2 text-sm text-gray-700 dark:text-gray-200">
-                  Practice solving physics problems with step-by-step guidance
-                </p>
-              </div>
-            </div>
-            <div className="mt-4 flex items-center justify-between">
-              <span
-                className={`text-sm font-medium ${
-                  isColorful
-                    ? "text-gray-700 dark:text-white/80"
-                    : "text-gray-700 dark:text-white/80"
-                }`}
-              >
-                Start Solving
-              </span>
-              <ChevronRight
-                className={`h-5 w-5 transition-transform group-hover:translate-x-1 ${
-                  isColorful
-                    ? "text-gray-700 dark:text-white/80"
-                    : "text-gray-700 dark:text-white/80"
-                }`}
-              />
-            </div>
-            {/* Animated background element */}
-            <div
-              className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
-                isColorful
-                  ? "bg-black/5 dark:bg-white/10"
-                  : "bg-gray-300/50 dark:bg-gray-700/50"
-              }`}
-            />
-          </Link>
-
-          {/* Concept Explainer Section */}
-          <div
-            className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg ${
-              isColorful
-                ? "bg-gradient-to-br from-green-200 to-teal-200 dark:from-green-600 dark:to-teal-600"
-                : "glass"
-            }`}
-          >
-            <ComingSoonTag />
-            <div className="flex items-center gap-4">
-              <BookOpen
-                className={`h-8 w-8 ${
-                  isColorful
-                    ? "text-current"
-                    : "bg-black/5 text-gray-700 dark:text-gray-300"
-                }`}
-              />
-              <div>
-                <h3
-                  className={`text-xl font-semibold ${
-                    isColorful ? "" : "text-gray-800 dark:text-white"
-                  }`}
-                >
-                  Concept Explainer
-                </h3>
-                <p className="mt-2 text-sm text-gray-700 dark:text-gray-200">
-                  Deep dive into complex physics concepts with interactive
-                  explanations
-                </p>
-              </div>
-            </div>
-            <div className="mt-4 flex items-center justify-between">
-              <span
-                className={`text-sm font-medium ${
-                  isColorful
-                    ? "text-gray-700 dark:text-white/80"
-                    : "text-gray-700 dark:text-white/80"
-                }`}
-              >
-                Learn More
-              </span>
-              <ChevronRight
-                className={`h-5 w-5 transition-transform group-hover:translate-x-1 ${
-                  isColorful
-                    ? "text-gray-700 dark:text-white/80"
-                    : "text-gray-700 dark:text-white/80"
-                }`}
-              />
-            </div>
-            {/* Animated background element */}
-            <div
-              className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
-                isColorful
-                  ? "bg-black/5 dark:bg-white/10"
-                  : "bg-gray-300/50 dark:bg-gray-700/50"
-              }`}
-            />
-          </div>
-        </div>
-      </div>
       {/* Decorative Section Divider */}
       <div className="mt-16 flex items-center justify-center space-x-4">
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:via-gray-400" />
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:from-transparent dark:via-gray-400 dark:to-transparent" />
         <span className="text-sm italic text-gray-500 dark:text-gray-200">
-          Unveiling the Universe&#39;s Secrets
+          Unveiling the Universe's Secrets
         </span>
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:via-gray-400" />
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-600 to-transparent dark:from-transparent dark:via-gray-400 dark:to-transparent" />
       </div>
     </div>
   );

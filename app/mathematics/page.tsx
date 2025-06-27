@@ -290,6 +290,66 @@ const intermediateAdvancedTopics = [
   },
 ];
 
+const interactiveTools = [
+  {
+    id: "challenges",
+    title: "Challenges",
+    description: "Solve mathematical problems to test your skills.",
+    href: "/mathematics/quiz/challenges",
+    icon: SiLibreofficemath,
+    cta: "Take Challenge",
+    gradient: "from-sky-200 to-blue-200 dark:from-sky-600 dark:to-blue-600",
+    comingSoon: false,
+    span: "lg:col-span-1",
+  },
+  {
+    id: "problem-solver",
+    title: "Problem Solver",
+    description: "Upload images for step-by-step solutions.",
+    href: "/mathematics/solve",
+    icon: Lightbulb,
+    cta: "Start Solving",
+    gradient: "from-purple-200 to-blue-200 dark:from-purple-600 dark:to-blue-600",
+    comingSoon: false,
+    span: "lg:col-span-2",
+  },
+  {
+    id: "formula-quiz",
+    title: "Formula Quiz",
+    description: "Test your knowledge of mathematical formulas.",
+    href: "/mathematics/quiz/formulas",
+    icon: SquareSigma,
+    cta: "Take Quiz",
+    gradient:
+      "from-purple-200 to-indigo-200 dark:from-purple-600 dark:to-indigo-600",
+    comingSoon: false,
+    span: "lg:col-span-1",
+  },
+  {
+    id: "quiz-from-file",
+    title: "Quiz from File",
+    description: "Upload a file to generate a custom quiz.",
+    href: "/mathematics/quiz/from-files",
+    icon: FaFileUpload,
+    cta: "Start Quiz",
+    gradient:
+      "from-yellow-200 to-amber-200 dark:from-yellow-600 dark:to-amber-600",
+    comingSoon: false,
+    span: "lg:col-span-1",
+  },
+  {
+    id: "concept-explainer",
+    title: "Concept Explainer",
+    description: "Comprehensive guides for math concepts.",
+    href: "#",
+    icon: BookOpen,
+    cta: "Learn More",
+    gradient: "from-green-200 to-teal-200 dark:from-green-600 dark:to-teal-600",
+    comingSoon: true,
+    span: "lg:col-span-1",
+  },
+];
+
 /**
  * @returns {JSX.Element} - "Coming Soon" tag component.
  * @description - Renders a "Coming Soon" tag.
@@ -323,6 +383,112 @@ export default function Mathematics() {
 
       {/* Color Toggle */}
       <ColorToggle onChange={setIsColorful} initialState={true} />
+
+      {/* Interactive Tools Section */}
+      <div className="mt-16">
+        <h2
+          className={`mb-8 text-center text-3xl font-bold ${
+            isColorful
+              ? "bg-gradient-to-r from-amber-700 to-orange-700 bg-clip-text text-transparent dark:from-amber-600 dark:to-orange-600"
+              : "text-gray-800 dark:text-gray-200"
+          } `}
+        >
+          Interactive Tools
+        </h2>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {interactiveTools.map((tool) => {
+            const cardContent = (
+              <>
+                {tool.comingSoon && <ComingSoonTag />}
+                <div className="flex h-full flex-col justify-between p-8">
+                  <div>
+                    <div className="mb-4 flex items-center gap-4">
+                      <div
+                        className={`rounded-lg p-3 ${
+                          isColorful
+                            ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
+                            : "bg-gray-300 dark:bg-gray-700"
+                        }`}
+                      >
+                        <tool.icon
+                          className={`h-8 w-8 ${
+                            isColorful
+                              ? "text-black dark:text-white"
+                              : "text-gray-800 dark:text-white"
+                          }`}
+                        />
+                      </div>
+                      <h3
+                        className={`text-2xl font-semibold ${
+                          isColorful
+                            ? "text-black dark:text-white"
+                            : "text-gray-800 dark:text-white"
+                        }`}
+                      >
+                        {tool.title}
+                      </h3>
+                    </div>
+                    <p
+                      className={`mb-6 text-base leading-relaxed ${
+                        isColorful
+                          ? "text-gray-600 dark:text-gray-200"
+                          : "text-gray-600 dark:text-gray-300"
+                      }`}
+                    >
+                      {tool.description}
+                    </p>
+                  </div>
+                  <div className="mt-auto flex items-center justify-between">
+                    <span
+                      className={`text-md font-medium ${
+                        isColorful
+                          ? "text-gray-700 dark:text-white/80"
+                          : "text-gray-700 dark:text-white/80"
+                      }`}
+                    >
+                      {tool.cta}
+                    </span>
+                    <ChevronRight
+                      className={`h-6 w-6 transition-transform group-hover:translate-x-1 ${
+                        isColorful
+                          ? "text-gray-700 dark:text-white/80"
+                          : "text-gray-700 dark:text-white/80"
+                      }`}
+                    />
+                  </div>
+                </div>
+                <div
+                  className={`absolute -right-12 -top-12 h-32 w-32 rounded-full transition-all duration-500 group-hover:-right-8 group-hover:-top-8 ${
+                    isColorful
+                      ? "bg-black/5 dark:bg-white/10"
+                      : "bg-gray-300/50 dark:bg-gray-700/50"
+                  }`}
+                />
+              </>
+            );
+
+            const cardClasses = `group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl dark:hover:shadow-black/40 flex flex-col ${
+              isColorful ? `bg-gradient-to-br ${tool.gradient}` : "glass"
+            } ${
+              tool.comingSoon ? "cursor-not-allowed opacity-70" : ""
+            } ${tool.span}`;
+
+            if (tool.comingSoon) {
+              return (
+                <div key={tool.id} className={cardClasses}>
+                  {cardContent}
+                </div>
+              );
+            }
+
+            return (
+              <Link href={tool.href} key={tool.id} className={cardClasses}>
+                {cardContent}
+              </Link>
+            );
+          })}
+        </div>
+      </div>
 
       {/* Foundational Mathematics (Ages 13-17) */}
       <div className="mt-12">
@@ -527,393 +693,6 @@ export default function Mathematics() {
               </div>
             );
           })}
-        </div>
-      </div>
-
-      {/* Quiz Section */}
-      <div className="mt-16">
-        <h2
-          className={`mb-6 text-center text-2xl font-bold ${
-            isColorful
-              ? "bg-gradient-to-r from-amber-700 to-orange-700 bg-clip-text text-transparent dark:from-amber-600 dark:to-orange-600"
-              : "text-gray-800 dark:text-gray-200"
-          } `}
-        >
-          Quizzes
-        </h2>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {/* Challenges */}
-          <Link
-            href="/mathematics/quiz/challenges"
-            className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg ${
-              isColorful
-                ? "bg-gradient-to-br from-sky-200 to-blue-200 dark:from-sky-600 dark:to-blue-600"
-                : "glass"
-            }`}
-          >
-            <div
-              className={`space-y-4 ${
-                isColorful ? "text-gray-800" : "text-gray-800 dark:text-white"
-              }`}
-            >
-              <div className="flex items-center gap-4">
-                <div
-                  className={`rounded-lg p-3 ${
-                    isColorful
-                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
-                      : "bg-gray-300 dark:bg-gray-700"
-                  }`}
-                >
-                  <SiLibreofficemath
-                    className={`h-6 w-6 ${
-                      isColorful
-                        ? "text-black dark:text-white"
-                        : "text-gray-800 dark:text-white"
-                    }`}
-                  />
-                </div>
-                <h3
-                  className={`text-xl font-semibold ${
-                    isColorful
-                      ? "text-black dark:text-white"
-                      : "text-gray-800 dark:text-white"
-                  }`}
-                >
-                  Challenges
-                </h3>
-              </div>
-              <p
-                className={`text-sm leading-6 ${
-                  isColorful
-                    ? "text-gray-600 dark:text-gray-200"
-                    : "text-gray-600 dark:text-gray-200"
-                }`}
-              >
-                Solve mathematical problems to test your skills
-              </p>
-              <div className="mt-4 flex items-center justify-between">
-                <span
-                  className={`text-sm font-medium ${
-                    isColorful
-                      ? "text-gray-700 dark:text-white/80"
-                      : "text-gray-700 dark:text-white/80"
-                  }`}
-                >
-                  Take Challenge
-                </span>
-                <ChevronRight
-                  className={`h-5 w-5 transition-transform group-hover:translate-x-1 ${
-                    isColorful
-                      ? "text-gray-700 dark:text-white/80"
-                      : "text-gray-700 dark:text-white/80"
-                  }`}
-                />
-              </div>
-            </div>
-            {/* Animated background element */}
-            <div
-              className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
-                isColorful
-                  ? "bg-black/5 dark:bg-white/10"
-                  : "bg-gray-300/50 dark:bg-gray-700/50"
-              }`}
-            />
-          </Link>
-          {/* Quiz on Formulas */}
-          <Link
-            href="/mathematics/quiz/formulas"
-            className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg ${
-              isColorful
-                ? "bg-gradient-to-br from-purple-200 to-indigo-200 dark:from-purple-600 dark:to-indigo-600"
-                : "glass"
-            }`}
-          >
-            <div
-              className={`space-y-4 ${
-                isColorful ? "text-gray-800" : "text-gray-800 dark:text-white"
-              }`}
-            >
-              <div className="flex items-center gap-4">
-                <div
-                  className={`rounded-lg p-3 ${
-                    isColorful
-                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
-                      : "bg-gray-300 dark:bg-gray-700"
-                  }`}
-                >
-                  <SquareSigma
-                    className={`h-6 w-6 ${
-                      isColorful
-                        ? "text-black dark:text-white"
-                        : "text-gray-800 dark:text-white"
-                    }`}
-                  />
-                </div>
-                <h3
-                  className={`text-xl font-semibold ${
-                    isColorful
-                      ? "text-black dark:text-white"
-                      : "text-gray-800 dark:text-white"
-                  }`}
-                >
-                  Formula Quiz
-                </h3>
-              </div>
-              <p
-                className={`text-sm leading-6 ${
-                  isColorful
-                    ? "text-gray-600 dark:text-gray-200"
-                    : "text-gray-600 dark:text-gray-200"
-                }`}
-              >
-                Test your knowledge of mathematical formulas
-              </p>
-              <div className="mt-4 flex items-center justify-between">
-                <span
-                  className={`text-sm font-medium ${
-                    isColorful
-                      ? "text-gray-700 dark:text-white/80"
-                      : "text-gray-700 dark:text-white/80"
-                  }`}
-                >
-                  Take Quiz
-                </span>
-                <ChevronRight
-                  className={`h-5 w-5 transition-transform group-hover:translate-x-1 ${
-                    isColorful
-                      ? "text-gray-700 dark:text-white/80"
-                      : "text-gray-700 dark:text-white/80"
-                  }`}
-                />
-              </div>
-            </div>
-            {/* Animated background element */}
-            <div
-              className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
-                isColorful
-                  ? "bg-black/5 dark:bg-white/10"
-                  : "bg-gray-300/50 dark:bg-gray-700/50"
-              }`}
-            />
-          </Link>
-          {/* Quiz from File */}
-          <Link
-            href="/mathematics/quiz/from-files"
-            className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg ${
-              isColorful
-                ? "bg-gradient-to-br from-yellow-200 to-amber-200 dark:from-yellow-600 dark:to-amber-600"
-                : "glass"
-            }`}
-          >
-            <div
-              className={`space-y-4 ${
-                isColorful ? "text-gray-800" : "text-gray-800 dark:text-white"
-              }`}
-            >
-              <div className="flex items-center gap-4">
-                <div
-                  className={`rounded-lg p-3 ${
-                    isColorful
-                      ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
-                      : "bg-gray-300 dark:bg-gray-700"
-                  }`}
-                >
-                  <FaFileUpload
-                    className={`h-6 w-6 ${
-                      isColorful
-                        ? "text-black dark:text-white"
-                        : "text-gray-800 dark:text-white"
-                    }`}
-                  />
-                </div>
-                <h3
-                  className={`text-xl font-semibold ${
-                    isColorful
-                      ? "text-black dark:text-white"
-                      : "text-gray-800 dark:text-white"
-                  }`}
-                >
-                  Quiz from File
-                </h3>
-              </div>
-              <p
-                className={`text-sm leading-6 ${
-                  isColorful
-                    ? "text-gray-600 dark:text-gray-200"
-                    : "text-gray-600 dark:text-gray-200"
-                }`}
-              >
-                Upload a file to generate a custom quiz
-              </p>
-              <div className="mt-4 flex items-center justify-between">
-                <span
-                  className={`text-sm font-medium ${
-                    isColorful
-                      ? "text-gray-700 dark:text-white/80"
-                      : "text-gray-700 dark:text-white/80"
-                  }`}
-                >
-                  Start Quiz
-                </span>
-                <ChevronRight
-                  className={`h-5 w-5 transition-transform group-hover:translate-x-1 ${
-                    isColorful
-                      ? "text-gray-700 dark:text-white/80"
-                      : "text-gray-700 dark:text-white/80"
-                  }`}
-                />
-              </div>
-            </div>
-            {/* Animated background element */}
-            <div
-              className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
-                isColorful
-                  ? "bg-black/5 dark:bg-white/10"
-                  : "bg-gray-300/50 dark:bg-gray-700/50"
-              }`}
-            />
-          </Link>
-        </div>
-      </div>
-
-      {/* Solve & Explanations */}
-      <div className="mt-16">
-        <h2
-          className={`mb-6 text-center text-2xl font-bold ${
-            isColorful
-              ? "bg-gradient-to-r from-purple-700 to-pink-700 bg-clip-text text-transparent dark:from-purple-600 dark:to-pink-600"
-              : "text-gray-800 dark:text-gray-200"
-          } `}
-        >
-          Solve & Explanations
-        </h2>
-        <div className=" grid grid-cols-1 gap-8 lg:grid-cols-2">
-          <Link
-            href="/mathematics/solve"
-            className={`group relative overflow-hidden rounded-2xl  p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg ${
-              isColorful
-                ? "bg-gradient-to-br from-purple-200 to-blue-200 dark:from-purple-600 dark:to-blue-600"
-                : "glass"
-            }`}
-          >
-            <div className="flex items-center gap-4">
-              <Lightbulb
-                className={`h-8 w-8 ${
-                  isColorful
-                    ? "text-current"
-                    : "text-gray-700 dark:text-gray-300"
-                }`}
-              />
-              <div>
-                <h3
-                  className={`text-xl font-semibold ${
-                    isColorful ? "" : "text-gray-800 dark:text-white"
-                  }`}
-                >
-                  Problem Solver
-                </h3>
-                <p
-                  className={`mt-2 text-sm ${
-                    isColorful
-                      ? "text-gray-700 dark:text-gray-200"
-                      : "text-gray-600 dark:text-gray-300"
-                  }`}
-                >
-                  Upload images, get step-by-step solutions or direct method
-                </p>
-              </div>
-            </div>
-            <div className="mt-4 flex items-center justify-between">
-              <span
-                className={`text-sm font-medium ${
-                  isColorful
-                    ? "text-gray-700 dark:text-white/80"
-                    : "text-gray-700 dark:text-white/80"
-                }`}
-              >
-                Start Solving
-              </span>
-              <ChevronRight
-                className={`h-5 w-5 transition-transform group-hover:translate-x-1 ${
-                  isColorful
-                    ? "text-gray-700 dark:text-white/80"
-                    : "text-gray-700 dark:text-white/80"
-                }`}
-              />
-            </div>
-            {/* Animated background element */}
-            <div
-              className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
-                isColorful
-                  ? "bg-black/5 dark:bg-white/10"
-                  : "bg-gray-300/50 dark:bg-gray-700/50"
-              }`}
-            />
-          </Link>
-
-          <div
-            className={`group relative overflow-hidden rounded-2xl  p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg ${
-              isColorful
-                ? "bg-gradient-to-br from-green-200 to-teal-200 dark:from-green-600 dark:to-teal-600"
-                : "glass"
-            }`}
-          >
-            <ComingSoonTag />
-            {/*  Concept Explainer is not clickable */}
-            <div className="flex cursor-not-allowed items-center gap-4">
-              <BookOpen
-                className={`h-8 w-8 ${
-                  isColorful
-                    ? "text-current"
-                    : "text-gray-700 dark:text-gray-300"
-                }`}
-              />
-              <div>
-                <h3
-                  className={`text-xl font-semibold ${
-                    isColorful ? "" : "text-gray-800 dark:text-white"
-                  }`}
-                >
-                  Concept Explainer
-                </h3>
-                <p
-                  className={`mt-2 text-sm ${
-                    isColorful
-                      ? "text-gray-700 dark:text-gray-200"
-                      : "text-gray-600 dark:text-gray-300"
-                  }`}
-                >
-                  Comprehensive guides for math concepts and theories
-                </p>
-              </div>
-            </div>
-            <div className="mt-4 flex items-center justify-between">
-              <span
-                className={`text-sm font-medium ${
-                  isColorful
-                    ? "text-gray-700 dark:text-white/80"
-                    : "text-gray-700 dark:text-white/80"
-                }`}
-              >
-                Learn More
-              </span>
-              <ChevronRight
-                className={`h-5 w-5 transition-transform group-hover:translate-x-1 ${
-                  isColorful
-                    ? "text-gray-700 dark:text-white/80"
-                    : "text-gray-700 dark:text-white/80"
-                }`}
-              />
-            </div>
-            {/* Animated background element */}
-            <div
-              className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
-                isColorful
-                  ? "bg-black/5 dark:bg-white/10"
-                  : "bg-gray-300/50 dark:bg-gray-700/50"
-              }`}
-            />
-          </div>
         </div>
       </div>
 
