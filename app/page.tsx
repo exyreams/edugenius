@@ -14,7 +14,6 @@ import {
   SquareSigma,
   Thermometer,
 } from "lucide-react";
-import SymbolTrail from "@/components/SymbolTrails";
 
 // Features Grid Data
 const features = [
@@ -188,12 +187,6 @@ export default function Home() {
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Hero Section */}
       <div className="mb-12 space-y-6 text-center">
-        <SymbolTrail
-          renderBuffer={30}
-          rotationRange={25}
-          symbolSize="24px"
-          trailLength={1}
-        />
         <h1 className="bg-gradient-to-r from-indigo-700 to-purple-800 bg-clip-text text-4xl font-bold text-transparent dark:from-indigo-200 dark:to-purple-300 sm:text-5xl md:text-6xl">
           Welcome to the World of Learning
         </h1>
