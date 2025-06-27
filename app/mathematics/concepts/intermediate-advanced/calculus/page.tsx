@@ -121,7 +121,7 @@ export default function Calculus() {
       {/* Formula Grid */}
       <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {formulas.map((formula) => {
-          const isComingSoon = formula.id === "multivariable";
+          const isComingSoon = formula.id === "";
           return (
             // Wrapper div for hover effects
             <div
