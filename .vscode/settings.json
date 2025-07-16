@@ -12,5 +12,6 @@
         "Poynting",
         "Savart",
         "Weisbach"
-    ]
+    ],
+    "typescript.autoClosingTags": false
 }

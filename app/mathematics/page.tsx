@@ -589,54 +589,6 @@ export default function Mathematics() {
                     : "glass text-gray-800 dark:text-white"
                 }`}
               >
-                {isComingSoon ? <ComingSoonTag /> : null}
-                {/* Conditional Link: Wrap entire content if NOT coming soon */}
-                {isComingSoon ? (
-                  <span>
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-3">
-                        <div
-                          className={`rounded-lg p-2 ${
-                            isColorful
-                              ? `bg-black/5 ${topic.text} backdrop-blur-sm dark:bg-black/25`
-                              : "bg-gray-200 dark:bg-gray-700"
-                          }`}
-                        >
-                          <Icon
-                            className={`h-5 w-5 ${
-                              isColorful
-                                ? "text-current"
-                                : "text-gray-700 dark:text-gray-300"
-                            }`}
-                          />
-                        </div>
-                        <h4 className={`font-medium ${topic.text}`}>
-                          {topic.name}
-                        </h4>
-                      </div>
-                      <div className="flex justify-between">
-                        <p
-                          className={`text-sm leading-6 ${
-                            isColorful
-                              ? "text-gray-600 dark:text-gray-200"
-                              : "text-gray-600 dark:text-gray-300"
-                          }`}
-                        >
-                          {topic.description}
-                        </p>
-                        {/* Chevron removed for Coming Soon */}
-                      </div>
-                    </div>
-                    {/* Animated background element */}
-                    <div
-                      className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
-                        isColorful
-                          ? "bg-black/5 dark:bg-white/10"
-                          : "bg-gray-300/50 dark:bg-gray-700/50"
-                      }`}
-                    />
-                  </span>
-                ) : (
                   <Link
                     href={`/mathematics/concepts/intermediate-advanced/${topic.id}`}
                   >
@@ -689,7 +641,6 @@ export default function Mathematics() {
                       }`}
                     />
                   </Link>
-                )}
               </div>
             );
           })}
