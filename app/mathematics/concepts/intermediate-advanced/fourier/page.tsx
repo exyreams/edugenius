@@ -358,7 +358,7 @@ export default function FourierFormulas() {
       <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {formulas.map((formula) => (
           <Link
-            href={`/mathematics/concepts/fourier/${formula.id}`}
+            href={`/mathematics/concepts/intermediate-advanced/fourier/${formula.id}`}
             key={formula.id}
             className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30 ${
               isColorful
