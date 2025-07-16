@@ -150,6 +150,39 @@ const differentialEquationTopics = [
     text: "text-gray-800 dark:text-white",
     description: "Properties and significance of integration constants",
   },
+  {
+    id: "bernoulli-equations",
+    name: "Bernoulli Equations",
+    icon: (
+      <TbMathFunction className="h-6 w-6 text-violet-400 dark:text-violet-300" />
+    ),
+    gradient:
+      "from-violet-200 to-purple-200 dark:from-violet-600 dark:to-purple-600",
+    text: "text-gray-800 dark:text-white",
+    description: "Nonlinear equations solved by substitution methods",
+  },
+  {
+    id: "riccati-equations",
+    name: "Riccati Equations",
+    icon: (
+      <TbMathXDivideY className="h-6 w-6 text-red-400 dark:text-red-300" />
+    ),
+    gradient:
+      "from-red-200 to-rose-200 dark:from-red-600 dark:to-rose-600",
+    text: "text-gray-800 dark:text-white",
+    description: "Special nonlinear equations with quadratic terms",
+  },
+  {
+    id: "systems-of-differential-equations",
+    name: "Systems of Equations",
+    icon: (
+      <TbMathIntegralX className="h-6 w-6 text-cyan-400 dark:text-cyan-300" />
+    ),
+    gradient:
+      "from-cyan-200 to-blue-200 dark:from-cyan-600 dark:to-blue-600",
+    text: "text-gray-800 dark:text-white",
+    description: "Coupled equations solved using matrix methods",
+  },
 ];
 
 /**
@@ -197,79 +230,133 @@ export default function DifferentialEquations() {
       <ColorToggle onChange={setIsColorful} initialState={true} />
       <Breadcrumb items={breadcrumbItems} />
 
+      {/* Introduction Section */}
+      <div className={`mt-8 rounded-lg p-6 shadow-md ${isColorful
+          ? "bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900 dark:to-purple-900"
+          : "glass dark:bg-gray-800"
+        }`}>
+        <h2 className={`text-xl font-semibold mb-4 ${isColorful
+            ? "text-indigo-800 dark:text-indigo-200"
+            : "text-gray-800 dark:text-gray-200"
+          }`}>
+          About Differential Equations
+        </h2>
+        <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+          Differential equations are mathematical equations that relate functions with their derivatives.
+          They are fundamental tools for modeling dynamic systems in physics, engineering, biology, economics,
+          and many other fields. From population growth to heat transfer, from oscillating springs to
+          electrical circuits, differential equations help us understand how quantities change over time or space.
+        </p>
+      </div>
+
+      {/* Learning Path */}
+      <div className={`mt-8 rounded-lg p-6 shadow-md ${isColorful
+          ? "bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900 dark:to-emerald-900"
+          : "glass dark:bg-gray-800"
+        }`}>
+        <h2 className={`text-xl font-semibold mb-4 ${isColorful
+            ? "text-green-800 dark:text-green-200"
+            : "text-gray-800 dark:text-gray-200"
+          }`}>
+          Recommended Learning Path
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className={`p-4 rounded-lg ${isColorful
+              ? "bg-white/50 dark:bg-black/20"
+              : "bg-gray-100 dark:bg-gray-700"
+            }`}>
+            <h3 className="font-semibold text-green-700 dark:text-green-300">Beginner</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              Start with Basic Concepts, then move to First-Order Equations and Separable Equations
+            </p>
+          </div>
+          <div className={`p-4 rounded-lg ${isColorful
+              ? "bg-white/50 dark:bg-black/20"
+              : "bg-gray-100 dark:bg-gray-700"
+            }`}>
+            <h3 className="font-semibold text-green-700 dark:text-green-300">Intermediate</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              Study Linear Equations, Exact Equations, and Homogeneous Equations
+            </p>
+          </div>
+          <div className={`p-4 rounded-lg ${isColorful
+              ? "bg-white/50 dark:bg-black/20"
+              : "bg-gray-100 dark:bg-gray-700"
+            }`}>
+            <h3 className="font-semibold text-green-700 dark:text-green-300">Advanced</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              Tackle Higher-Order Equations and specialized coefficient cases
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Topics Grid */}
       <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {differentialEquationTopics.map((topic) => (
           <Link
             href={`/mathematics/concepts/intermediate-advanced/differential-equations/${topic.id}`}
             key={topic.id}
-            className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30 ${
-              isColorful
+            className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30 ${isColorful
                 ? `bg-gradient-to-br ${topic.gradient} ${topic.text}`
                 : "glass text-gray-800 dark:text-white"
-            }`}
+              }`}
           >
             <div className="space-y-4">
               <div className="flex items-center gap-4">
                 {/* Topic Icon */}
                 <div
-                  className={`rounded-lg p-3 ${
-                    isColorful
+                  className={`rounded-lg p-3 ${isColorful
                       ? "bg-black/5 backdrop-blur-sm dark:bg-black/20"
                       : "bg-gray-200 dark:bg-gray-700"
-                  }`}
+                    }`}
                 >
                   {topic.icon}
                 </div>
                 {/* Topic Name */}
                 <h3
-                  className={`text-lg font-semibold ${
-                    isColorful
+                  className={`text-lg font-semibold ${isColorful
                       ? "currentcolor"
                       : "text-gray-800 dark:text-white"
-                  }`}
+                    }`}
                 >
                   {topic.name}
                 </h3>
               </div>
               {/* Topic Description */}
               <p
-                className={`text-sm leading-6 ${
-                  isColorful
+                className={`text-sm leading-6 ${isColorful
                     ? "text-gray-600 dark:text-gray-200"
                     : "text-gray-700 dark:text-gray-300"
-                }`}
+                  }`}
               >
                 {topic.description}
               </p>
               {/* "Explore Concepts" Link */}
               <div className="mt-4 flex items-center justify-between opacity-0 transition-opacity group-hover:opacity-100">
                 <span
-                  className={`text-sm font-medium ${
-                    isColorful
+                  className={`text-sm font-medium ${isColorful
                       ? "text-gray-700 dark:text-white/80"
                       : "text-gray-800 dark:text-white"
-                  }`}
+                    }`}
                 >
                   Explore Concepts
                 </span>
                 <ChevronRight
-                  className={`h-5 w-5 transition-transform group-hover:translate-x-1 ${
-                    isColorful
+                  className={`h-5 w-5 transition-transform group-hover:translate-x-1 ${isColorful
                       ? "text-gray-700 dark:text-white/80"
                       : "text-gray-800 dark:text-white"
-                  }`}
+                    }`}
                 />
               </div>
             </div>
 
             {/* Animated background element */}
             <div
-              className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${
-                isColorful
+              className={`absolute -right-8 -top-8 h-24 w-24 rounded-full transition-all duration-500 group-hover:-right-4 group-hover:-top-4 ${isColorful
                   ? "bg-black/5 dark:bg-white/10"
                   : "bg-gray-200/50 dark:bg-gray-700/50"
-              }`}
+                }`}
             />
           </Link>
         ))}
