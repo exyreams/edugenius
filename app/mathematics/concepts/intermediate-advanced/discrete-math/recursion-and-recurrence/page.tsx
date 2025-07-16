@@ -257,7 +257,7 @@ export default function RecursionAndRecurrence() {
                 </h3>
                 <p className="mt-2">For recurrences of the form:</p>
                 <BlockMath math="T(n) = aT(n/b) + f(n)" />
-                <p className="mt-2 text-sm">where a ≥ 1, b > 1, and f(n) is asymptotically positive.</p>
+                <p className="mt-2 text-sm">where a ≥ 1, b {">"} 1, and f(n) is asymptotically positive.</p>
                 <p className="mt-2 text-sm">Compare <InlineMath math="f(n)" /> with <InlineMath math="n^{\log_b a}" /> to determine the solution.</p>
               </div>
 
