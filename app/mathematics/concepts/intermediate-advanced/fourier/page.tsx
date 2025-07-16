@@ -326,8 +326,12 @@ const formulas = [
 export default function FourierFormulas() {
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
-    { label: "Formulas", href: "/mathematics/formulas" },
-    { label: "Fourier", href: "/mathematics/formulas/fourier" },
+    { label: "Concepts", href: "/mathematics/concepts" },
+    {
+      label: "Intermediate & Advanced",
+      href: "/mathematics/concepts/intermediate-advanced",
+    },
+    { label: "Fourier Analysis", href: "/mathematics/concepts/intermediate-advanced/fourier" },
   ];
 
   const [isColorful, setIsColorful] = useState(true);

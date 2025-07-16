@@ -384,7 +384,7 @@ export default function Combinatorics() {
                   Pigeonhole Principle
                 </h3>
                 <p className="mt-2 text-sm">
-                  If n pigeons are placed in m pigeonholes and n > m, then at least one pigeonhole contains more than one pigeon.
+                  If n pigeons are placed in m pigeonholes and n {">"} m, then at least one pigeonhole contains more than one pigeon.
                 </p>
                 <p className="mt-2 text-sm">
                   <strong>Generalized:</strong> At least one pigeonhole contains at least <InlineMath math="\lceil n/m \rceil" /> pigeons.
