@@ -200,11 +200,11 @@ export default function FourierTransform() {
                     <td className="border border-gray-400 dark:border-gray-600 px-4 py-2">2πδ(ω)</td>
                   </tr>
                   <tr>
-                    <td className="border border-gray-400 dark:border-gray-600 px-4 py-2">e^(-at)u(t), a > 0</td>
+                    <td className="border border-gray-400 dark:border-gray-600 px-4 py-2">e^(-at)u(t), a {">"} 0</td>
                     <td className="border border-gray-400 dark:border-gray-600 px-4 py-2">1/(a + iω)</td>
                   </tr>
                   <tr>
-                    <td className="border border-gray-400 dark:border-gray-600 px-4 py-2">e^(-a|t|), a > 0</td>
+                    <td className="border border-gray-400 dark:border-gray-600 px-4 py-2">e^(-a|t|), a {">"} 0</td>
                     <td className="border border-gray-400 dark:border-gray-600 px-4 py-2">2a/(a² + ω²)</td>
                   </tr>
                   <tr>
