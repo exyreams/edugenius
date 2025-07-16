@@ -51,18 +51,16 @@ export default function Negation() {
       <div className="mt-6 space-y-8">
         {/* Basic Definition */}
         <div
-          className={`rounded-lg p-6 shadow-md ${
-            isColorful
+          className={`rounded-lg p-6 shadow-md ${isColorful
               ? "bg-gradient-to-br from-sky-200 to-blue-200 dark:from-sky-600 dark:to-blue-600"
               : "glass dark:bg-gray-800"
-          }`}
+            }`}
         >
           <h2
-            className={`text-2xl font-semibold ${
-              isColorful
+            className={`text-2xl font-semibold ${isColorful
                 ? "bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"
                 : "text-gray-800 dark:text-gray-200"
-            } dark:from-blue-300 dark:to-purple-300`}
+              } dark:from-blue-300 dark:to-purple-300`}
           >
             Logical Negation
           </h2>
@@ -78,18 +76,16 @@ export default function Negation() {
 
         {/* Truth Table */}
         <div
-          className={`rounded-lg p-6 shadow-md ${
-            isColorful
+          className={`rounded-lg p-6 shadow-md ${isColorful
               ? "bg-gradient-to-br from-green-200 to-emerald-200 dark:from-green-600 dark:to-emerald-600"
               : "glass dark:bg-gray-800"
-          }`}
+            }`}
         >
           <h2
-            className={`text-2xl font-semibold ${
-              isColorful
+            className={`text-2xl font-semibold ${isColorful
                 ? "bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent"
                 : "text-gray-800 dark:text-gray-200"
-            } dark:from-green-300 dark:to-teal-300`}
+              } dark:from-green-300 dark:to-teal-300`}
           >
             Truth Table for Negation
           </h2>
@@ -119,18 +115,16 @@ export default function Negation() {
 
         {/* Examples */}
         <div
-          className={`rounded-lg p-6 shadow-md ${
-            isColorful
+          className={`rounded-lg p-6 shadow-md ${isColorful
               ? "bg-gradient-to-br from-purple-200 to-violet-200 dark:from-purple-600 dark:to-violet-600"
               : "glass dark:bg-gray-800"
-          }`}
+            }`}
         >
           <h2
-            className={`text-2xl font-semibold ${
-              isColorful
+            className={`text-2xl font-semibold ${isColorful
                 ? "bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
                 : "text-gray-800 dark:text-gray-200"
-            } dark:from-purple-300 dark:to-pink-300`}
+              } dark:from-purple-300 dark:to-pink-300`}
           >
             Examples
           </h2>
@@ -155,18 +149,16 @@ export default function Negation() {
 
         {/* Properties */}
         <div
-          className={`rounded-lg p-6 shadow-md ${
-            isColorful
+          className={`rounded-lg p-6 shadow-md ${isColorful
               ? "bg-gradient-to-br from-orange-200 to-amber-200 dark:from-orange-600 dark:to-amber-600"
               : "glass dark:bg-gray-800"
-          }`}
+            }`}
         >
           <h2
-            className={`text-2xl font-semibold ${
-              isColorful
+            className={`text-2xl font-semibold ${isColorful
                 ? "bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent"
                 : "text-gray-800 dark:text-gray-200"
-            } dark:from-orange-300 dark:to-red-300`}
+              } dark:from-orange-300 dark:to-red-300`}
           >
             Properties of Negation
           </h2>

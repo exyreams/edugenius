@@ -83,11 +83,10 @@ const Navbar = () => {
             <div className="hidden space-x-5 md:flex">
               <Link
                 href="/mathematics"
-                className={`flex items-center space-x-2 rounded-lg p-2 transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-700 ${
-                  pathname.startsWith("/mathematics")
-                    ? "bg-gray-100 dark:bg-gray-700"
-                    : ""
-                }`}
+                className={`flex items-center space-x-2 rounded-lg p-2 transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-700 ${pathname.startsWith("/mathematics")
+                  ? "bg-gray-100 dark:bg-gray-700"
+                  : ""
+                  }`}
               >
                 <span className="text-md font-semibold text-black dark:text-white">
                   Mathematics
@@ -95,11 +94,10 @@ const Navbar = () => {
               </Link>
               <Link
                 href="/physics"
-                className={`flex items-center space-x-2 rounded-lg p-2 transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-700 ${
-                  pathname.startsWith("/physics")
-                    ? "bg-gray-100 dark:bg-gray-700"
-                    : ""
-                }`}
+                className={`flex items-center space-x-2 rounded-lg p-2 transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-700 ${pathname.startsWith("/physics")
+                  ? "bg-gray-100 dark:bg-gray-700"
+                  : ""
+                  }`}
               >
                 <span className="text-md font-semibold text-black dark:text-white">
                   Physics
@@ -107,11 +105,10 @@ const Navbar = () => {
               </Link>
               <Link
                 href="/chemistry"
-                className={`flex items-center space-x-2 rounded-lg p-2 transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-700 ${
-                  pathname.startsWith("/chemistry")
-                    ? "bg-gray-100 dark:bg-gray-700"
-                    : ""
-                }`}
+                className={`flex items-center space-x-2 rounded-lg p-2 transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-700 ${pathname.startsWith("/chemistry")
+                  ? "bg-gray-100 dark:bg-gray-700"
+                  : ""
+                  }`}
               >
                 <span className="text-md font-semibold text-black dark:text-white">
                   Chemistry
@@ -256,11 +253,10 @@ const Navbar = () => {
               <div className="flex flex-col gap-2">
                 <Link
                   href="/mathematics"
-                  className={`rounded-lg p-2  ${
-                    pathname === "/mathematics"
-                      ? "bg-gray-100 dark:bg-gray-700"
-                      : "hover:bg-gray-100 dark:hover:bg-gray-700"
-                  }`}
+                  className={`rounded-lg p-2  ${pathname === "/mathematics"
+                    ? "bg-gray-100 dark:bg-gray-700"
+                    : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                    }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <span className="text-md block text-center font-semibold text-black dark:text-white">
@@ -270,11 +266,10 @@ const Navbar = () => {
 
                 <Link
                   href="/physics"
-                  className={`rounded-lg p-2  ${
-                    pathname === "/physics"
-                      ? "bg-gray-100 dark:bg-gray-700"
-                      : "hover:bg-gray-100 dark:hover:bg-gray-700"
-                  }`}
+                  className={`rounded-lg p-2  ${pathname === "/physics"
+                    ? "bg-gray-100 dark:bg-gray-700"
+                    : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                    }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <span className="text-md block text-center font-semibold text-black dark:text-white">
@@ -284,11 +279,10 @@ const Navbar = () => {
 
                 <Link
                   href="/chemistry"
-                  className={`rounded-lg p-2  ${
-                    pathname === "/chemistry"
-                      ? "bg-gray-100 dark:bg-gray-700"
-                      : "hover:bg-gray-100 dark:hover:bg-gray-700"
-                  }`}
+                  className={`rounded-lg p-2  ${pathname === "/chemistry"
+                    ? "bg-gray-100 dark:bg-gray-700"
+                    : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                    }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <span className="text-md block text-center font-semibold text-black dark:text-white">
@@ -325,11 +319,10 @@ const Navbar = () => {
                   <button
                     onClick={() => handleThemeChange("light")}
                     aria-label="Enable light theme"
-                    className={`flex items-center justify-center rounded-lg p-2 ${
-                      resolvedTheme === "light"
-                        ? "border border-black/20 bg-gray-100 text-black dark:border-white/20 dark:bg-gray-700 dark:text-white"
-                        : "border border-black/20 hover:bg-gray-100 dark:border-white/20 dark:hover:bg-gray-700"
-                    }`}
+                    className={`flex items-center justify-center rounded-lg p-2 ${resolvedTheme === "light"
+                      ? "border border-black/20 bg-gray-100 text-black dark:border-white/20 dark:bg-gray-700 dark:text-white"
+                      : "border border-black/20 hover:bg-gray-100 dark:border-white/20 dark:hover:bg-gray-700"
+                      }`}
                   >
                     <Sun className="h-6 w-6" />
                     <span className="ml-2">Light</span>
@@ -337,11 +330,10 @@ const Navbar = () => {
                   <button
                     onClick={() => handleThemeChange("dark")}
                     aria-label="Enable dark theme"
-                    className={`flex items-center justify-center rounded-lg p-2 ${
-                      resolvedTheme === "dark"
-                        ? "border border-black/20 bg-gray-100 text-black dark:border-white/20 dark:bg-gray-700 dark:text-white"
-                        : "border border-black/20 hover:bg-gray-100 dark:border-white/20 dark:hover:bg-gray-700"
-                    }`}
+                    className={`flex items-center justify-center rounded-lg p-2 ${resolvedTheme === "dark"
+                      ? "border border-black/20 bg-gray-100 text-black dark:border-white/20 dark:bg-gray-700 dark:text-white"
+                      : "border border-black/20 hover:bg-gray-100 dark:border-white/20 dark:hover:bg-gray-700"
+                      }`}
                   >
                     <Moon className="h-6 w-6" />
                     <span className="ml-2">Dark</span>
@@ -349,11 +341,10 @@ const Navbar = () => {
                   <button
                     onClick={() => handleThemeChange("system")}
                     aria-label="Use system theme"
-                    className={`flex items-center justify-center rounded-lg p-2 ${
-                      resolvedTheme === "system"
-                        ? "border border-black/20 bg-gray-100 text-black dark:border-white/20 dark:bg-gray-700 dark:text-white"
-                        : "border border-black/20 hover:bg-gray-100 dark:border-white/20 dark:hover:bg-gray-700"
-                    }`}
+                    className={`flex items-center justify-center rounded-lg p-2 ${resolvedTheme === "system"
+                      ? "border border-black/20 bg-gray-100 text-black dark:border-white/20 dark:bg-gray-700 dark:text-white"
+                      : "border border-black/20 hover:bg-gray-100 dark:border-white/20 dark:hover:bg-gray-700"
+                      }`}
                   >
                     <Computer className="h-6 w-6" />
                     <span className="ml-2">System</span>
