@@ -4,14 +4,14 @@ export default function SumToProductAndProductToSum() {
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
     { label: "Formulas", href: "/mathematics/" },
-    { label: "Trigonometry", href: "/mathematics/formulas/trigonometry" },
+    { label: "Trigonometry", href: "/mathematics/concepts/intermediate-advanced/trigonometry" },
     {
       label: "Trignometric Identities",
-      href: "/mathematics/formulas/trigonometry/trigonometric-identities",
+      href: "/mathematics/concepts/intermediate-advancedconcepts/intermediate-advanced//trigonometry/trigonometric-identities",
     },
     {
       label: "Sum to Product & Product to Sum",
-      href: "/mathematics/formulas/trigonometry/trigonometric-identities/sum-to-product-and-product-to-sum",
+      href: "/mathematics/concepts/intermediate-advanced/trigonometry/trigonometric-identities/sum-to-product-and-product-to-sum",
     },
   ];
 

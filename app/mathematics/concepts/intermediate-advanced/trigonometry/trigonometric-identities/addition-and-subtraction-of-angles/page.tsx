@@ -4,14 +4,14 @@ export default function AdditionAndSubtractionOfAngles() {
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
     { label: "Formulas", href: "/mathematics/" },
-    { label: "Trigonometry", href: "/mathematics/formulas/trigonometry" },
+    { label: "Trigonometry", href: "/mathematics/concepts/intermediate-advanced/trigonometry" },
     {
       label: "Trignometric Identities",
-      href: "/mathematics/formulas/trigonometry/trigonometric-identities",
+      href: "/mathematics/concepts/intermediate-advanced/trigonometry/trigonometric-identities",
     },
     {
       label: "Addition and Subtraction of Angles",
-      href: "/mathematics/formulas/trigonometry/trigonometric-identities/addition-and-subtraction-of-angles",
+      href: "/mathematics/concepts/intermediate-advanced/trigonometry/trigonometric-identities/addition-and-subtraction-of-angles",
     },
   ];
 

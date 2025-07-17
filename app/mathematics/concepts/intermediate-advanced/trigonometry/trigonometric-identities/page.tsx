@@ -39,11 +39,18 @@ const formulas = [
 export default function TrigonometricIdentities() {
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
-    { label: "Formulas", href: "/mathematics/formulas" },
-    { label: "Trigonometry", href: "/mathematics/formulas/trigonometry" },
+    { label: "Concepts", href: "/mathematics/concepts" },
+    {
+      label: "Intermediate-Advanced",
+      href: "/mathematics/concepts/intermediate-advanced",
+    },
+    {
+      label: "Trigonometry",
+      href: "/mathematics/concepts/intermediate-advanced/trigonometry",
+    },
     {
       label: "Trigonometric Identities",
-      href: "/mathematics/formulas/trigonometry/trigonometric-identities",
+      href: "/mathematics/concepts/intermediate-advanced/trigonometry/trigonometric-identities",
     },
   ];
 

@@ -57,11 +57,12 @@ const formulas = [
 export default function SphericalTrigonometry() {
   const breadcrumbItems = [
     { label: "Mathematics", href: "/mathematics" },
-    { label: "Formulas", href: "/mathematics/formulas" },
-    { label: "Trigonometry", href: "/mathematics/formulas/trigonometry" },
+    { label: "Concepts", href: "/mathematics/concepts" },
+    { label: "Intermediate-Advanced", href: "/mathematics/concepts/intermediate-advanced" },
+    { label: "Trigonometry", href: "/mathematics/concepts/intermediate-advanced/trigonometry" },
     {
       label: "Spherical Trigonometry",
-      href: "/mathematics/formulas/trigonometry/spherical-trigonometry",
+      href: "/mathematics/concepts/intermediate-advanced/trigonometry/spherical-trigonometry",
     },
   ];
 
@@ -86,7 +87,7 @@ export default function SphericalTrigonometry() {
           const Icon = formula.icon;
           return (
             <Link
-              href={`/mathematics/concepts/trigonometry/spherical-trigonometry/${formula.id}`}
+              href={`/mathematics/concepts/intermediate-advanced/trigonometry/spherical-trigonometry/${formula.id}`}
               key={formula.id}
               className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${formula.gradient} ${formula.text} p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30`}
             >
