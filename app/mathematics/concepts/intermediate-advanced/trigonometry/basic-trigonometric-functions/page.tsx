@@ -314,7 +314,7 @@ export default function BasicTrigonometricFunctions() {
             
             <div className="space-y-2">
               <p><strong>Solution:</strong></p>
-              <p>225° is in Quadrant III (180° < 225° < 270°)</p>
+              <p>225° is in Quadrant III (180° {"<"} 225° {"<"} 270°)</p>
               <p>Reference angle = 225° - 180° = 45°</p>
               
               <p>In Quadrant III, both sine and cosine are negative:</p>
