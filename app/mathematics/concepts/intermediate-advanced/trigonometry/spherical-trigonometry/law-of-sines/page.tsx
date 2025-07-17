@@ -152,7 +152,7 @@ export default function LawOfSines() {
             <BlockMath math="\frac{\sin a}{\sin A} = \frac{\sin b}{\sin B} = \frac{\sin c}{\sin C}" />
             <ul className="list-disc list-inside space-y-1 text-sm mt-2">
               <li>Sides are angular measures</li>
-              <li>Angles sum > 180° (spherical excess)</li>
+              <li>Angles sum {">"} 180° (spherical excess)</li>
               <li>Used for curved surfaces</li>
             </ul>
           </div>
@@ -182,7 +182,7 @@ export default function LawOfSines() {
               <BlockMath math="\sin a = \frac{\sin A \cdot \sin c}{\sin C} = \frac{\sin(80°) \cdot \sin(60°)}{\sin(30°)}" />
               <BlockMath math="\sin a = \frac{0.9848 \times 0.8660}{0.5000} = \frac{0.8528}{0.5000} = 1.7056" />
               
-              <p>Since sin a > 1, this indicates our approximation for C was incorrect. 
+              <p>Since sin a {">"} 1, this indicates our approximation for C was incorrect. 
               We need to use more precise methods for spherical triangles.</p>
               
               <p><strong>Note:</strong> This example shows the importance of using proper spherical 

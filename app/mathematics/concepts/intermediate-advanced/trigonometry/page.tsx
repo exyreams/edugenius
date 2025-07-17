@@ -80,16 +80,6 @@ const formulas = [
       "Double angle identities, half angle identities, and their applications in solving equations.",
   },
   {
-    id: "other-trigonometric-identities",
-    name: "Other Trigonometric Identities",
-    icon: ScatterChart,
-    gradient:
-      "from-pink-200 to-rose-200 dark:from-pink-600 dark:to-rose-600",
-    text: "text-gray-800 dark:text-white",
-    description:
-      "Product-to-sum, sum-to-product, power reduction, and multiple angle formulas.",
-  },
-  {
     id: "trigonometric-equations",
     name: "Trigonometric Equations",
     icon: Square,
