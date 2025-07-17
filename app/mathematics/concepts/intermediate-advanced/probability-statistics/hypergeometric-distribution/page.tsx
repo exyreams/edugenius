@@ -134,7 +134,7 @@ export default function HypergeometricDistribution() {
             <h3 className="text-lg font-semibold mb-2">Rule of Thumb</h3>
             <p className="mb-2">Use hypergeometric when:</p>
             <ul className="list-disc list-inside space-y-1">
-              <li>Sample size n > 5% of population size N (i.e., n/N > 0.05)</li>
+              <li>Sample size n {">"} 5% of population size N (i.e., n/N {">"} 0.05)</li>
               <li>Sampling is done without replacement</li>
             </ul>
             <p className="mb-2">Use binomial when:</p>
@@ -188,7 +188,7 @@ export default function HypergeometricDistribution() {
             <ul className="list-disc list-inside space-y-1">
               <li>P(X = k) ≈ P(k - 0.5 &lt; Z &lt; k + 0.5)</li>
               <li>P(X ≤ k) ≈ P(Z &lt; k + 0.5)</li>
-              <li>P(X ≥ k) ≈ P(Z > k - 0.5)</li>
+              <li>P(X ≥ k) ≈ P(Z {">"} k - 0.5)</li>
             </ul>
           </div>
         </div>
