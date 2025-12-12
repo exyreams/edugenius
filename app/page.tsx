@@ -7,12 +7,15 @@ import {
   Check,
   ChevronRight,
   CircuitBoard,
+  FlaskConical,
   FunctionSquare,
   Lightbulb,
   Magnet,
   Shapes,
   SquareSigma,
+  TestTube,
   Thermometer,
+  Zap,
 } from "lucide-react";
 
 // Features Grid Data
@@ -37,6 +40,16 @@ const features = [
     description:
       "Dive into electromagnetism, mechanics, and modern physics with interactive tools and visualizations.",
     href: "/physics",
+  },
+  {
+    id: "chemistry",
+    name: "Chemistry",
+    icon: FlaskConical,
+    gradient: "from-red-200 to-pink-200 dark:from-red-600 dark:to-pink-600",
+    text: "text-gray-800 dark:text-white",
+    description:
+      "Master chemical reactions, molecular structures, and explore the building blocks of matter.",
+    href: "/chemistry",
   },
   {
     id: "quizzes",
@@ -133,6 +146,43 @@ const popularPhysicsTopics = [
   },
 ];
 
+// Popular Chemistry Topics
+const popularChemistryTopics = [
+  {
+    id: "atomic-structure",
+    name: "Atomic Structure",
+    icon: Atom,
+    gradient:
+      "from-red-200 to-pink-200 dark:from-red-600 dark:to-pink-600",
+    text: "text-gray-800 dark:text-white",
+    description:
+      "Explore atomic models, electron configurations, and periodic trends.",
+    href: "/chemistry/foundational/atomic-structure-and-properties",
+  },
+  {
+    id: "chemical-reactions",
+    name: "Chemical Reactions",
+    icon: Zap,
+    gradient:
+      "from-yellow-200 to-orange-200 dark:from-yellow-600 dark:to-orange-600",
+    text: "text-gray-800 dark:text-white",
+    description:
+      "Master chemical equations, stoichiometry, and reaction mechanisms.",
+    href: "/chemistry/foundational/chemical-reactions-and-stoichiometry",
+  },
+  {
+    id: "organic-chemistry",
+    name: "Organic Chemistry",
+    icon: TestTube,
+    gradient:
+      "from-green-200 to-teal-200 dark:from-green-600 dark:to-teal-600",
+    text: "text-gray-800 dark:text-white",
+    description:
+      "Study carbon compounds, functional groups, and organic synthesis.",
+    href: "/chemistry/intermediate-advanced/organic-chemistry",
+  },
+];
+
 // Stats Section Data
 const stats = [
   { name: "Active Students", value: "10,000+" },
@@ -192,7 +242,7 @@ export default function Home() {
         </h1>
         <p className="mx-auto max-w-2xl text-lg text-gray-600 dark:text-gray-300 md:text-xl">
           Explore interactive lessons, quizzes, and problem-solving tools for
-          mathematics and physics. Build your knowledge with professional
+          mathematics, physics, and chemistry. Build your knowledge with professional
           resources and engaging content.
         </p>
         <div className="mt-6">
@@ -371,6 +421,48 @@ export default function Home() {
         </h2>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {popularPhysicsTopics.map((topic) => {
+            const Icon = topic.icon;
+            return (
+              <Link
+                href={topic.href}
+                key={topic.id}
+                className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${topic.gradient} ${topic.text} p-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/30`}
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <div className="rounded-lg bg-black/5 p-3 backdrop-blur-sm dark:bg-black/20">
+                      <Icon className="h-6 w-6 text-current" />
+                    </div>
+                    <h3 className="currentcolor text-lg font-semibold">
+                      {topic.name}
+                    </h3>
+                  </div>
+                  <p className="text-sm leading-6 text-gray-600 dark:text-gray-200">
+                    {topic.description}
+                  </p>
+                  <div className="mt-4 flex items-center justify-between opacity-0 transition-opacity group-hover:opacity-100">
+                    <span className="text-sm font-medium text-gray-700 dark:text-white/80">
+                      Learn More
+                    </span>
+                    <ChevronRight className="h-5 w-5 text-gray-700 transition-transform group-hover:translate-x-1 dark:text-white/80" />
+                  </div>
+                </div>
+
+                {/* Animated background element */}
+                <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-black/5 transition-all duration-500 group-hover:-right-4 group-hover:-top-4 dark:bg-white/10" />
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Popular Chemistry Topics Section */}
+      <div className="mt-16">
+        <h2 className="mb-6 bg-gradient-to-r from-red-700 to-pink-700 bg-clip-text text-center text-2xl font-bold text-transparent dark:from-red-600 dark:to-pink-600">
+          Popular Chemistry Topics
+        </h2>
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {popularChemistryTopics.map((topic) => {
             const Icon = topic.icon;
             return (
               <Link
